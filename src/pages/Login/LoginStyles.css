@@ -1,0 +1,9 @@
+.login-page {
+    height: var(--body-height);
+    justify-content: space-between;
+}
+
+.login-page .logo-section {
+    height: 60%;
+    user-select: none;
+}

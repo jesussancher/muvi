@@ -1,0 +1,125 @@
+:root {
+    --background-color: #032541;
+    --background-transparent: #1f66a05c;
+    --main-color: #5bf192;
+    --main-color-transparent: #5bf1928d;
+    --secondary-color: #13b6dc;
+    --text-color: #fff;
+    --main-gradient: linear-gradient(45deg,#5bf192,#13b6dc);
+    --body-padding: 30px;
+    --body-height: calc(100vh - (2 * var(--body-padding)));
+    --quick-transition: all 0.2s ease-in-out;
+}
+
+body {
+    background-color: var(--background-color);
+    padding: var(--body-padding);
+    color: var(--text-color);
+    overflow: hidden;
+    height: var(--body-height);
+}
+
+/* Global styles */
+
+/* Flex */
+.flex-row {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction:column;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-row-center-land {
+    justify-content: center;
+}
+
+.flex-row-center-vert {
+    align-items: center;
+}
+
+.flex-column-center-land {
+    align-items: center;
+}
+
+.flex-column-center-vert {
+    justify-content: center;
+}
+
+/* Form */
+
+/* Input */
+input {
+    height: 30px;
+    outline: none;
+    min-width: 300px;
+    max-width: 400px;
+    margin: 0.5em 1em;
+    padding: 0.5em 1em;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 2px solid var(--main-color-transparent);
+}
+
+input:focus {
+    background-color: var(--background-transparent);
+}
+
+/* Label */
+
+.label-text-group {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label .text {
+    margin-left: 1em;
+    align-self: start;
+    color: var(--main-color-transparent);
+    transition: var(--quick-transition);
+}
+
+label .invalid-text {
+    font-size: 0.7em;
+    margin-right: 1em;
+}
+
+label:hover .text,
+.text.focused {
+    color: var(--main-color);
+}
+
+/* Button */
+button {
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    min-width: 330px;
+    max-width: 400px;
+    margin: 0.5em 1em;
+    padding: 0.5em 1em;
+    transition: var(--quick-transition);
+    background-color: var(--main-color);
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+
+/* UI */
+input:focus,
+label:hover input,
+.border-gradient {
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: var(--main-gradient);
+}
