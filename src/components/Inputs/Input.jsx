@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { passWordRegexTest } from '../../utils/Auth/auth';
+import  './InputStyles.css';
 
 function Button(props) {
 
@@ -51,9 +52,11 @@ function Button(props) {
         setIsFocused(false);
     }
 
+
+
     const onEnterPressed = (evt) => {
-        const totalInputs = document.getElementsByTagName('input');
         if(evt.which === 13) {
+            const totalInputs = document.getElementsByTagName('input');
             for(let i = 0; i < totalInputs.length-1; i++) {
                 if(totalInputs[i].id === `${name}Input` && isValid) {
                     totalInputs[i+1].focus();
@@ -67,7 +70,7 @@ function Button(props) {
         <label htmlFor={name} className={'flex-column flex-center'}>
             <span className={'label-text-group flex-row'}>
                 <span className={classNames('text', {'focused': isFocused})}>{text}</span>
-                {!isValid  && <span className={'invalid-text'}>{invalidMessages[type]}</span>}
+                {!isValid && value !== '' && <span className={'invalid-text'}>{invalidMessages[type]}</span>}
             </span>
             <input 
                 type={type} 

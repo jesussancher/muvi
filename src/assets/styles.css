@@ -5,10 +5,16 @@
     --main-color-transparent: #5bf1928d;
     --secondary-color: #13b6dc;
     --text-color: #fff;
+    --text-color-dark: #032541;
     --main-gradient: linear-gradient(45deg,#5bf192,#13b6dc);
+    --main-gradient-transparent: linear-gradient(45deg,#5bf192c2,#13b7dcc1);
     --body-padding: 30px;
+    --component-padding-large: 30px;
+    --component-padding-small: 15px;
     --body-height: calc(100vh - (2 * var(--body-padding)));
     --quick-transition: all 0.2s ease-in-out;
+    --border-radius-large: 10px;
+    --border-radius-small: 5px;
 }
 
 body {
@@ -52,67 +58,19 @@ body {
     justify-content: center;
 }
 
-/* Form */
+/* Lettering */
 
-/* Input */
-input {
-    height: 30px;
-    outline: none;
-    min-width: 300px;
-    max-width: 400px;
-    margin: 0.5em 1em;
-    padding: 0.5em 1em;
-    color: var(--text-color);
-    background-color: transparent;
-    border: 2px solid var(--main-color-transparent);
+.text-center {
+    text-align: center;
 }
 
-input:focus {
-    background-color: var(--background-transparent);
-}
-
-/* Label */
-
-.label-text-group {
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-label .text {
-    margin-left: 1em;
-    align-self: start;
-    color: var(--main-color-transparent);
-    transition: var(--quick-transition);
-}
-
-label .invalid-text {
-    font-size: 0.7em;
-    margin-right: 1em;
-}
-
-label:hover .text,
-.text.focused {
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    line-height: 1em;
     color: var(--main-color);
 }
-
-/* Button */
-button {
-    height: 36px;
-    border: none;
-    cursor: pointer;
-    min-width: 330px;
-    max-width: 400px;
-    margin: 0.5em 1em;
-    padding: 0.5em 1em;
-    transition: var(--quick-transition);
-    background-color: var(--main-color);
-}
-
-button:hover {
-    background-color: var(--secondary-color);
-}
-
 
 /* UI */
 input:focus,
@@ -122,4 +80,43 @@ label:hover input,
     border-image-slice: 1;
     border-width: 2px;
     border-image-source: var(--main-gradient);
+}
+
+/* RESPONSIVE */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    body {
+        --body-height: calc(100vh - (2 * var(--body-padding)) - 50px);
+    }
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+    body {
+        --body-height: calc(100vh - (2 * var(--body-padding)) - 50px);
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+    body {
+        --body-height: calc(100vh - (2 * var(--body-padding)));
+    }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
 }

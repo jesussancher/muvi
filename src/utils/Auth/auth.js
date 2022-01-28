@@ -23,6 +23,11 @@ const AuthContextType = {
   signout: () => {},
 }
 
+const testUser = {
+  email: 'test@example.com',
+  password: 'TestPass1234'
+}
+
 let passWordRegex =  {
   lowerCase: new RegExp('[a-z]', 'i'),
   upperCase: new RegExp('[A-Z]', 'i'),
@@ -36,17 +41,23 @@ const passWordRegexTest = (password) => {
   })
 }
 
-// let passWordRegex =  new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)” + “(?=.*[-+_!@#$%^&*., ?]).+$', 'i');
 
 let AuthContext = React.createContext(AuthContextType);
 
 function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
+  let [isUserValid, setIsUserValid] = React.useState(true);
 
   let signin = (newUser, callback) => {
     return authProvider.signin(() => {
       const isPasswordValid = passWordRegexTest(newUser.password);
-      if(newUser.password !== '' && isPasswordValid) {
+      const isPasswordAllowed = testUser.password === newUser.password && newUser.password !== '';
+      const isEmailAllowed = testUser.email === newUser.email  && newUser.email !== '';
+      setIsUserValid(isPasswordAllowed && isEmailAllowed);
+      console.log(testUser.email, newUser.email, testUser.password, newUser.password)
+      console.log("isEmailAllowed",isEmailAllowed)
+      console.log("isPasswordAllowed",isPasswordAllowed)
+      if(isPasswordValid && isUserValid) {
         setUser(newUser);
         callback();
       }
@@ -60,9 +71,10 @@ function AuthProvider({ children }) {
     });
   };
 
-  let value = { user, signin, signout };
+  let value = { user, isUserValid, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+
 }
 
 function useAuth() {

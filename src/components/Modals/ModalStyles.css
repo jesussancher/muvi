@@ -1,0 +1,27 @@
+.modal-wrapper {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    backdrop-filter: blur(3px);
+    background-color:var(--main-gradient-transparent);
+}
+
+.modal-container {
+    max-width: 70vw;
+    min-width: 240px;
+    max-height: 60vh;
+    overflow: hidden;
+    min-height: 350px;
+    border-radius: 10px;
+    background-color: #fff;
+    justify-content: space-between;
+    padding: var(--component-padding-large);
+}
+
+
+.modal-content {
+    height: 75%;
+    color: var(--text-color-dark);
+}
