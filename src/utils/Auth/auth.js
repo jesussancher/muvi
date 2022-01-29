@@ -90,7 +90,7 @@ function AuthProvider({ children }) {
 
   React.useEffect(() => {
     recursionLogin();
-  },[])
+  },[recursionLogin])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 

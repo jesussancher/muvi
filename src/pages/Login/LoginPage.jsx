@@ -51,10 +51,6 @@ export default function LoginPage(props) {
       setIsPasswordValid(valid);
     }
 
-    // useEffect(() => {
-    //   auth.recursionLogin();
-    // },[]);
-
     return (
       <div className={classNames('login-page flex-column flex-column-center-land')}>
         <div className={classNames('logo-section flex-column flex-center')}>
