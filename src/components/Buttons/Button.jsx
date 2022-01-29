@@ -1,4 +1,5 @@
 import React from 'react';
+import { Loader } from '..';
 import './ButtonStyles.css';
 
 function Button(props) {
@@ -8,11 +9,19 @@ function Button(props) {
         type,
         style,
         onClick,
+        loading,
         className,
-        onMouseEnter
+        onMouseEnter,
     } = props;
 
-    return <button type={type} onClick={onClick} onMouseEnter={onMouseEnter} className={className} style={style}>{text}</button>
+    return <button type={type} onClick={onClick} onMouseEnter={onMouseEnter} className={className} style={style}>
+        {loading 
+            ?
+            <Loader color={'dark'} size={30}/>
+            :
+            text
+        }
+        </button>
 }
 
 export default Button

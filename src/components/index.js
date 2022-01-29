@@ -1,11 +1,17 @@
-import MuviLogo from "./Logo/Logo";
+import Loader from './Loaders/Loader';
 import Button from "./Buttons/Button";
+import MuviLogo from "./Logo/Logo";
 import Input from './Inputs/Input';
 import Modal from "./Modals/Modal";
+import Icon from './Icons/Icon';
+import TopNavbar from "./Navbars/TopNavbar";
 
 export {
+    TopNavbar,
     MuviLogo,
     Button,
+    Loader,
     Input,
-    Modal
+    Modal,
+    Icon
 }

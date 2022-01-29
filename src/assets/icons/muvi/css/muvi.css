@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'muvi';
-  src: url('../font/muvi.eot?51945220');
-  src: url('../font/muvi.eot?51945220#iefix') format('embedded-opentype'),
-       url('../font/muvi.woff2?51945220') format('woff2'),
-       url('../font/muvi.woff?51945220') format('woff'),
-       url('../font/muvi.ttf?51945220') format('truetype'),
-       url('../font/muvi.svg?51945220#muvi') format('svg');
+  src: url('../font/muvi.eot?45977491');
+  src: url('../font/muvi.eot?45977491#iefix') format('embedded-opentype'),
+       url('../font/muvi.woff2?45977491') format('woff2'),
+       url('../font/muvi.woff?45977491') format('woff'),
+       url('../font/muvi.ttf?45977491') format('truetype'),
+       url('../font/muvi.svg?45977491#muvi') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'muvi';
-    src: url('../font/muvi.svg?51945220#muvi') format('svg');
+    src: url('../font/muvi.svg?45977491#muvi') format('svg');
   }
 }
 */
@@ -54,5 +54,9 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-hide:before { content: '\e800'; } /* '' */
-.icon-show:before { content: '\e801'; } /* '' */
+.icon-favorite-contain:before { content: '\e800'; } /* '' */
+.icon-favorite-outline:before { content: '\e801'; } /* '' */
+.icon-hide:before { content: '\e802'; } /* '' */
+.icon-home:before { content: '\e803'; } /* '' */
+.icon-search:before { content: '\e804'; } /* '' */
+.icon-show:before { content: '\e805'; } /* '' */

@@ -1,3 +1,7 @@
 
-.icon-hide:before { content: '\e800'; } /* '' */
-.icon-show:before { content: '\e801'; } /* '' */
+.icon-favorite-contain:before { content: '\e800'; } /* '' */
+.icon-favorite-outline:before { content: '\e801'; } /* '' */
+.icon-hide:before { content: '\e802'; } /* '' */
+.icon-home:before { content: '\e803'; } /* '' */
+.icon-search:before { content: '\e804'; } /* '' */
+.icon-show:before { content: '\e805'; } /* '' */

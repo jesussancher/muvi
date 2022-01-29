@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import classNames from 'classnames';
 import { passWordRegexTest } from '../../utils/Auth/auth';
 import  './InputStyles.css';
+import { Icon } from '..';
 
 function Input(props) {
 
@@ -10,7 +11,9 @@ function Input(props) {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
 
     const [value, setValue] = useState('');
-    const [hiddenPasswordValue, setHiddenPasswordValue] = useState('');
+
+    const inputRef = createRef();
+    const labelRef = createRef();
 
     const invalidMessages = {
         email: 'Try a valid email!',
@@ -19,12 +22,17 @@ function Input(props) {
 
     const {
         type,
+        icon,
         name,
         text,
         style,
         onClick,
+        animated,
+        noBorder,
+        onIconClick,
         placeholder,
         onMouseEnter,
+        onValueChange,
         getValidation
     } = props;
 
@@ -36,14 +44,11 @@ function Input(props) {
             'password': passWordRegexTest(newValue)
         }
 
-        const valueLength = newValue.length+1;
-        const hide = (new Array(valueLength)).fill('·').join('');
-        setHiddenPasswordValue(hide);
-
         setValue(newValue);
+        onValueChange && onValueChange(newValue);
         
         if(newValue === '') return;
-        getValidation(loginFileds[name])
+        getValidation && getValidation(loginFileds[name])
         setIsValid(loginFileds[name]);
     }
 
@@ -60,13 +65,17 @@ function Input(props) {
     }
 
     const onEnterPressed = (evt) => {
-        console.log("evt",evt)
         if(evt.which === 13) {
-            const totalInputs = document.getElementsByClassName('visible-input');
-            for(let i = 0; i < totalInputs.length-1; i++) {
-                if(totalInputs[i].id === `${name}Input` && isValid) {
-                    isValid && totalInputs[i+1].focus();
+            const parent = labelRef.current.parentNode.nodeName;
+            if(parent === 'FORM') {
+                const totalInputs = document.getElementsByClassName('visible-input');
+                for(let i = 0; i < totalInputs.length-1; i++) {
+                    if(totalInputs[i].id === `${name}Input` && isValid) {
+                        isValid && totalInputs[i+1].focus();
+                    }
                 }
+            } else {
+                onIconClick && onIconClick(evt)
             }
         }
     }
@@ -75,18 +84,54 @@ function Input(props) {
         setIsPasswordShown(prev => prev = !prev);
     }
 
+    const focusOnClick = () => {
+        inputRef.current.focus();
+    }
+
+    function setCaretPosition() {
+        const ctrl = inputRef.current;
+        const pos = ctrl.value.length;
+        if (ctrl.setSelectionRange) {
+          ctrl.focus();
+          ctrl.setSelectionRange(pos, pos);
+        } else if (ctrl.createTextRange) {
+          var range = ctrl.createTextRange();
+          range.collapse(true);
+          range.moveEnd('character', pos);
+          range.moveStart('character', pos);
+          range.select();
+        }
+    }
+
+    useEffect(() => {
+        if(type !== 'password') return;
+        setCaretPosition();
+    },[type,isPasswordShown]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const animationStyles = {
+        'left': {'left-animation': animated},
+        'right': {'right-animation': animated}
+    }
+
     return (
-        <label htmlFor={name} className={'flex-column flex-center'}>
-            <span className={'label-text-group flex-row'}>
-                <span className={classNames('text', {'focused': isFocused})}>{text}</span>
-                {!isValid && value !== '' && <span className={'invalid-text'}>{invalidMessages[name]}</span>}
-            </span>
-            <div className={classNames('input-container flex-row flex-row-center-vert', {'focused': isFocused})}>
+        <label ref={labelRef} htmlFor={name} className={classNames('flex-column flex-center', {'animated': animated}, animationStyles[animated])} onClick={focusOnClick}>
+            {text && <span className={'label-text-group flex-row'}>
+                    <span className={classNames('text', {'focused': isFocused})}>{text}</span>
+                    {!isValid && value !== '' && <span className={'invalid-text'}>{invalidMessages[name]}</span>}
+                </span>
+            }
+            <div className={
+                classNames('input-container flex-row flex-row-center-vert', 
+                {'focused': isFocused}, 
+                {'no-border': noBorder && value === ''})
+                }
+                style={style}
+                >
                 <input 
-                    type={type} 
+                    ref={inputRef}
                     id={`${name}Input`}
-                    value={isPasswordShown ? hiddenPasswordValue : value}
-                    style={style}
+                    name={name} 
+                    value={value}
                     onClick={onClick}
                     autoComplete={'off'}
                     onBlur={handleOnBlur}
@@ -96,17 +141,11 @@ function Input(props) {
                     onKeyDown={onEnterPressed}
                     onInvalid={handleOnInvalid}
                     onMouseEnter={onMouseEnter} 
-                    className={classNames('visible-input', {'password': name === 'password'}, {'hidden-password': isPasswordShown})}  
+                    type={isPasswordShown ? 'text' : type} 
+                    className={classNames('visible-input')}  
                 />
-                <input 
-                    type={type} 
-                    name={name} 
-                    value={value}
-                    onChange={handleOnChange}
-                    autoComplete={'off'}
-                    className={'invisible-nput'}
-                />
-                {name === 'password' && <i className={!isPasswordShown ? 'icon-hide' : 'icon-show'} style={{ fontSize: '0.6em' }} onClick={toggleShowPassword} />}
+                {name === 'password' && <Icon icon={!isPasswordShown ? 'icon-hide' : 'icon-show'} style={{ fontSize: '1em' }} onClick={toggleShowPassword}/>}
+                {(name !== 'password' && icon) && <Icon icon={`icon-${icon}`} onClick={onIconClick}/>}
             </div>
         </label>
     )

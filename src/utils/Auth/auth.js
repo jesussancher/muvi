@@ -4,6 +4,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import { Loader } from "../../components";
 
 
 const authProvider = {
@@ -25,8 +26,10 @@ const AuthContextType = {
 }
 
 const testUser = {
-  email: 'test@example.com',
-  password: 'TestPass1234'
+  // email: 'test@example.com',
+  // password: 'TestPass1234'
+  email: 'a@b.c',
+  password: 'a1234'
 }
 
 let passWordRegex =  {
@@ -47,6 +50,7 @@ let AuthContext = React.createContext(AuthContextType);
 function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
   let [isUserValid, setIsUserValid] = React.useState(true);
+  let [loading, setLoading] = React.useState(false);
 
   
   const location = useLocation();
@@ -67,11 +71,17 @@ function AuthProvider({ children }) {
       if(!newUser) return;
       const isPasswordAllowed = testUser.password === newUser.password ;
       const isEmailAllowed = testUser.email === newUser.email;
-      setIsUserValid(isPasswordAllowed && isEmailAllowed);
+      setIsUserValid(isPasswordAllowed && isEmailAllowed && !loading);
       if(isPasswordAllowed && isEmailAllowed) {
+
         localStorage.setItem('user-login', JSON.stringify(newUser));
         setUser(newUser);
-        callback();
+        
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+          callback();
+        },[3000]); // fake async
       }
     });
   };
@@ -84,13 +94,15 @@ function AuthProvider({ children }) {
     });
   };
 
-  let value = { user, isUserValid, signin, signout, recursionLogin };
+  let value = { user, isUserValid, signin, signout, loading };
 
   React.useEffect(() => {
     recursionLogin();
   },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>
+      {loading ? <Loader /> :children}
+    </AuthContext.Provider>;
 
 }
 

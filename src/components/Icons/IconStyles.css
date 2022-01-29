@@ -1,0 +1,18 @@
+.icon-container {
+    height: 30px;
+    width: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.icon-container i {
+    margin: 0;
+    padding: 0;
+    color: var(--main-color);
+    transition: var(--slow-transition);
+}
+
+.icon-container:hover i {
+    transform: rotate(5deg);
+    color: var(--secondary-color);
+}

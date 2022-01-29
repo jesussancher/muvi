@@ -1,13 +1,16 @@
 .login-page {
-    height: var(--body-height);
+    height: 100vh;
     justify-content: space-between;
 }
 
+.form-section {
+    margin-bottom: 110px;
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
 
     .login-page .logo-section {
-        height: 60%;
+        height: 40%;
         user-select: none;
     }
 
@@ -16,7 +19,7 @@
 @media only screen and (min-width: 600px) {
 
     .login-page .logo-section {
-        height: 60%;
+        height: 40%;
         user-select: none;
     }
     
@@ -26,8 +29,7 @@
 @media only screen and (min-width: 768px) {
     .login-page {
         justify-content: center;
-    }
-    
+    }  
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

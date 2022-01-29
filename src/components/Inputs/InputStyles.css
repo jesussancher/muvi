@@ -8,8 +8,10 @@ input {
 }
 
 .input-container {
+    cursor: text;
     height: 30px;
     outline: none;
+    overflow: hidden;
     min-width: 300px;
     max-width: 400px;
     margin: 0.5em 1em;
@@ -17,8 +19,13 @@ input {
     background-color: transparent;
     justify-content: space-between;
     border: 2px solid var(--main-color-transparent);
+    transition: var(--quick-transition);
 }
 
+label:hover .input-container.no-border,
+.input-container.no-border {
+    border: 2px solid var(--background-color);
+}
 
 .input-container.focused {
     background-color: var(--background-transparent);
@@ -29,17 +36,15 @@ input {
     width: 0;
 }
 
-input.hidden-password {
-    font-size: 1em;
-    font-weight: bold;
-    letter-spacing: 0.1em
-}
-
 input.password {
     letter-spacing: 0.1em
 }
 
 /* Label */
+
+label {
+    transition: var(--quick-transition);
+}
 
 .label-text-group {
     width: 100%;
@@ -62,4 +67,13 @@ label .invalid-text {
 label:hover .text,
 .text.focused {
     color: var(--main-color);
+}
+
+.input-container.focused,
+label:hover .input-container.no-border.focused,
+label:hover .input-container {
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: var(--main-gradient);
 }

@@ -59,8 +59,8 @@ export default function LoginPage(props) {
         <div className={classNames('form-section flex-column flex-center')}>
           <form onSubmit={handleSubmit} className={classNames('flex-column flex-center')}>
               <Input name="email" type="email" text="Email" placeholder="myemail@domain.com" getValidation={getEmailValidation}/>
-              <Input name="password" text="Password" placeholder="Password" getValidation={gePasswordValidation} />
-              <Button type="submit" text="Let's go!" />
+              <Input name="password" type="password" text="Password" placeholder="Password" getValidation={gePasswordValidation} />
+              <Button type="submit" text="Let's go!" loading={auth.loading}/>
           </form>
         </div>
         {(isModalOpen) && <Modal title={modalTexts.title} text={modalTexts.text} close={closeModal}/>}
