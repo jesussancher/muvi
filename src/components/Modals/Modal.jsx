@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, useCallback } from 'react';
+import React, { useEffect, createRef } from 'react';
 import classNames from 'classnames';
 import './ModalStyles.css';
 import Button from '../Buttons/Button';

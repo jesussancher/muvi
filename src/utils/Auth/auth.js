@@ -52,7 +52,7 @@ function AuthProvider({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  let recursionLogin = React.useCallback(() => {
+  let recursionLogin = () => {
       const localUserData = JSON.parse(localStorage.getItem('user-login'));
 
       const from = location.state?.from?.pathname || "/";
@@ -60,8 +60,7 @@ function AuthProvider({ children }) {
       signin(localUserData, () => {
         navigate(from, { replace: true });
       })
-    },
-  )
+  }
 
   let signin = (newUser, callback) => {
     return authProvider.signin(() => {
