@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect, createRef, useCallback } from 'react';
 import classNames from 'classnames';
 import './ModalStyles.css';
 import Button from '../Buttons/Button';
@@ -32,14 +32,22 @@ function Modal(props) {
         }
     }   
 
-    useEffect(() => {
+    const didMount = useCallback(() => {
         document.addEventListener('click', closeOnClickOutside);
         document.addEventListener('keydown', closeOnEscape);
+    });
+
+    const willUnmount = useCallback(() => {
+        document.removeEventListener('click', closeOnClickOutside);
+        document.removeEventListener('keydown', closeOnEscape);
+    });
+
+    useEffect(() => {
+        didMount();
         return function cleanup() {
-            document.removeEventListener('click', closeOnClickOutside);
-            document.removeEventListener('keydown', closeOnEscape);
+            willUnmount();
         } 
-    },[])
+    },[didMount, willUnmount])
 
     return (
         <div ref={container} className={classNames('modal-wrapper flex-column flex-center')} tabIndex={0}>
