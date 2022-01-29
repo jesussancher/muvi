@@ -64,8 +64,7 @@ function AuthProvider({ children }) {
 
   let signin = (newUser, callback) => {
     return authProvider.signin(() => {
-      console.log("userLogin", newUser, testUser)
-
+      if(!newUser) return;
       const isPasswordAllowed = testUser.password === newUser.password ;
       const isEmailAllowed = testUser.email === newUser.email;
       setIsUserValid(isPasswordAllowed && isEmailAllowed);
