@@ -32,22 +32,22 @@ function Modal(props) {
         }
     }   
 
-    const didMount = useCallback(() => {
+    const didMount = () => {
         document.addEventListener('click', closeOnClickOutside);
         document.addEventListener('keydown', closeOnEscape);
-    });
+    };
 
-    const willUnmount = useCallback(() => {
+    const willUnmount = () => {
         document.removeEventListener('click', closeOnClickOutside);
         document.removeEventListener('keydown', closeOnEscape);
-    });
+    };
 
     useEffect(() => {
         didMount();
         return function cleanup() {
             willUnmount();
         } 
-    },[didMount, willUnmount])
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div ref={container} className={classNames('modal-wrapper flex-column flex-center')} tabIndex={0}>

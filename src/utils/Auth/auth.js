@@ -90,7 +90,7 @@ function AuthProvider({ children }) {
 
   React.useEffect(() => {
     recursionLogin();
-  },[recursionLogin])
+  },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 
