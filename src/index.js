@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import './assets/styles.css';
+import './assets/icons/muvi/css/muvi.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

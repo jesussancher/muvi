@@ -1,17 +1,42 @@
 input {
+    width: 75%;
+    height: 30px;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+.input-container {
     height: 30px;
     outline: none;
     min-width: 300px;
     max-width: 400px;
     margin: 0.5em 1em;
     padding: 0.5em 1em;
-    color: var(--text-color);
     background-color: transparent;
+    justify-content: space-between;
     border: 2px solid var(--main-color-transparent);
 }
 
-input:focus {
+
+.input-container.focused {
     background-color: var(--background-transparent);
+}
+
+.invisible-nput {
+    opacity: 0;
+    width: 0;
+}
+
+input.hidden-password {
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.1em
+}
+
+input.password {
+    letter-spacing: 0.1em
 }
 
 /* Label */
@@ -31,7 +56,7 @@ label .text {
 
 label .invalid-text {
     font-size: 0.7em;
-    margin-right: 1em;
+    margin-right: 2em;
 }
 
 label:hover .text,

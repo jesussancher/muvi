@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   useLocation,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 
 
@@ -9,11 +10,11 @@ const authProvider = {
   isAuthenticated: false,
   signin(callback) {
     authProvider.isAuthenticated = true;
-    setTimeout(callback, 100);
+    callback();
   },
   signout(callback) {
     authProvider.isAuthenticated = false;
-    setTimeout(callback, 100);
+    callback();
   }
 };
 
@@ -41,23 +42,36 @@ const passWordRegexTest = (password) => {
   })
 }
 
-
 let AuthContext = React.createContext(AuthContextType);
 
 function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
   let [isUserValid, setIsUserValid] = React.useState(true);
 
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  let recursionLogin = () => {
+    const localUserData = JSON.parse(localStorage.getItem('user-login'));
+
+    const from = location.state?.from?.pathname || "/";
+    console.log("localUserData", localUserData, from)
+
+    signin(localUserData, () => {
+      navigate(from, { replace: true });
+    });
+  }
+
   let signin = (newUser, callback) => {
     return authProvider.signin(() => {
-      const isPasswordValid = passWordRegexTest(newUser.password);
-      const isPasswordAllowed = testUser.password === newUser.password && newUser.password !== '';
-      const isEmailAllowed = testUser.email === newUser.email  && newUser.email !== '';
+      console.log("userLogin", newUser, testUser)
+
+      const isPasswordAllowed = testUser.password === newUser.password ;
+      const isEmailAllowed = testUser.email === newUser.email;
       setIsUserValid(isPasswordAllowed && isEmailAllowed);
-      console.log(testUser.email, newUser.email, testUser.password, newUser.password)
-      console.log("isEmailAllowed",isEmailAllowed)
-      console.log("isPasswordAllowed",isPasswordAllowed)
-      if(isPasswordValid && isUserValid) {
+      if(isPasswordAllowed && isEmailAllowed) {
+        localStorage.setItem('user-login', JSON.stringify(newUser));
         setUser(newUser);
         callback();
       }
@@ -66,12 +80,17 @@ function AuthProvider({ children }) {
 
   let signout = (callback) => {
     return authProvider.signout(() => {
+      localStorage.setItem('user-login', null);
       setUser(null);
       callback();
     });
   };
 
-  let value = { user, isUserValid, signin, signout };
+  let value = { user, isUserValid, signin, signout, recursionLogin };
+
+  React.useEffect(() => {
+    recursionLogin();
+  },[])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 

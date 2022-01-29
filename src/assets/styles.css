@@ -73,14 +73,24 @@ h2 {
 }
 
 /* UI */
-input:focus,
-label:hover input,
+label:hover .input-container ,
 .border-gradient {
     border: 10px solid;
     border-image-slice: 1;
     border-width: 2px;
     border-image-source: var(--main-gradient);
 }
+
+i {
+    cursor: pointer;
+    color: var(--main-color);
+    transition: var(--quick-transition);
+}
+
+i:hover {
+    color: var(--secondary-color);
+}
+
 
 /* RESPONSIVE */
 

@@ -15,7 +15,6 @@ function App() {
   return (
     <ErrorBoundary>
       <AuthProvider>
-          {/* <div className="App" onContextMenu={e => e.preventDefault()}> */}
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route
@@ -28,7 +27,6 @@ function App() {
                   >
               </Route>
             </Routes>
-          {/* </div> */}
        </AuthProvider>
      </ErrorBoundary> 
   );

@@ -26,15 +26,23 @@ function Modal(props) {
         }
     };
 
+    const closeOnEscape = (event) => {
+        if([27,13].includes(event.which)) {
+            close();
+        }
+    }   
+
     useEffect(() => {
         document.addEventListener('click', closeOnClickOutside);
+        document.addEventListener('keydown', closeOnEscape);
         return function cleanup() {
             document.removeEventListener('click', closeOnClickOutside);
+            document.removeEventListener('keydown', closeOnEscape);
         } 
-    })
+    },[])
 
     return (
-        <div ref={container} className={classNames('modal-wrapper flex-column flex-center')}>
+        <div ref={container} className={classNames('modal-wrapper flex-column flex-center')} tabIndex={0}>
             <div className={classNames('modal-container flex-column flex-column-center-land')} style={{height: height + 'px', width: width + 'px'}}>
                 <div className={classNames('modal-title text-center')}>
                     {title.includes(breakChar) ? 
@@ -55,7 +63,7 @@ function Modal(props) {
                     }
                 </div>
                 <div className={classNames('modal-action')}>
-                    <Button text={'Try again'} onClick={close}/>
+                    <Button text={'Try again'} onClick={close} style={{minWidth: 210}}/>
                 </div>
             </div>
         </div>
