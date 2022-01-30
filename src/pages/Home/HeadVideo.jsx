@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { tmdbRequest } from '../../utils/API/API';
 
-function HeadVideo (props) {
+function HeadVideo () {
 
     const [moviesList, setMoviesList] = useState([]);
     const [currentMovie, setCurrentMovie] = useState({movieId: '', videoId: '', index: 0, details: null});
 
-    const { 
-        genresList
-    } = props;
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest('upcoming');

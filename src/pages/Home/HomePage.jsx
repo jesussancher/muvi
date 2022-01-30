@@ -8,7 +8,7 @@ import Carousel from './Carousel';
 import MoviesList from './MoviesList';
 import HeadVideo from './HeadVideo';
 
-function HomePage(props) {
+function HomePage() {
 
     const [genresList, setGenresList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
