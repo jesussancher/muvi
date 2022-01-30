@@ -1,0 +1,47 @@
+.head-video-player {
+    width: 100vw !important;
+    height: calc(80vh + 150px) !important;
+    margin-top: -55px;
+}
+
+.movie-overlay {
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: absolute;
+    justify-content: flex-end;
+    align-items: flex-start;
+    background: linear-gradient(to bottom, var(--background-darker-transparent) 5%, transparent 60%, var(--background-darker-transparent) 90%);
+}
+
+.movie-overlay-details {
+    width: 90vw;
+    padding: var(--body-padding);
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.movie-overlay-details .card-title{
+    overflow: visible;
+    margin: 0.3em 0;
+}
+
+.movie-overlay-details .card-rate,
+.movie-overlay-details .card-genre
+{
+    font-size: 0.6em
+}
+.head-video-container {
+    position: relative;
+}
+.backdrop-fallback {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+}

@@ -44,9 +44,8 @@ function HeadVideo () {
         setTimeout(() =>{
             let newIndex = currentMovie.index + 1;
             if(newIndex === videosLimit) { newIndex = 0 };
-            console.log(videosList[newIndex].movieId, videosList[newIndex].videoKey, (newIndex))
             getMovieDetails(videosList[newIndex].movieId, videosList[newIndex].videoKey, (newIndex));
-        }, currentMovieDuration*900)
+        }, currentMovieDuration*1000)
     },[currentMovie, currentMovieDuration, videosList])
 
     return (
@@ -67,7 +66,8 @@ function HeadVideo () {
                 }
             </div>
             <VideoPlayer
-                videoKey={currentMovie.videoKey}
+                videoKey={currentMovie?.videoKey}
+                backdrop={currentMovie?.details?.backdrop_path}
                 className="head-video-player"
                 getDuration={getDuration}
             />
