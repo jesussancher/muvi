@@ -1,5 +1,20 @@
 .card {
     margin: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    outline: 1px solid transparent;
+    transition: outline 0.3s ease-in-out, transform 0.3s ease-in-out;
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-color);
+}
+
+
+.card.release {
+    margin: 5px;
     height: 220px;
     cursor: pointer;
     overflow: hidden;
@@ -14,12 +29,18 @@
 }
 
 .card:hover {
-    margin-bottom: 20px;
     outline: 1px solid var(--main-color);
+    transform: translateY(-5px);
 }
+
 
 .card:hover .card-info-container {
     bottom: 0px;
+}
+
+.card:hover .card-favorite {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .card-info-container {
@@ -63,4 +84,96 @@
 .card-genre {
     color: var(--main-color);
     font-size: 0.7em;
+}
+
+.card-favorite {
+    top: 0;
+    right: 0;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    position: absolute;
+    transform: scale(0);
+    background-color: transparent;
+    transition: var(--slow-transition);
+    z-index: 999;
+}
+
+.new-fav {
+    height: 100%;
+    width: 100%;
+}
+
+.new-fav i {
+    font-size: 60px;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 2s ease-in-out;
+    color: var(--main-color-transparent);
+}
+
+.new-fav.animate i {
+    opacity: 1;
+    animation-name: favAnimate;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+}
+
+@keyframes favAnimate {
+    0% {transform: scale(0);}
+    25% {transform: scale(2);}
+    50% {transform: scale(1.5);}
+    75% {transform: scale(2);}
+    90% {transform: scale(1.5);}
+    100% {transform: scale(0);}
+  }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .card {
+        height: 340px;
+        min-width: calc(((100vw - 60px) / 2) - 15px);
+        max-width: calc(((100vw - 60px) / 2) - 15px);  
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+    .card {
+        height: 300px;
+        min-width: calc(((100vw - 60px) / 3) - 14px);
+        max-width: calc(((100vw - 60px) / 3) - 14px);   
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .card {
+        height: 330px;
+        min-width: calc(((100vw - 60px) / 4) - 13px);
+        max-width: calc(((100vw - 60px) / 4) - 13px);
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+    .card {
+        height: 400px;
+        min-width: calc(((100vw - 60px) / 5) - 12px);
+        max-width: calc(((100vw - 60px) / 5) - 12px);
+    }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }

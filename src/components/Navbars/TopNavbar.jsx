@@ -20,9 +20,9 @@ function TopNavbar() {
     },[])
 
     return (
-        <div style={{top: hideNavbar ? '-100px' : 0}} className={'top-navbar-container flex-row'}>
-            <MuviLogo width={80} />
-            <Input style={{height: 16}} icon={'search'} name={'search'} type={'text'} noBorder animated={'right'}/>
+        <div style={{top: hideNavbar ? '-100px' : 0}} className={'top-navbar-container flex-row flex-center'}>
+            <MuviLogo width={100} />
+            {/* <Input style={{height: 16}} icon={'search'} name={'search'} type={'text'} noBorder animated={'right'}/> */}
         </div>
     )
 }

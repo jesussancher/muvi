@@ -24,9 +24,8 @@ const tmdbRequest = (req) => {
 }
 
 const discoverMoviesByGenre = async (genre = 28, page = 1) => {
-    const baseRequest = `discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${page}&with_genres=${genre}`
+    const baseRequest = `discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${page}${genre ? `&with_genres=${genre}` : ''}`
     const moviesList = await tmdbRequestParams(baseRequest);
-    console.log("genre", genre, moviesList)
     return moviesList
 }
 

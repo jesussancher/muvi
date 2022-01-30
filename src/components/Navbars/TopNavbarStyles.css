@@ -6,6 +6,5 @@
     padding: 5px 20px;
     width: calc(100% - 40px);
     backdrop-filter: blur(3px);
-    justify-content: space-between;
     transition: var(--slow-transition);
 }

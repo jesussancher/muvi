@@ -5,11 +5,11 @@ import Input from './Inputs/Input';
 import Modal from "./Modals/Modal";
 import Icon from './Icons/Icon';
 import TopNavbar from "./Navbars/TopNavbar";
-import NewReleaseCard from './Cards/NewReleaseCard';
+import MovieCard from './Cards/MovieCard';
 import Tag from './Tags/Tag';
 
 export {
-    NewReleaseCard,
+    MovieCard,
     TopNavbar,
     MuviLogo,
     Button,

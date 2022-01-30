@@ -12,6 +12,7 @@ function HomePage(props) {
     const [genresList, setGenresList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
     const [moviesList, setMoviesList] = useState([]);
+    const [favoritesList, setFavoritesList] = useState([]);
     
     const getGenresList = async() => {
         const genres = await getAllGenresList('now_playing');
@@ -28,9 +29,25 @@ function HomePage(props) {
         setGenreSelected(genre);
     }
 
+    const updateFavoritesList = (list) => {
+        setFavoritesList(list);
+    }
+
     // Request now playing movies
     useEffect(() => {
         getGenresList();
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect( () => {
+        async function getFavoritesList() {
+            const favorites = await localStorage.getItem('favorites');
+            if(!favorites) {
+                localStorage.setItem('favorites', JSON.stringify([]));
+            } else {
+                setFavoritesList(favorites)
+            }
+        }
+        getFavoritesList();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
     
     useEffect(() => {
@@ -40,9 +57,9 @@ function HomePage(props) {
     return (
         <div className={classNames('home-page')} onContextMenu={e => e.preventDefault()}>
             <TopNavbar />
-            <NewReleases genresList={genresList} />
+            <NewReleases genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
-            <MoviesList genresList={genresList} moviesList={moviesList} />
+            <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
         </div>
     )
 }

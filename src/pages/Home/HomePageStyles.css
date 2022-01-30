@@ -64,6 +64,7 @@
 
 /* Filter Bar */
 #filterBarPanel {
+    padding: var(--body-padding);
     transition: var(--quick-transition);
 }
 
@@ -104,15 +105,14 @@
 
 .movies-list {
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    padding: var(--body-padding);
+    justify-content: flex-start;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
-    .new-releases,
-    .filter-content,
-    .filter-opener {
+    .new-releases {
         border-radius: 0;
     }
 
@@ -125,17 +125,12 @@
         width: calc(100% + 60px);
     }
 
-    #filterBarPanel {
-        padding: var(--body-padding) 0 ;
-    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 
-    .new-releases,
-    .filter-content,
-    .filter-opener {
+    .new-releases {
         border-radius: 0;
     }
 
@@ -143,33 +138,14 @@
         margin-left: -30px;
         width: calc(100% + 60px);
     }
-    
-    #filterBarPanel {
-        padding: var(--body-padding) 0;
-    }
 
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
-    .filter-opener {
-        border-radius: 0 var(--border-radius-large) var(--border-radius-large) 0;
-    }
-
-    .filter-content {
-        margin-left: 0px;
-        border-radius: var(--border-radius-large) 0 0 var(--border-radius-large);
-    }
-
     .new-releases {
         width: 100%;
         margin-left: 0px;
         border-radius: var(--border-radius-large);
     }
-
-    #filterBarPanel {
-        padding: var(--body-padding);
-    }
-    
 }

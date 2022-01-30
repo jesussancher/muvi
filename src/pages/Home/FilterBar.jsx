@@ -8,6 +8,7 @@ function FilterBar(props) {
     const [selected, setSelected] = useState({id: '', name: ''});
     const [closedWidth, setClosedWidth] = useState(100);
     const [sortedGenresList, setSortedGenresList] = useState([]);
+    const noFilterGenre = {id: null, name: 'All'};
 
     const {
         genresList,
@@ -42,8 +43,11 @@ function FilterBar(props) {
         const index = genresList.findIndex(genre => genre.id === selected.id);
         let newList = [...genresList];
         newList.splice(index, 1);
-
-        setSortedGenresList([selected, ...newList]);
+        if(selected.name !== 'All') {
+            setSortedGenresList([selected, noFilterGenre, ...newList]);
+        } else {
+            setSortedGenresList([selected, ...newList]);
+        }
     }
 
     const toggleOpenPanel = () => {
@@ -52,9 +56,8 @@ function FilterBar(props) {
 
     useEffect(() => {
         if(genresList.length === 0) return;
-        const firstGenre = genresList[0];
-        setSelected(firstGenre);
-        setSortedGenresList(genresList);
+        setSelected(noFilterGenre);
+        setSortedGenresList([noFilterGenre, ...genresList]);
     },[genresList]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -87,8 +90,8 @@ function FilterBar(props) {
 
     return (
         <section id={'filterBarPanel'} >
-            <h1>Genres</h1>
-            <div className={'flex-row flex-row-center-vert'}>
+            <h1>Movies</h1>
+            <div className={'filter-containter flex-row flex-row-center-vert'}>
                 <div id={'filterBar'} style={{width: open ? undefined: closedWidth}} className={classNames('filter-content shadow-soft flex-row flex-row-center-vert', {'open': open})}>
                     {sortedGenresList ?
                         drawFilters()

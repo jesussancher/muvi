@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Icon, NewReleaseCard } from '../../components';
+import { Icon, MovieCard } from '../../components';
 import { tmdbRequest } from '../../utils/API/API';
 
 const deltas = {
@@ -13,7 +13,9 @@ function NewReleases(props) {
     const [moviesList, setMoviesList] = useState([]);
     const [controlInterval, setControlInterval] = useState(null);
     const { 
-        genresList
+        genresList,
+        favoritesList,
+        updateFavoritesList
     } = props
 
     const getMoviesList = async() => {
@@ -54,24 +56,29 @@ function NewReleases(props) {
         }
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
+    const getFavoritesList = (list) => {
+        updateFavoritesList(list)
+    }
+
     const drawCards = () => {
         const cardsNodeList  = moviesList?.map((movie, index) => {
+            const id = movie.id;
             const image = movie.poster_path;
             const title = movie.original_title;
             const rate = movie.vote_average;
             const date = movie.release_date;
             const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
-            return <Fragment key={index}><NewReleaseCard image={image} title={title} rate={rate} date={date} genre={genre}/></Fragment>
+            const isFavorite = favoritesList.includes(id);
+            return <Fragment key={index}><MovieCard id={id} image={image} release title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={getFavoritesList}/></Fragment>
         });
 
         return cardsNodeList;
     }
-
     
     const drawCardsDummy = () => {
         const dummyCardsList = (new Array(20)).fill(null);
         const cardsNodeList  =  dummyCardsList?.map((movie, index) => {
-            return <Fragment key={index}><NewReleaseCard /></Fragment>
+            return <Fragment key={index}><MovieCard release /></Fragment>
         })
 
         return cardsNodeList;
