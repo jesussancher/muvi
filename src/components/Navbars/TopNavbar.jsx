@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Input, MuviLogo } from '..';
+import { MuviLogo } from '..';
 import './TopNavbarStyles.css';
 
 function TopNavbar() {
