@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Icon, NewReleaseCard } from '../../components';
-import { getAllGenresList, tmdbRequest } from '../../utils/API/API';
+import { tmdbRequest } from '../../utils/API/API';
 
 const deltas = {
     left: -200,
@@ -8,33 +8,27 @@ const deltas = {
     null: 0
 }
 
-function NewReleases() {
+function NewReleases(props) {
 
     const [moviesList, setMoviesList] = useState([]);
-    const [genresList, setGenresList] = useState([]);
+    const [moviesListPopular, setMoviesListPopular] = useState([]);
     const [controlInterval, setControlInterval] = useState(null);
-
+    const { 
+        genresList
+    } = props
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest('now_playing');
+        const popular = await tmdbRequest('popular');
+        const latest = await tmdbRequest('latest');
+        console.log(latest)
         setMoviesList(movies.results);
+        setMoviesListPopular(popular.results);
     }
     // Request now playing movies
     useEffect(() => {
         getMoviesList();
     },[])
-
-
-    const getGenresList = async() => {
-        const genres = await getAllGenresList('now_playing');
-        setGenresList(genres.genres);
-    }
-
-    // Request now playing movies
-    useEffect(() => {
-        getGenresList();
-    },[])
-
 
     const scrollOnMouseWheel = (event) => {
         const carousel = document.querySelector("#releaseCarousel");
@@ -65,6 +59,28 @@ function NewReleases() {
         }
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
+    const drawCards = () => {
+        const cardsNodeList  = moviesList?.map((movie, index) => {
+            const image = movie.poster_path;
+            const title = movie.original_title;
+            const rate = movie.vote_average;
+            const date = movie.release_date;
+            const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
+            return <Fragment key={index}><NewReleaseCard image={image} title={title} rate={rate} date={date} genre={genre}/></Fragment>
+        });
+
+        return cardsNodeList;
+    }
+
+    
+    const drawCardsDummy = () => {
+        const dummyCardsList = (new Array(20)).fill(null);
+        const cardsNodeList  =  dummyCardsList?.map((movie, index) => {
+            return <Fragment key={index}><NewReleaseCard /></Fragment>
+        })
+
+        return cardsNodeList;
+    }
 
     return (
         <section id={'newRelases'}>
@@ -80,14 +96,11 @@ function NewReleases() {
                         <Icon icon={'chevron-left'}/>
                     </div>
                     <div id={'releaseCarousel'} className={'carousel land-scroll flex-row flex-row-center-vert'}>
-                        {moviesList.map((movie, index) => {
-                            const image = movie.poster_path;
-                            const title = movie.original_title;
-                            const rate = movie.vote_average;
-                            const date = movie.release_date;
-                            const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
-                            return <Fragment key={index}><NewReleaseCard image={image} title={title} rate={rate} date={date} genre={genre}/></Fragment>
-                        })}
+                        {moviesList?
+                        drawCards()
+                        :
+                        drawCardsDummy()
+                    }
                     </div>
                     <div 
                         className={'control right flex-column flex-center'} 

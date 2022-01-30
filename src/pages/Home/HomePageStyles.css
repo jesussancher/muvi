@@ -1,5 +1,4 @@
 .home-page {
-    height: 300vh;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -14,12 +13,12 @@
 .section-content {
     min-height: 320px;
     margin: 10px 0;
-    border-radius: var(--border-radius-large);
     background-color: var(--background-color-darker);
 }
 
 .section-content.new-releases {
     height: 300px;
+    transition: var(--quick-transition);
 }
 
 .land-slider {
@@ -61,4 +60,110 @@
     overflow-y: hidden;
     justify-content: flex-start;
     scroll-behavior: smooth;
+}
+
+/* Filter Bar */
+#filterBarPanel {
+    transition: var(--quick-transition);
+}
+
+.filter-content {
+    height: 60px;
+    overflow-x: hidden;
+    padding: 0px 15px;
+    overflow-y: hidden;
+    width: calc(100% - 30px);
+    justify-content: flex-start;
+    border-radius: var(--border-radius-large) 0 0 var(--border-radius-large);
+    background-color: var(--background-color-darker);
+    transition: var(--quick-transition);
+}
+
+.filter-content.open {
+    overflow-x: auto;
+}
+
+.filter-opener {
+    width: 30px;
+    height: 60px;
+    cursor: pointer;
+    background-color: var(--background-transparent);
+    border-radius: 0 var(--border-radius-large) var(--border-radius-large) 0;
+    transition: var(--slow-transition);
+}
+
+
+.filter-opener:hover {
+    background-color: var(--main-color);
+}
+
+.filter-opener:hover i{
+    color: var(--background-color-darker);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .new-releases,
+    .filter-content,
+    .filter-opener {
+        border-radius: 0;
+    }
+
+    .new-releases {
+        margin-left: -30px;
+        width: calc(100% + 60px);
+    }
+
+    .filter-content.open {
+        width: calc(100% + 60px);
+    }
+
+    #filterBarPanel {
+        padding: var(--body-padding) 0 ;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+    .new-releases,
+    .filter-content,
+    .filter-opener {
+        border-radius: 0;
+    }
+
+    .new-releases {
+        margin-left: -30px;
+        width: calc(100% + 60px);
+    }
+    
+    #filterBarPanel {
+        padding: var(--body-padding) 0;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .filter-opener {
+        border-radius: 0 var(--border-radius-large) var(--border-radius-large) 0;
+    }
+
+    .filter-content {
+        margin-left: 0px;
+        border-radius: var(--border-radius-large) 0 0 var(--border-radius-large);
+    }
+
+    .new-releases {
+        width: 100%;
+        margin-left: 0px;
+        border-radius: var(--border-radius-large);
+    }
+
+    #filterBarPanel {
+        padding: var(--body-padding);
+    }
+    
 }

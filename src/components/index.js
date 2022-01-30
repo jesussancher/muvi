@@ -6,6 +6,7 @@ import Modal from "./Modals/Modal";
 import Icon from './Icons/Icon';
 import TopNavbar from "./Navbars/TopNavbar";
 import NewReleaseCard from './Cards/NewReleaseCard';
+import Tag from './Tags/Tag';
 
 export {
     NewReleaseCard,
@@ -16,4 +17,5 @@ export {
     Input,
     Modal,
     Icon,
+    Tag
 }

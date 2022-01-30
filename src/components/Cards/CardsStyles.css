@@ -44,14 +44,20 @@
 }
 
 .card-title {
+    font-size: 20px;
     min-height: 25px;
     max-height: 68px;
-    text-overflow: ellipsis;
-    word-break: break-word;
     overflow: hidden;
-    font-size: 20px;
     font-weight: bold;
     line-height: 22px;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    transition: var(--slow-transition);
+}
+
+.card-title:hover {
+    text-shadow: 1px 1px 2px var(--background-color);
+    text-decoration: underline;
 }
 
 .card-genre {

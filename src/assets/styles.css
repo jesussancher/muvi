@@ -3,6 +3,7 @@
     --background-color-darker: #021b2f;
     --background-transparent: #1f66a05c;
     --shadow-color: #2a89d637;
+    --shadow-color-soft: #2a89d61d;
     --main-color: #5bf192;
     --main-color-transparent: #5bf1928d;
     --secondary-color: #13b6dc;
@@ -76,7 +77,7 @@ body {
 h1 {
     position: relative;
     font-size: 2em;
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 0;
 }
 
@@ -128,6 +129,36 @@ h6 {
     box-shadow: 0px 5px 25px 5px var(--shadow-color);
 }
 
+.shadow-soft {
+    -webkit-box-shadow: 0px 5px 15px 0px var(--shadow-color-soft);
+    -moz-box-shadow: 0px 5px 15px 0px var(--shadow-color-soft);
+    box-shadow: 0px 5px 15px 0px var(--shadow-color-soft);
+}
+
+::-webkit-scrollbar {
+    width: 0.6em;
+    height: 0.3em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--background-transparent);
+}
+
+::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    background-color: var(--main-color-transparent);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--main-color);
+}
+
+.debug {
+    outline: 1px solid red;
+}
+
 /* RESPONSIVE */
 
 /* Extra small devices (phones, 600px and down) */
@@ -145,27 +176,6 @@ h6 {
     body {
         --body-height: calc(100vh - (2 * var(--body-padding)) - 50px);
     }
-
-    ::-webkit-scrollbar {
-        width: 0.6em;
-        height: 0.3em;
-    }
-    
-    ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: var(--background-transparent);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        outline: none;
-        border-radius: 0.3em;
-        cursor: pointer;
-        background-color: var(--main-color-transparent);
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--main-color);
-    }
-
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

@@ -17,15 +17,15 @@ function NewReleaseCard(props) {
         <div className={'card release'} style={{backgroundImage: `url(${baseUrl+image})`}}>
             <div className={'card-info-container'}>
                 <div className={'card-info-content flex-column'}>
-                    <div className={'card-rate'}>
+                    {rate && <div className={'card-rate'}>
                         <i className={`icon-star-contain`} />{rate}
-                    </div>
-                    <div className={'card-title'}>
+                    </div>}
+                    {title && <div className={'card-title'}>
                         {title}
-                    </div>
-                    <div className={'card-genre'}>
+                    </div>}
+                    {genre && <div className={'card-genre'}>
                         {genre} 
-                    </div>
+                    </div>}
                     
                 </div>
             </div>
