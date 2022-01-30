@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TopNavbar } from '../../components';
 import'./HomePageStyles.css';
 import NewReleases from './NewReleases';
