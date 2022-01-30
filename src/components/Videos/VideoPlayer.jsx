@@ -41,11 +41,6 @@ function VideoPlayer(props) {
         }
     },[])
 
-    useEffect(() => {
-        const canPlay = ReactPlayer.canPlay(videoKey);
-        setPlaying(canPlay)
-    },[videoKey, backdrop])
-
     const fallback = () => {
         return (
             <div style={{backgroundImage: `url(${baseBackfropUrl+backdrop})`}} className={'backdrop-fallback'}></div>
