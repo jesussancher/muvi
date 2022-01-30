@@ -3,3 +3,62 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+/* New Releases */
+
+#newRelases {
+    margin-top: 50px;
+    padding: var(--body-padding);
+}
+
+.section-content {
+    min-height: 320px;
+    margin: 10px 0;
+    border-radius: var(--border-radius-large);
+    background-color: var(--background-color-darker);
+}
+
+.section-content.new-releases {
+    height: 300px;
+}
+
+.land-slider {
+    position: relative;
+    height: calc(100% - 30px);
+    width: calc(100% - 30px);
+}
+
+.land-slider .control{
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+}
+
+.land-slider .control.right {
+    background: linear-gradient(to right, transparent, var(--background-color-darker));
+    right: 0;
+}
+
+.land-slider .control.left {
+    background: linear-gradient(to left, transparent, var(--background-color-darker));
+    left: 0;
+}
+
+.land-slider .control.right:hover{
+    background: linear-gradient(to right, transparent, var(--background-color));
+}
+
+.land-slider .control.left:hover{
+    background: linear-gradient(to left, transparent, var(--background-color));
+}
+
+/* Carousel */
+.carousel {
+    height: calc(100% - 30px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start;
+    scroll-behavior: smooth;
+}

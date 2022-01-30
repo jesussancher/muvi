@@ -5,3 +5,7 @@
 .icon-home:before { content: '\e803'; } /* '' */
 .icon-search:before { content: '\e804'; } /* '' */
 .icon-show:before { content: '\e805'; } /* '' */
+.icon-chevron-right:before { content: '\e806'; } /* '' */
+.icon-chevron-left:before { content: '\e807'; } /* '' */
+.icon-star-outline:before { content: '\e809'; } /* '' */
+.icon-star-contain:before { content: '\e80a'; } /* '' */

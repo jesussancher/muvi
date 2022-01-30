@@ -144,8 +144,8 @@ function Input(props) {
                     type={isPasswordShown ? 'text' : type} 
                     className={classNames('visible-input')}  
                 />
-                {name === 'password' && <Icon icon={!isPasswordShown ? 'icon-hide' : 'icon-show'} style={{ fontSize: '1em' }} onClick={toggleShowPassword}/>}
-                {(name !== 'password' && icon) && <Icon icon={`icon-${icon}`} onClick={onIconClick}/>}
+                {name === 'password' && <Icon icon={!isPasswordShown ? 'hide' : 'show'} style={{ fontSize: '1em' }} onClick={toggleShowPassword}/>}
+                {(name !== 'password' && icon) && <Icon icon={icon} onClick={onIconClick}/>}
             </div>
         </label>
     )

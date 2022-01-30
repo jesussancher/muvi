@@ -1,13 +1,16 @@
 :root {
     --background-color: #032541;
+    --background-color-darker: #021b2f;
     --background-transparent: #1f66a05c;
+    --shadow-color: #2a89d637;
     --main-color: #5bf192;
     --main-color-transparent: #5bf1928d;
     --secondary-color: #13b6dc;
+    --gold-color: gold;
     --text-color: #fff;
     --text-color-dark: #032541;
     --main-gradient: linear-gradient(45deg,#5bf192,#13b6dc);
-    --main-gradient-transparent: linear-gradient(45deg,#5bf192c2,#13b7dcc1);
+    --main-gradient-transparent: linear-gradient(45deg,#5bf1929e,#13b7dc95);
     --body-padding: 30px;
     --component-padding-large: 30px;
     --component-padding-small: 15px;
@@ -19,16 +22,16 @@
 }
 
 #root {
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
     height: 100vh;
 }
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
     color: var(--text-color);
     /* height: var(--body-height); */
     /* padding: var(--body-padding); */
-    background-color: var(--background-color);
+    background: var(--background-color);
 }
 
 /* Global styles */
@@ -70,12 +73,45 @@ body {
     text-align: center;
 }
 
+h1 {
+    position: relative;
+    font-size: 2em;
+    margin: 5px 0;
+    padding: 0;
+}
+
+h1:after {
+    left: 0;
+    content: "";
+    z-index: 99;
+    width: 0px;
+    height: 3px;
+    bottom: -3px;
+    position: absolute;
+    background: var(--main-gradient);
+    transition: var(--quick-transition);
+}
+
+h1:hover:after {
+    width: 30px;
+}
+
+
 h2 {
     margin: 0;
     padding: 0;
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: 1em;
     color: var(--main-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    user-select: none;
 }
 
 /* UI */
@@ -84,6 +120,12 @@ h2 {
     border-image-slice: 1;
     border-width: 2px;
     border-image-source: var(--main-gradient);
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 5px 25px 5px var(--shadow-color);
+    -moz-box-shadow: 0px 5px 25px 5px var(--shadow-color);
+    box-shadow: 0px 5px 25px 5px var(--shadow-color);
 }
 
 /* RESPONSIVE */
@@ -106,6 +148,7 @@ h2 {
 
     ::-webkit-scrollbar {
         width: 0.6em;
+        height: 0.3em;
     }
     
     ::-webkit-scrollbar-track {

@@ -5,7 +5,7 @@
     height: 100vh;
     position: fixed;
     backdrop-filter: blur(3px);
-    background-color:var(--main-gradient-transparent);
+    background: var(--main-gradient-transparent);
 }
 
 .modal-container {

@@ -1,11 +1,11 @@
 .top-navbar-container {
     top: 0;
     left: 0;
-    position: fixed;
     height: 45px;
-    width: calc(100% - 40px);
-    justify-content: space-between;
+    position: fixed;
     padding: 5px 20px;
+    width: calc(100% - 40px);
     backdrop-filter: blur(3px);
-    background-color:var(--main-gradient-transparent);
+    justify-content: space-between;
+    transition: var(--slow-transition);
 }

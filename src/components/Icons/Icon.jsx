@@ -13,7 +13,7 @@ function Icon(props){
 
     return (
         <span className={classNames(`icon-container flex-row flex-center ${className}`)} onClick={onClick}>
-            <i className={icon} style={style} />
+            <i className={`icon-${icon}`} style={style} />
         </span>
     )
 }

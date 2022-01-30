@@ -1,0 +1,60 @@
+.card {
+    margin: 5px;
+    height: 220px;
+    cursor: pointer;
+    overflow: hidden;
+    min-width: 150px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    outline: 1px solid transparent;
+    transition: var(--quick-transition);
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-color);
+}
+
+.card:hover {
+    margin-bottom: 20px;
+    outline: 1px solid var(--main-color);
+}
+
+.card:hover .card-info-container {
+    bottom: 0px;
+}
+
+.card-info-container {
+    width: 100%;
+    height: 200px;
+    bottom: -202px;
+    position: absolute;
+    background: linear-gradient(to bottom, transparent, var(--background-color) 95%);
+    transition: var(--slow-transition);
+}
+
+.card-info-content {
+    width: 80%;
+    height: calc(100% - 40px);
+    margin: 20px 10%;
+    justify-content: flex-end;
+}
+
+.card-rate {
+    color: var(--gold-color);
+    font-size: 0.7em;
+}
+
+.card-title {
+    min-height: 25px;
+    max-height: 68px;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+.card-genre {
+    color: var(--main-color);
+    font-size: 0.7em;
+}
