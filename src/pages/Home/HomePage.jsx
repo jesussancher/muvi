@@ -4,8 +4,9 @@ import { TopNavbar } from '../../components';
 import { discoverMoviesByGenre, getAllGenresList } from '../../utils/API/API';
 import'./HomePageStyles.css';
 import FilterBar from './FilterBar';
-import NewReleases from './NewReleases';
+import Carousel from './Carousel';
 import MoviesList from './MoviesList';
+import HeadVideo from './HeadVideo';
 
 function HomePage(props) {
 
@@ -57,7 +58,9 @@ function HomePage(props) {
     return (
         <div className={classNames('home-page')} onContextMenu={e => e.preventDefault()}>
             <TopNavbar />
-            <NewReleases genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
+            <HeadVideo genresList={genresList} />
+            <Carousel type={'new'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
+            <Carousel type={'now'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
             <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
         </div>

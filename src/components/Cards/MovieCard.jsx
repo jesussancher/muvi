@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Icon } from '..';
 import { addToFavoriteList, removeFromFavoriteList } from '../../utils/Misc/favorites';
 import './CardsStyles.css';
@@ -31,26 +31,26 @@ function MovieCard(props) {
     }
 
     const handleAddToFavoriteList = () => {
+        if(!getFavoritesList) return;
         getFavoritesList(addToFavoriteList(id));
+        favAnimation();
     }
 
     const handleRemoveToFavoriteList = () => {
+        if(!getFavoritesList) return;
         getFavoritesList(removeFromFavoriteList(id));
+        favAnimation();
     }
 
-    useEffect(() => {
-        if(isFavorite) {
-            const favInterval = setInterval(() => {
-                setFavoriteAnimation(true);
-            }, 10);
-            setTimeout(() => {
-                clearInterval(favInterval);
-                setFavoriteAnimation(false);
-                
-            }, 2000);
-        }
-    },[isFavorite])
-
+    const favAnimation = () => {
+        const favInterval = setInterval(() => {
+            setFavoriteAnimation(true);
+        }, 10);
+        setTimeout(() => {
+            clearInterval(favInterval);
+            setFavoriteAnimation(false);
+        }, 2000);
+    }
 
     return (
         <div 
@@ -58,8 +58,13 @@ function MovieCard(props) {
             style={{backgroundImage: `url(${baseUrl+image})`}}
             onDoubleClick={isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
-            <div className={classNames('new-fav flex-row flex-center', {'animate': favoriteAnimation})}>
-                <i className={'icon-favorite-contain'}/>
+            <div className={classNames('new-fav flex-row flex-center', favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
+                { isFavorite
+                    ?
+                    <i className={'icon-favorite-contain'}/>
+                    :
+                    <i className={'icon-favorite-outline'}/>
+                }
             </div>
             <div 
                 className={'card-favorite flex-row flex-center'}
@@ -71,7 +76,7 @@ function MovieCard(props) {
             </div>
             <div className={'card-info-container'}>
                 <div className={'card-info-content flex-column'}>
-                    {rate && <div className={'card-rate'}>
+                    {(rate !== undefined || rate !== null) && <div className={'card-rate'}>
                         <i className={`icon-star-contain`} />{rate}
                     </div>}
                     {title && <div className={'card-title'}>

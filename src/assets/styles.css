@@ -2,6 +2,7 @@
     --background-color: #032541;
     --background-color-darker: #021b2f;
     --background-transparent: #1f66a05c;
+    --background-darker-transparent: #021322ef;
     --shadow-color: #2a89d637;
     --shadow-color-soft: #2a89d61d;
     --main-color: #5bf192;
@@ -23,15 +24,11 @@
 }
 
 #root {
-    /* overflow-y: auto;
-    overflow-x: hidden; */
-    height: 100vh;
+
+    height: 100%;
 }
 body {
-    /* overflow: hidden; */
     color: var(--text-color);
-    /* height: var(--body-height); */
-    /* padding: var(--body-padding); */
     background: var(--background-color);
 }
 

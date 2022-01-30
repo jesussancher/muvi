@@ -4,7 +4,7 @@ import { Icon, Tag } from '../../components';
 
 function FilterBar(props) {
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [selected, setSelected] = useState({id: '', name: ''});
     const [closedWidth, setClosedWidth] = useState(100);
     const [sortedGenresList, setSortedGenresList] = useState([]);

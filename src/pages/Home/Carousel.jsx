@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, Suspense, useEffect, useState } from 'react';
 import { Icon, MovieCard } from '../../components';
 import { tmdbRequest } from '../../utils/API/API';
 
@@ -8,34 +8,46 @@ const deltas = {
     null: 0
 }
 
-function NewReleases(props) {
+const types = {
+    now: {id: 'now_playing', title: 'New Releases'},
+    new: {id: 'upcoming', title: 'Upcoming'}
+}
+
+function Carousel(props) {
 
     const [moviesList, setMoviesList] = useState([]);
     const [controlInterval, setControlInterval] = useState(null);
-    const { 
+    const {
+        type,
         genresList,
         favoritesList,
         updateFavoritesList
     } = props
 
     const getMoviesList = async() => {
-        const movies = await tmdbRequest('now_playing');
+        const movies = await tmdbRequest(types[type].id);
+        const latest = await tmdbRequest('latest');
+        // setTimeout(async () => {
+            const images = await tmdbRequest(`${movies.results[0].id}/videos`);
+            console.log(movies.results[0].original_title, images);
+        // }, [2000])
+        console.log("Latest", latest);
         setMoviesList(movies.results);
     }
     // Request now playing movies
     useEffect(() => {
         getMoviesList();
-    },[])
+    },[])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const scrollOnMouseWheel = (event) => {
-        const carousel = document.querySelector("#releaseCarousel");
+        const carousel = document.querySelector(`#${type}Carousel`);
         event.preventDefault();
         if(!carousel) return;
         carousel.scrollLeft += event.deltaY;
     }
 
     const controlScroll = (delta) => {
-        const carousel = document.querySelector("#releaseCarousel");
+        const carousel = document.querySelector(`#${type}Carousel`);
         carousel.scrollLeft += delta;
     }
 
@@ -49,27 +61,27 @@ function NewReleases(props) {
     }
 
     useEffect(() => {
-        const carousel = document.querySelector("#releaseCarousel");
+        const carousel = document.querySelector(`#${type}Carousel`);
         carousel.addEventListener('wheel', scrollOnMouseWheel);
         return function cleanup() {
             carousel.removeEventListener('wheel', scrollOnMouseWheel);
         }
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const getFavoritesList = (list) => {
-        updateFavoritesList(list)
-    }
-
     const drawCards = () => {
         const cardsNodeList  = moviesList?.map((movie, index) => {
             const id = movie.id;
             const image = movie.poster_path;
-            const title = movie.original_title;
+            const title = movie.title;
             const rate = movie.vote_average;
             const date = movie.release_date;
             const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
             const isFavorite = favoritesList.includes(id);
-            return <Fragment key={index}><MovieCard id={id} image={image} release title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={getFavoritesList}/></Fragment>
+            return <Fragment key={index}>
+                    <Suspense fallback={<MovieCard release />}>
+                        <MovieCard id={id} image={image} release title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
+                    </Suspense>
+                </Fragment>
         });
 
         return cardsNodeList;
@@ -85,8 +97,8 @@ function NewReleases(props) {
     }
 
     return (
-        <section id={'newRelases'}>
-            <h1>New Releases</h1>
+        <section id={`${type}Section`}>
+            <h1>{types[type].title}</h1>
             <div className={'section-content new-releases flex-row flex-center shadow'}>
                 <div className={'land-slider flex-row flex-center '}>
                     <div 
@@ -97,12 +109,13 @@ function NewReleases(props) {
                     >
                         <Icon icon={'chevron-left'}/>
                     </div>
-                    <div id={'releaseCarousel'} className={'carousel land-scroll flex-row flex-row-center-vert'}>
-                        {moviesList?
-                        drawCards()
-                        :
-                        drawCardsDummy()
-                    }
+                    <div  id={`${type}Carousel`} className={'carousel land-scroll flex-row flex-row-center-vert'}>
+                        {moviesList || moviesList.length > 0
+                            ?
+                            drawCards()
+                            :
+                            drawCardsDummy()
+                        }
                     </div>
                     <div 
                         className={'control right flex-column flex-center'} 
@@ -118,4 +131,4 @@ function NewReleases(props) {
     )
 }
 
-export default NewReleases;
+export default Carousel;

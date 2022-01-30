@@ -9,7 +9,7 @@
     outline: 1px solid transparent;
     transition: outline 0.3s ease-in-out, transform 0.3s ease-in-out;
     border-radius: var(--border-radius-small);
-    background-color: var(--background-color);
+    background-color: var(--background-color-darker);
 }
 
 
@@ -113,29 +113,49 @@
     color: var(--main-color-transparent);
 }
 
-.new-fav.animate i {
-    opacity: 1;
-    animation-name: favAnimate;
+.new-fav.add-animate i {
+    animation-name: addAnimation;
     animation-iteration-count: 1;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
 }
 
-@keyframes favAnimate {
-    0% {transform: scale(0);}
-    25% {transform: scale(2);}
+.new-fav.remove-animate i {
+    animation-name: removeAnimation;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+
+
+@keyframes addAnimation {
+    0% {transform: scale(0);
+        opacity: 0;}
+    25% {transform: scale(2);
+        opacity: 1;}
     50% {transform: scale(1.5);}
     75% {transform: scale(2);}
-    90% {transform: scale(1.5);}
-    100% {transform: scale(0);}
-  }
+    90% {transform: scale(1.5);
+        opacity: 1;}
+    100% {transform: scale(0);
+        opacity: 0;}
+}
+
+
+@keyframes removeAnimation {
+    0% {transform: scale(0);
+        opacity: 0;}
+    50% {transform: scale(2);
+        opacity: 1;}
+    100% {transform: scale(0);
+        opacity: 0;}
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
     .card {
         height: 340px;
-        min-width: calc(((100vw - 60px) / 2) - 15px);
-        max-width: calc(((100vw - 60px) / 2) - 15px);  
+        min-width: calc(((100vw - 20px) / 2) - 16px);
+        max-width: calc(((100vw - 20px) / 2) - 16px);  
     }
 
 }
@@ -145,8 +165,8 @@
 
     .card {
         height: 300px;
-        min-width: calc(((100vw - 60px) / 3) - 14px);
-        max-width: calc(((100vw - 60px) / 3) - 14px);   
+        min-width: calc(((100vw - 20px) / 3) - 15px);
+        max-width: calc(((100vw - 20px) / 3) - 15px);   
     }
 
 }
@@ -156,8 +176,8 @@
 
     .card {
         height: 330px;
-        min-width: calc(((100vw - 60px) / 4) - 13px);
-        max-width: calc(((100vw - 60px) / 4) - 13px);
+        min-width: calc(((100vw - 60px) / 4) - 14px);
+        max-width: calc(((100vw - 60px) / 4) - 14px);
     }
 
 }
@@ -166,9 +186,9 @@
 @media only screen and (min-width: 992px) {
     
     .card {
-        height: 400px;
-        min-width: calc(((100vw - 60px) / 5) - 12px);
-        max-width: calc(((100vw - 60px) / 5) - 12px);
+        height: 380px;
+        min-width: calc(((100vw - 60px) / 5) - 13px);
+        max-width: calc(((100vw - 60px) / 5) - 13px);
     }
 
 }
