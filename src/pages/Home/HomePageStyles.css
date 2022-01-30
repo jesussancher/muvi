@@ -122,10 +122,9 @@ section {
 }
 
 .head-video-player {
-    width: 130vw;
-    height: 130vh;
-    margin-top: -20vh;
-    margin-left: -15vw;
+    width: 100vw !important;
+    height: calc(80vh + 150px) !important;
+    margin-top: -55px;
 }
 
 .movie-overlay {
@@ -137,8 +136,27 @@ section {
     position: absolute;
     justify-content: flex-end;
     align-items: flex-start;
-    background: linear-gradient(to bottom, var(--background-darker-transparent) 10%, transparent 50%, var(--background-darker-transparent) 80%);
+    background: linear-gradient(to bottom, var(--background-darker-transparent) 5%, transparent 60%, var(--background-darker-transparent) 90%);
 }
+
+.movie-overlay-details {
+    width: 90vw;
+    padding: var(--body-padding);
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.movie-overlay-details .card-title{
+    overflow: visible;
+    margin: 0.3em 0;
+}
+
+.movie-overlay-details .card-rate,
+.movie-overlay-details .card-genre
+{
+    font-size: 0.6em
+}
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

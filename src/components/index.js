@@ -7,8 +7,10 @@ import Icon from './Icons/Icon';
 import TopNavbar from "./Navbars/TopNavbar";
 import MovieCard from './Cards/MovieCard';
 import Tag from './Tags/Tag';
+import VideoPlayer from "./Videos/VideoPlayer"
 
 export {
+    VideoPlayer,
     MovieCard,
     TopNavbar,
     MuviLogo,

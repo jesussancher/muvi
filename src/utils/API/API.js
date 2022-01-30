@@ -19,8 +19,23 @@ const tmdbRequest = (req) => {
     .then(function(resJson) {
         return resJson;
    })
+   .catch(function(error) {
+       console.log("Error", error)
+   })
 
    return moviesList
+}
+
+const tmdbRequestList = async (array, limit) => {
+    let resultList = [];
+    for(let i = 0; i < limit; i++) {
+        await tmdbRequest(array[i]).then(function(result) {
+            resultList.push(result);
+          }, function(err) {
+            console.log(err);
+          });
+    }
+    return resultList;
 }
 
 const discoverMoviesByGenre = async (genre = 28, page = 1) => {
@@ -39,7 +54,9 @@ const tmdbRequestParams = (req) => {
     .then(function(resJson) {
         return resJson;
    })
-
+   .catch(function(error) {
+    console.log("Error", error)
+    })
    return moviesList
 }
 
@@ -52,15 +69,19 @@ const getAllGenresList = () => {
     .then(function(resJson) {
         return resJson;
    })
+   .catch(function(error) {
+    console.log("Error", error)
+    })
 
    return genresList
 }
 
 export {
     tmdbRequest,
+    tmdbRequestList,
     getAllGenresList,
     tmdbRequestParams,
-    discoverMoviesByGenre
+    discoverMoviesByGenre,
 }
 
 

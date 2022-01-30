@@ -1,69 +1,76 @@
 import React, { useEffect, useState } from 'react';
-import { tmdbRequest } from '../../utils/API/API';
+import { VideoPlayer } from '../../components';
+import { tmdbRequest, tmdbRequestList } from '../../utils/API/API';
 
+const baseUrl = 'https://www.youtube.com/watch?v=';
+const videosLimit = 3;
 function HeadVideo () {
 
-    const [moviesList, setMoviesList] = useState([]);
-    const [currentMovie, setCurrentMovie] = useState({movieId: '', videoId: '', index: 0, details: null});
+    const [videosList, setVideosList] = useState([]);
+    const [currentMovie, setCurrentMovie] = useState({videoKey: '', details: null, index: 0});
+    const [currentMovieDuration, setCurrentMovieDuration] = useState(0);
 
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest('upcoming');
         if(movies.results.length === 0) return;
-        await getCurrentMovie(movies.results[1].id, 1);
-        setTimeout( async () => {
-            await getCurrentMovie(movies.results[2].id, 2);
-        },[30000])
-        setMoviesList(movies.results);
+        const moviesList = movies.results.map((movie) => `${movie.id}/videos`);
+        const videosObjects = await tmdbRequestList(moviesList, videosLimit);
+        let videosKeys = []
+        videosObjects.forEach((video, index) => {
+            videosKeys.push({movieId: video?.id, videoKey: baseUrl + video?.results[0]?.key, index});
+        });
+        setVideosList(videosKeys);
+        getMovieDetails(videosKeys[0].movieId, videosKeys[0].videoKey, 0);
+
     }
 
-    const getCurrentMovie = async(movieId, index) => {
-        const videos = await tmdbRequest(`${movieId}/videos`);
-        if(videos.results.length === 0 && moviesList.length === 0) {
-            const nextMovieId= moviesList[index + 1].id;
-            const nextMovievideos = await tmdbRequest(`${movieId}/videos`);
-            const nextVideoId = nextMovievideos.results[0].key;
-            const nextMovieDetails = await tmdbRequest(nextMovieId);
-            setCurrentMovie({movieId: nextMovieId, videoId: nextVideoId, index: index +1, details: nextMovieDetails});
-        } else {
-            const videoId = videos.results[0].key;
-            const details = await tmdbRequest(movieId);
-            setCurrentMovie({movieId, videoId, index, details});
-        }
+    const getMovieDetails = async (movieId, videoKey, index) => {
+        const details = await tmdbRequest(movieId);
+        setCurrentMovie({videoKey, details, index});
     }
-    // Request now playing movies
+
+    const getDuration = (duration) => {
+        setCurrentMovieDuration(duration)
+    }
+
     useEffect(() => {
         getMoviesList();
     },[])  // eslint-disable-line react-hooks/exhaustive-deps
 
+
     useEffect(() => {
-        if(currentMovie.movieId === '' || moviesList.length === 0) return;
-        setTimeout( () => {
-            const newIndex = currentMovie.index === moviesList.length -1 ? 0 : currentMovie.index + 1;
-            getCurrentMovie(moviesList[newIndex].id, newIndex);
-        },[30000])
-    }, [currentMovie, moviesList]) // eslint-disable-line react-hooks/exhaustive-deps
+        if(currentMovieDuration === 0 || videosList.length === 0 || !currentMovie.details) return;
+        setTimeout(() =>{
+            let newIndex = currentMovie.index + 1;
+            if(newIndex === videosLimit) { newIndex = 0 };
+            console.log(videosList[newIndex].movieId, videosList[newIndex].videoKey, (newIndex))
+            getMovieDetails(videosList[newIndex].movieId, videosList[newIndex].videoKey, (newIndex));
+        }, currentMovieDuration*900)
+    },[currentMovie, currentMovieDuration, videosList])
+
     return (
         <section id="headVideoSection">
             <div className={'movie-overlay flex-column'}>
                 {currentMovie.details && 
-                    <div>
-                        <p>{currentMovie.details.vote_average}</p>
-                        <h1>{currentMovie.details.title}</h1>
-                        <h3>{currentMovie.details.genres[0].name}</h3>
+                    <div className={'movie-overlay-details'}>
+                        {(currentMovie.details.vote_average !== undefined || currentMovie.details.vote_average !== null) && <div className={'card-rate'}>
+                        <i className={`icon-star-contain`} />{currentMovie.details.vote_average}
+                        </div>}
+                        {currentMovie.details.title && <div className={'card-title'}>
+                            {currentMovie.details.title}
+                        </div>}
+                        {currentMovie.details.genres[0].name && <div className={'card-genre'}>
+                            {currentMovie.details.genres[0].name} 
+                        </div>}
                     </div>
                 }
             </div>
-            {currentMovie.videoId !== '' && 
-                <iframe 
-                    className="head-video-player"
-                    src={`https://www.youtube.com/embed/${currentMovie.videoId}?autoplay=1&amp;controls=0&amp;disablekb=1&amp;rel=1&amp;color=white&amp;showinfo=0`}
-                    title="YouTube video player" 
-                    frameBorder="0"
-                    allow="accelerometer; gyroscope; autoplay"
-                >
-                </iframe>
-            }
+            <VideoPlayer
+                videoKey={currentMovie.videoKey}
+                className="head-video-player"
+                getDuration={getDuration}
+            />
         </section>
     )
 }

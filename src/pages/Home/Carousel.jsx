@@ -26,12 +26,6 @@ function Carousel(props) {
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest(types[type].id);
-        const latest = await tmdbRequest('latest');
-        // setTimeout(async () => {
-            const images = await tmdbRequest(`${movies.results[0].id}/videos`);
-            console.log(movies.results[0].original_title, images);
-        // }, [2000])
-        console.log("Latest", latest);
         setMoviesList(movies.results);
     }
     // Request now playing movies
