@@ -10,7 +10,8 @@ function FilterBar(props) {
     const [sortedGenresList, setSortedGenresList] = useState([]);
 
     const {
-        genresList
+        genresList,
+        getSelected
     } = props;
 
     const drawFilters = () => {
@@ -32,6 +33,7 @@ function FilterBar(props) {
 
     const handleOnFilterSelection = (genre) => {
         setSelected(genre);
+        getSelected(genre);
         sortList(genre);
         setOpen(false);
     }
@@ -41,7 +43,6 @@ function FilterBar(props) {
         let newList = [...genresList];
         newList.splice(index, 1);
 
-        console.log([selected, ...newList])
         setSortedGenresList([selected, ...newList]);
     }
 
@@ -52,7 +53,6 @@ function FilterBar(props) {
     useEffect(() => {
         if(genresList.length === 0) return;
         const firstGenre = genresList[0];
-        console.log(firstGenre)
         setSelected(firstGenre);
         setSortedGenresList(genresList);
     },[genresList]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -65,6 +65,7 @@ function FilterBar(props) {
 
     const scrollOnMouseWheel = (event) => {
         const filterBar = document.querySelector("#filterBar");
+        if(!filterBar.classList.contains('open')) return;
         event.preventDefault();
         if(!filterBar) return;
         filterBar.scrollLeft += event.deltaY;
@@ -73,10 +74,16 @@ function FilterBar(props) {
     useEffect(() => {
         const filterBar = document.querySelector("#filterBar");
         filterBar.addEventListener('wheel', scrollOnMouseWheel);
+        
         return function cleanup() {
             filterBar.removeEventListener('wheel', scrollOnMouseWheel);
         }
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        const filterBar = document.querySelector("#filterBar");
+        if(!open) {filterBar.scrollLeft = 0;}
+    },[open])
 
     return (
         <section id={'filterBarPanel'} >

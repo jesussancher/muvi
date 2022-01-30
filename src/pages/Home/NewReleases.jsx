@@ -11,7 +11,6 @@ const deltas = {
 function NewReleases(props) {
 
     const [moviesList, setMoviesList] = useState([]);
-    const [moviesListPopular, setMoviesListPopular] = useState([]);
     const [controlInterval, setControlInterval] = useState(null);
     const { 
         genresList
@@ -19,11 +18,7 @@ function NewReleases(props) {
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest('now_playing');
-        const popular = await tmdbRequest('popular');
-        const latest = await tmdbRequest('latest');
-        console.log(latest)
         setMoviesList(movies.results);
-        setMoviesListPopular(popular.results);
     }
     // Request now playing movies
     useEffect(() => {
