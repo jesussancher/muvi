@@ -8,7 +8,7 @@ const baseBackfropUrl = 'https://image.tmdb.org/t/p/original';
 function VideoPlayer(props) {
 
     const [playing, setPlaying] = useState(false);
-    const [showFallBack, setShowFallBack] = useState(false)
+    const [showFallBack, setShowFallBack] = useState(true);
     const {
         videoKey,
         videosList,

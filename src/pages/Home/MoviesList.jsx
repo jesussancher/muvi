@@ -6,7 +6,9 @@ function MoviesList(props) {
 
     const {
         title,
+        style,
         release,
+        className,
         moviesList,
         genresList,
         fromFavorites,
@@ -22,10 +24,11 @@ function MoviesList(props) {
             const rate = movie.vote_average;
             const date = movie.release_date;
             const genre = movie.genre ? movie.genre : genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
+            const genreId = movie.genreId ? movie.genreId : movie.genre_ids[0];
             const isFavorite = favoritesList?.some(fav => fav.id === id);
             return <Fragment key={index}>
                     <Suspense fallback={<MovieCard />}>
-                        <MovieCard id={id} image={image} release={release} fromFavorites={fromFavorites} title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
+                        <MovieCard id={id} image={image} release={release} fromFavorites={fromFavorites} title={title} rate={rate} date={date} genre={genre} genreId={genreId} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
                     </Suspense>
                 </Fragment>
         });
@@ -43,7 +46,7 @@ function MoviesList(props) {
     }
 
     return (
-        <section id={'moviesListSection'} >
+        <section id={'moviesListSection'} style={{...style}} className={className}>
             {title && <h1>{title}</h1>}
             <div className={classNames('movies-list flex-row')}>
                 {moviesList?.length > 0

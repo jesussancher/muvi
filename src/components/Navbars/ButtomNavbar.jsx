@@ -7,10 +7,13 @@ import './ButtomNavbarStyles.css';
 function ButtomNavbar(props) {
 
     const [open, setOpen] = useState(false);
+    const [hideNavbar, setHideNavbar] = useState(false);
 
     const {
         pageNavigation,
-        getSearchValue
+        getSearchValue,
+        currentPage,
+        genreSelected
     } = props
 
     let location = useLocation();
@@ -64,15 +67,31 @@ function ButtomNavbar(props) {
         } 
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
+
+    const getScrollValue = () => {
+        const moviesListSection = document.querySelector('#moviesListSection');
+        var y = window.scrollY;
+        setHideNavbar(y > moviesListSection.offsetTop - 400 && y < moviesListSection.offsetTop + moviesListSection.offsetHeight + 400) 
+    }
+    
+
+    useEffect(() => {
+        document.addEventListener("scroll", getScrollValue);
+        return function cleanup() {
+            document.removeEventListener("scroll", getScrollValue);
+        }
+    },[])
+
     return <div id={'buttomNavbar'} className={classNames('buttom-navbar inner-shadow shadow', {'open': open})}>
+                {pageNavigation && <div className={classNames('ribbon', {'open': hideNavbar})}>
+                    <b>{genreSelected.name ? genreSelected.name : 'All'}  </b>
+                        {currentPage}
+                </div> }
                 {open && <div  className={classNames('buttom-navbar-searcher')}>
-                        <SearchInput icon={'search'} onValueChange={getSearchValue} />
+                        <SearchInput icon={'search flex-row flex-center'} onValueChange={getSearchValue} onIconClck={closeNavbar} />
                 </div>}
                 <div className={'icons-container flex-row flex-center'}>
-                    <div className={'ribbon'}>
-
-                    </div>
-                    {pageNavigation && <div className={classNames('buttom-prev flex-row flex-center', {'open': open})} onClick={() => pageNavigation(-1)}>
+                    {pageNavigation && <div className={classNames('buttom-prev flex-row flex-center', {'open': !hideNavbar || open})} onClick={() => pageNavigation(-1)}>
                             <Icon icon={'chevron-left'} />
                     </div>}
                     {location.pathname === '/' && <div className={classNames('buttom-navbar-button flex-row flex-center', {'open': open})} onClick={toggleOpenNavbar}>
@@ -93,7 +112,7 @@ function ButtomNavbar(props) {
                             Favorites
                         </span>
                     </div>
-                    {pageNavigation && <div className={classNames('buttom-next flex-row flex-center', {'open': open})} onClick={() => pageNavigation(1)}>
+                    {pageNavigation && <div className={classNames('buttom-next flex-row flex-center', {'open': !hideNavbar || open})} onClick={() => pageNavigation(1)}>
                         <Icon icon={'chevron-right'} />
                     </div>}
                 </div>

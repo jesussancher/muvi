@@ -1,7 +1,7 @@
 :root {
     --background-color: #032541;
     --background-color-darker: #021b2f;
-    --background-transparent: #1f66a05c;
+    --background-transparent: #1f66a090;
     --background-darker-transparent: #021322ef;
     --shadow-color: #2a89d637;
     --shadow-color-soft: #2a89d61d;
@@ -24,9 +24,9 @@
 }
 
 #root {
-
-    height: 100%;
+    height: 100vh;
 }
+
 body {
     color: var(--text-color);
     background: var(--background-color);

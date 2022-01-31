@@ -13,6 +13,7 @@ function MovieCard(props) {
         genre,
         title,
         image,
+        genreId,
         release,
         isFavorite,
         fromFavorites,
@@ -39,6 +40,7 @@ function MovieCard(props) {
             vote_average: rate,
             genre,
             title,
+            genreId,
             poster_path: image,
             release_date: release}));
         favAnimation('add');
@@ -51,7 +53,6 @@ function MovieCard(props) {
     }
 
     const favAnimation = (type) => {
-        console.log(type, title)
         const favInterval = setInterval(() => {
             setFavoriteAnimation(true);
         }, 10);
@@ -70,9 +71,9 @@ function MovieCard(props) {
             <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
                 { isFavorite
                     ?
-                    <i className={'icon-favorite-contain'}/>
+                    <i className={'icon-favorite-contain'} />
                     :
-                    <i className={'icon-favorite-outline'}/>
+                    <i className={'icon-favorite-outline'} />
                 }
             </div>
             <div 

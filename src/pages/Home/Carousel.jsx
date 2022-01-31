@@ -70,10 +70,11 @@ function Carousel(props) {
             const rate = movie.vote_average;
             const date = movie.release_date;
             const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
+            const genreId = movie.genre_ids[0];
             const isFavorite = favoritesList?.some(fav => fav.id === id);
             return <Fragment key={index}>
                     <Suspense fallback={<MovieCard release />}>
-                        <MovieCard id={id} image={image} release title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
+                        <MovieCard id={id} image={image} release title={title} rate={rate} date={date} genre={genre} genreId={genreId} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
                     </Suspense>
                 </Fragment>
         });

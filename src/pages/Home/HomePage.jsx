@@ -36,13 +36,14 @@ function HomePage() {
     const getMoviesPagination = async (n) => {
         const newPage = currentPage + n;
         if(newPage === 0) return;
-        const byPage = await discoverMoviesByGenre(genreSelected, newPage);
+        const byPage = await discoverMoviesByGenre(genreSelected.id, newPage);
         setCurrentPage(newPage);
         setMoviesList(byPage.results);
     }
 
     const getSelectedGenre = (genre) => {
         setGenreSelected(genre);
+        setCurrentPage(1);
     }
 
     const getSearchValue = (query) => {
@@ -90,7 +91,7 @@ function HomePage() {
             <Carousel type={'now'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
             <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-            <ButtomNavbar pageNavigation={getMoviesPagination} getSearchValue={getSearchValue}/>
+            <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue}/>
         </div>
     )
 }

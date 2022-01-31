@@ -3,7 +3,6 @@
     bottom: 0;
     height: 50px;
     position: fixed;
-    overflow: hidden;
     backdrop-filter: blur(3px);
     transition: var(--slow-transition);
     background: var(--background-transparent);
@@ -16,8 +15,9 @@
 .icons-container {
     bottom: 0;
     height: 50px;
-    position: fixed;
     font-size: 35px;
+    position: fixed;
+    overflow: hidden;
 }
 
 .buttom-navbar-button {
@@ -71,13 +71,21 @@
     width: 0px;
 }
 
+.buttom-navbar-button.active:hover .icon-container {
+    margin-top: 0;
+}
+
+.buttom-navbar-button.active .icon-container {
+    margin-top: -10px;
+}
+
 .buttom-navbar-button.active .icon-container::after{
     position: absolute;
     content: "";
     height: 4px;
     width: 4px;
     border-radius: 50%;
-    bottom: 1px;
+    bottom: -10px;
     left: calc(50% - 2px);
     background-color:var(--main-color);
     transition: var(--slow-transition);
@@ -131,6 +139,24 @@
     color: var(--background-color-darker);
 }
 
+.ribbon {
+    top: 0px;
+    left: 25px;
+    height: 0px;
+    padding: 0 1em;
+    overflow: hidden;
+    position: absolute;
+    transition: var(--quick-transition);
+    color: var(--background-color-darker);
+    background-color: var(--main-color);
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+}
+
+.ribbon.open {
+    top: -25px;
+    height: 25px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .buttom-prev,
@@ -143,6 +169,7 @@
         left: 0;
     }
 
+    .icons-container,
     .buttom-navbar {
         left: 0;
         width: 100%;
@@ -169,6 +196,7 @@
         left: 0;
     }
 
+    .icons-container,
     .buttom-navbar {
         left: 0;
         width: 100%;
@@ -189,6 +217,7 @@
         left: calc(50% - 200px);
     }
     
+    .icons-container,
     .buttom-navbar {
         width: 400px;
         left: calc(50% - 200px);
