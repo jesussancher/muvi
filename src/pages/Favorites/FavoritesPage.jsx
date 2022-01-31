@@ -2,13 +2,10 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { TopNavbar, ButtomNavbar } from '../../components';
 import { discoverMoviesByGenre, getAllGenresList } from '../../utils/API/API';
-import'./HomePageStyles.css';
-import FilterBar from './FilterBar';
-import Carousel from './Carousel';
-import MoviesList from './MoviesList';
-import HeadVideo from './HeadVideo';
+import'../Home/HomePageStyles.css';
+import MoviesList from '../Home/MoviesList';
 
-function HomePage() {
+function FavoritesPage() {
 
     const [genresList, setGenresList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
@@ -24,10 +21,6 @@ function HomePage() {
     const getMoviesList = async (genre) => {
         const byGenre = await discoverMoviesByGenre(genre);
         setMoviesList(byGenre.results);
-    }
-
-    const getSelectedGenre = (genre) => {
-        setGenreSelected(genre);
     }
 
     const updateFavoritesList = (list) => {
@@ -58,14 +51,11 @@ function HomePage() {
     return (
         <div className={classNames('home-page')} onContextMenu={e => e.preventDefault()}>
             <TopNavbar />
-            <HeadVideo genresList={genresList} />
-            <Carousel type={'new'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-            <Carousel type={'now'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-            <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
-            <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
+            <div style={{marginTop: 30}}></div>
+            <MoviesList fromFavorites title={'My Favorites'} genresList={genresList} moviesList={favoritesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <ButtomNavbar />
         </div>
     )
 }
 
-export default HomePage;
+export default FavoritesPage;

@@ -5,11 +5,13 @@ import Input from './Inputs/Input';
 import Modal from "./Modals/Modal";
 import Icon from './Icons/Icon';
 import TopNavbar from "./Navbars/TopNavbar";
+import ButtomNavbar from "./Navbars/ButtomNavbar";
 import MovieCard from './Cards/MovieCard';
 import Tag from './Tags/Tag';
 import VideoPlayer from "./Videos/VideoPlayer"
 
 export {
+    ButtomNavbar,
     VideoPlayer,
     MovieCard,
     TopNavbar,

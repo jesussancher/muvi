@@ -14,6 +14,7 @@ function MovieCard(props) {
         image,
         release,
         isFavorite,
+        fromFavorites,
         getFavoritesList
     } = props;
 
@@ -32,17 +33,24 @@ function MovieCard(props) {
 
     const handleAddToFavoriteList = () => {
         if(!getFavoritesList) return;
-        getFavoritesList(addToFavoriteList(id));
-        favAnimation();
+        getFavoritesList(addToFavoriteList({
+            id,
+            vote_average: rate,
+            genre,
+            title,
+            poster_path: image,
+            release_date: release}));
+        favAnimation('add');
     }
 
     const handleRemoveToFavoriteList = () => {
         if(!getFavoritesList) return;
         getFavoritesList(removeFromFavoriteList(id));
-        favAnimation();
+        favAnimation('remove');
     }
 
-    const favAnimation = () => {
+    const favAnimation = (type) => {
+        console.log(type, title)
         const favInterval = setInterval(() => {
             setFavoriteAnimation(true);
         }, 10);
@@ -58,7 +66,7 @@ function MovieCard(props) {
             style={{backgroundImage: `url(${baseUrl+image})`}}
             onDoubleClick={isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
-            <div className={classNames('new-fav flex-row flex-center', favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
+            <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
                 { isFavorite
                     ?
                     <i className={'icon-favorite-contain'}/>

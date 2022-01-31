@@ -5,8 +5,11 @@ import { MovieCard } from '../../components';
 function MoviesList(props) {
 
     const {
+        title,
+        release,
         moviesList,
         genresList,
+        fromFavorites,
         favoritesList,
         updateFavoritesList
     } = props;
@@ -15,14 +18,14 @@ function MoviesList(props) {
         const cardsNodeList  = moviesList?.map((movie, index) => {
             const id = movie.id;
             const image = movie.poster_path;
-            const title = movie.original_title;
+            const title = movie.title;
             const rate = movie.vote_average;
             const date = movie.release_date;
-            const genre = genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
-            const isFavorite = favoritesList.includes(id);
+            const genre = movie.genre ? movie.genre : genresList.find((genre) => genre.id === movie.genre_ids[0])?.name;
+            const isFavorite = favoritesList?.some(fav => fav.id === id);
             return <Fragment key={index}>
                     <Suspense fallback={<MovieCard />}>
-                        <MovieCard id={id} image={image} title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
+                        <MovieCard id={id} image={image} release={release} fromFavorites={fromFavorites} title={title} rate={rate} date={date} genre={genre} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
                     </Suspense>
                 </Fragment>
         });
@@ -40,15 +43,18 @@ function MoviesList(props) {
     }
 
     return (
-        <section id={'moviesListSection'} className={classNames('movies-list flex-row')}>
-            {moviesList || moviesList.length > 0
-                ?
-                drawCards()
-                :
-                drawCardsDummy()
-            }
+        <section id={'moviesListSection'} >
+            {title && <h1>{title}</h1>}
+            <div className={classNames('movies-list flex-row')}>
+                {moviesList || moviesList.length > 0
+                    ?
+                    drawCards()
+                    :
+                    drawCardsDummy()
+                }
+            </div>
         </section>
     )
 }
 
-export default MoviesList
+export default React.memo(MoviesList);

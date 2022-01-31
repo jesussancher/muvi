@@ -15,6 +15,7 @@ function VideoPlayer(props) {
         className,
         backdrop,
         getDuration,
+        getShowCallback
     } = props;
 
     const handleOnDuration = (duration) => {
@@ -27,6 +28,7 @@ function VideoPlayer(props) {
 
     const handleOnProgress = (progress) => {
         setShowFallBack(progress.playedSeconds === 0);
+        getShowCallback(progress.playedSeconds === 0)
     }
 
     const getScrollValue = () => {

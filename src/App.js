@@ -1,10 +1,12 @@
+import React from 'react';
 import './App.css';
-import { 
+import {
   Route, 
   Routes } from 'react-router-dom';
 import { 
   HomePage,
-  LoginPage
+  LoginPage,
+  FavoritesPage
 } from './pages';
 import { 
   AuthProvider, 
@@ -26,6 +28,15 @@ function App() {
                   }
                   >
               </Route>
+              <Route
+                  path="/favorites"
+                  element={
+                    <RequireAuth>
+                      <FavoritesPage />
+                    </RequireAuth>
+                  }
+                  >
+                    </Route>
             </Routes>
        </AuthProvider>
      </ErrorBoundary> 

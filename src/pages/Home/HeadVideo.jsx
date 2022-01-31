@@ -9,7 +9,7 @@ function HeadVideo () {
     const [videosList, setVideosList] = useState([]);
     const [currentMovie, setCurrentMovie] = useState({videoKey: '', details: null, index: 0});
     const [currentMovieDuration, setCurrentMovieDuration] = useState(0);
-
+    const [canPlay, setCanPlay] = useState(false);
 
     const getMoviesList = async() => {
         const movies = await tmdbRequest('upcoming');
@@ -34,19 +34,23 @@ function HeadVideo () {
         setCurrentMovieDuration(duration)
     }
 
+    const getShowCallback = (playing) => {
+        setCanPlay(playing)
+    }
+
     useEffect(() => {
         getMoviesList();
     },[])  // eslint-disable-line react-hooks/exhaustive-deps
 
 
     useEffect(() => {
-        if(currentMovieDuration === 0 || videosList.length === 0 || !currentMovie.details) return;
+        if(currentMovieDuration === 0 || videosList.length === 0 || !currentMovie.details || !canPlay) return;
         setTimeout(() =>{
             let newIndex = currentMovie.index + 1;
             if(newIndex === videosLimit) { newIndex = 0 };
             getMovieDetails(videosList[newIndex].movieId, videosList[newIndex].videoKey, (newIndex));
         }, currentMovieDuration*1000)
-    },[currentMovie, currentMovieDuration, videosList])
+    },[currentMovie, currentMovieDuration, videosList, canPlay])
 
     return (
         <section id="headVideoSection">
@@ -70,6 +74,7 @@ function HeadVideo () {
                 backdrop={currentMovie?.details?.backdrop_path}
                 className="head-video-player"
                 getDuration={getDuration}
+                getShowCallback={getShowCallback}
             />
         </section>
     )

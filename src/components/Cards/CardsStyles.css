@@ -154,8 +154,8 @@
 
     .card {
         height: 280px;
-        min-width: calc(((100vw - 20px) / 2) - 16px);
-        max-width: calc(((100vw - 20px) / 2) - 16px);  
+        min-width: calc(((100vw - 20px) / 2) - 15px);
+        max-width: calc(((100vw - 20px) / 2) - 15px);  
     }
 
 }
@@ -165,8 +165,8 @@
 
     .card {
         height: 300px;
-        min-width: calc(((100vw - 20px) / 3) - 15px);
-        max-width: calc(((100vw - 20px) / 3) - 15px);   
+        min-width: calc(((100vw - 20px) / 3) - 14px);
+        max-width: calc(((100vw - 20px) / 3) - 14px);   
     }
 
 }
@@ -186,7 +186,7 @@
 @media only screen and (min-width: 992px) {
     
     .card {
-        height: 350px;
+        height: 380px;
         min-width: calc(((100vw - 60px) / 5) - 13px);
         max-width: calc(((100vw - 60px) / 5) - 13px);
     }
