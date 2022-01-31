@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { createRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Icon, SearchInput } from '..';
 import './ButtomNavbarStyles.css';
