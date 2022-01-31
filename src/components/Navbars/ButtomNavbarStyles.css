@@ -1,25 +1,27 @@
     
-.icons-container {
-    bottom: 0;
-    height: 50px;
-    width: 400px;
-    position: fixed;
-    left: calc(50% - 200px);
-    font-size: 35px;
-}
-
-
 .buttom-navbar {
     bottom: 0;
     height: 50px;
     position: fixed;
     overflow: hidden;
     backdrop-filter: blur(3px);
-    /* outline: 1px solid var(--main-color); */
+    transition: var(--slow-transition);
     background: var(--background-transparent);
 }
 
+.buttom-navbar.open {
+    height: 100px;
+}
+
+.icons-container {
+    bottom: 0;
+    height: 50px;
+    position: fixed;
+    font-size: 35px;
+}
+
 .buttom-navbar-button {
+    z-index: 9;
     width: 50px;
     height: 35px;
     margin: 0 5px;
@@ -27,28 +29,58 @@
     cursor: pointer;
     user-select: none;
     border-radius: 25px;
-    transition: var(--quick-transition);
+    transition: var(--slow-transition);
 }
 
+.buttom-navbar-button.open,
 .buttom-navbar-button:hover {
     width: 120px;
     backdrop-filter: blur(3px);
     background: var(--main-color);
 }
 
+.buttom-navbar-button.active:hover i,
+.buttom-navbar-button.open .buttom-navbar-text,
+.buttom-navbar-button.open i,
 .buttom-navbar-button:hover .buttom-navbar-text,
 .buttom-navbar-button:hover i{
     color: var(--background-color-darker) !important;
 }
 
+.buttom-navbar-button i {
+    color: var(--main-color-transparent) !important;
+}
+
+.buttom-navbar-button.active i {
+    color: var(--main-color) !important;
+}
+
+.buttom-navbar-button.open i,
 .buttom-navbar-button:hover i {
     margin-top: -4px;
     padding: 0;
 }
 
+.buttom-navbar-button.open .buttom-navbar-text,
 .buttom-navbar-button:hover .buttom-navbar-text{
-    /* width: 80px; */
     opacity: 1;
+}
+
+.buttom-navbar-button.active:hover .icon-container::after{
+    height: 0px;
+    width: 0px;
+}
+
+.buttom-navbar-button.active .icon-container::after{
+    position: absolute;
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    bottom: 1px;
+    left: calc(50% - 2px);
+    background-color:var(--main-color);
+    transition: var(--slow-transition);
 }
 
 .buttom-navbar-text {
@@ -61,32 +93,111 @@
     transition: var(--slow-transition);
 }
 
+.buttom-prev,
+.buttom-next {
+    top: 0;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    transition: var(--slow-transition);
+}
+.buttom-prev.open,
+.buttom-next.open {
+    border-radius: 0;
+    width: 0;
+}
+    
+
+.buttom-prev {
+    left: 0;
+    border-radius: var(--border-radius-large) 0 0 var(--border-radius-large);
+}
+
+.buttom-next {
+    right: 0;
+    border-radius: 0 var(--border-radius-large) var(--border-radius-large) 0;
+}
+
+.buttom-prev:hover,
+.buttom-next:hover
+{
+    background-color: var(--main-color);
+}
+
+.buttom-prev:hover i,
+.buttom-next:hover i{
+    color: var(--background-color-darker);
+}
+
 @media only screen and (max-width: 600px) {
+
+    .buttom-prev,
+    .buttom-next {
+        border-radius: 0;   
+    }
+
+    .icons-container {
+        width: 100%;
+        left: 0;
+    }
 
     .buttom-navbar {
         left: 0;
         width: 100%;
         border-radius: 0;
     }
+
+    .buttom-prev,
+    .buttom-next {
+        background-color: transparent;
+    }
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 
+    .buttom-prev,
+    .buttom-next {
+        border-radius: 0;   
+    }
+
+    .icons-container {
+        width: 100%;
+        left: 0;
+    }
+
     .buttom-navbar {
         left: 0;
         width: 100%;
         border-radius: 0;
     }
+
+    .buttom-prev,
+    .buttom-next {
+        background-color: transparent;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+
+    .icons-container {
+        width: 400px;
+        left: calc(50% - 200px);
+    }
     
     .buttom-navbar {
         width: 400px;
         left: calc(50% - 200px);
         border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    }
+
+    .buttom-prev,
+    .buttom-next {
+        background-color: var(--background-transparent);
     }
 
 }

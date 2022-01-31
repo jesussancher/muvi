@@ -38,12 +38,23 @@ const tmdbRequestList = async (array, limit) => {
     return resultList;
 }
 
-const discoverMoviesByGenre = async (genre = 28, page = 1) => {
-    const baseRequest = `discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${page}${genre ? `&with_genres=${genre}` : ''}`
-    const moviesList = await tmdbRequestParams(baseRequest);
+const discoverMoviesByGenre = async (genre , page = 1) => {
+    const baseRequest = `discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${page}${genre ? `&with_genres=${genre}` : ''}`;
+    let moviesList = await tmdbRequestParams(baseRequest);
+    if(page === moviesList.total_pages) {
+        discoverMoviesByGenre(genre, moviesList.total_pages)
+    } else if (page === 0 ) {
+        discoverMoviesByGenre(genre, 1)
+    }
     return moviesList
 }
 
+const tmdbSearchMovie = async (query) => {
+    if(!query) return;
+    const baseRequest = `/search/movie?api_key=${apiKey}&query=${query}`
+    let moviesList = await tmdbRequestParams(baseRequest);
+    return moviesList
+}
 
 const tmdbRequestParams = (req) => {
     let moviesList = 
@@ -82,6 +93,7 @@ export {
     getAllGenresList,
     tmdbRequestParams,
     discoverMoviesByGenre,
+    tmdbSearchMovie
 }
 
 

@@ -34,7 +34,7 @@ function MoviesList(props) {
     }
     
     const drawCardsDummy = () => {
-        const dummyCardsList = (new Array(20)).fill(null);
+        const dummyCardsList = (new Array(10)).fill(null);
         const cardsNodeList  =  dummyCardsList?.map((movie, index) => {
             return <Fragment key={index}><MovieCard /></Fragment>
         })
@@ -46,7 +46,7 @@ function MoviesList(props) {
         <section id={'moviesListSection'} >
             {title && <h1>{title}</h1>}
             <div className={classNames('movies-list flex-row')}>
-                {moviesList || moviesList.length > 0
+                {moviesList?.length > 0
                     ?
                     drawCards()
                     :

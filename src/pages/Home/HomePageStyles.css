@@ -107,7 +107,7 @@ section {
 }
 
 
-#moviesListSection {
+.movies-list {
     flex-wrap: wrap;
     justify-content: flex-start;
 }

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Icon } from '..';
 import { addToFavoriteList, removeFromFavoriteList } from '../../utils/Misc/favorites';
+import PosterFallback from '../../assets/images/fallback-poster.jpg';
 import './CardsStyles.css';
 
 function MovieCard(props) {
@@ -63,8 +64,8 @@ function MovieCard(props) {
     return (
         <div 
             className={classNames('card', {'release': release})} 
-            style={{backgroundImage: `url(${baseUrl+image})`}}
-            onDoubleClick={isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
+            style={{backgroundImage: `url(${image ? baseUrl+image : PosterFallback})`}}
+            onDoubleClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
             <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
                 { isFavorite
@@ -78,13 +79,13 @@ function MovieCard(props) {
                 className={'card-favorite flex-row flex-center'}
                 onMouseEnter={onEnterFavorite}
                 onMouseLeave={onLeaveFavorite}
-                onClick={isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
+                onClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
                 <Icon icon={hoverFavorite || isFavorite ? 'favorite-contain' : 'favorite-outline'} />
             </div>
             <div className={'card-info-container'}>
                 <div className={'card-info-content flex-column'}>
-                    {(rate !== undefined || rate !== null) && <div className={'card-rate'}>
+                    {id && (rate !== undefined || rate !== null)  && <div className={'card-rate'}>
                         <i className={`icon-star-contain`} />{rate}
                     </div>}
                     {title && <div className={'card-title'}>
