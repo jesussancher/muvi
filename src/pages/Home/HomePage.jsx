@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { TopNavbar, ButtomNavbar } from '../../components';
+import { TopNavbar, ButtomNavbar, Footer } from '../../components';
 import { discoverMoviesByGenre, getAllGenresList, tmdbSearchMovie } from '../../utils/API/API';
 import'./HomePageStyles.css';
 import FilterBar from './FilterBar';
@@ -92,6 +92,7 @@ function HomePage() {
             <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
             <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue}/>
+            <Footer />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState, Fragment } from 'react';
-import { TopNavbar, ButtomNavbar } from '../../components';
+import { TopNavbar, ButtomNavbar, Footer } from '../../components';
 import'../Home/HomePageStyles.css';
 import MoviesList from '../Home/MoviesList';
 
@@ -57,6 +57,7 @@ function FavoritesPage() {
                 )
             })}
             <ButtomNavbar />
+            <Footer />
         </div>
     )
 }

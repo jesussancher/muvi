@@ -8,6 +8,10 @@
     background: var(--background-transparent);
 }
 
+.buttom-navbar.hide {
+    bottom: -78px;
+}
+
 .buttom-navbar.open {
     height: 100px;
 }
