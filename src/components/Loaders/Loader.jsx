@@ -5,6 +5,7 @@ import './LoaderStyles.css';
 function Loader(props) {
 
     const {
+        parentHeight,
         color,
         size
     } = props;
@@ -15,7 +16,7 @@ function Loader(props) {
     }
 
     return (
-        <div className={'loader-container flex-row flex-center'}>
+        <div className={'loader-container flex-row flex-center'} style={{height: parentHeight}}>
             <SpinnerDotted color={color ? colorDictionary[color] : '#5bf192'} secondarycolor={'#13b6dc'} size={size}/>
         </div>
     )

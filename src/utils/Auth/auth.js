@@ -101,7 +101,7 @@ function AuthProvider({ children }) {
   },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <AuthContext.Provider value={value}>
-      {loading ? <Loader /> :children}
+      {loading ? <Loader parentHeight={'100vh'}/> :children}
     </AuthContext.Provider>;
 
 }
