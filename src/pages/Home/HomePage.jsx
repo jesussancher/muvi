@@ -98,6 +98,7 @@ function HomePage() {
             <FilterBar title={'Genres'} genresList={genresList} getSelected={getSelectedGenre}/>
             <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList} style={{minHeight: '80vh'}}/>
             <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue} getSearchMode={getSearchMode}/>
+            <div style={{marginTop: 200}}></div>
             <Footer />
         </div>
     )

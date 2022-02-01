@@ -7,6 +7,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import './MovieDetailsSmallStyles.css';
 import { getMonthName, getYearShort } from '../../utils/Misc/dateTime';
+import { MuviLogo } from '../../components';
 
 const baseUrl = 'https://image.tmdb.org/t/p/original';
 
@@ -52,11 +53,6 @@ function MovieDetailsSmall({movieDetails}) {
             icon: faWallet,
             text: formatter.format(movieDetails?.budget).split(',')[0]+'M'
         },
-        {
-            icon: faMoneyBillWave,
-            text: kFormatter(movieDetails?.revenue),
-            style: {color: 'var(--gold-color)'}
-        }
     ]
 
 
@@ -75,7 +71,12 @@ function MovieDetailsSmall({movieDetails}) {
                             {genre} 
                         </div>}
                         <div className={'details-company-sm flex-row flex-center shadow'}>
-                            <img src={baseUrl + company?.logo_path} alt={company?.name + " logo"}/>
+                            {company?.logo_path 
+                                ? 
+                                <img src={baseUrl + company?.logo_path} alt={company?.name + " logo"}/>
+                                :
+                                <MuviLogo />
+                            }
                         </div>
                     </div>
                 </div>
