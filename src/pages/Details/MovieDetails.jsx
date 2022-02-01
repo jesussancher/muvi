@@ -32,7 +32,7 @@ function MovieDetails({movieDetails}) {
     const info = [
         {
             icon: faClock,
-            text: Math.floor(movieDetails?.runtime / 60)
+            text: Math.ceil(movieDetails?.runtime / 60) + 'Hs'
         },
         {
             icon: faCalendarDay,
