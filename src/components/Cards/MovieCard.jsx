@@ -73,7 +73,6 @@ function MovieCard(props) {
         <div 
             className={classNames('card', {'release': release})} 
             style={{backgroundImage: `url(${image ? baseUrl+image : PosterFallback})`}}
-            onClick={() => goToMovie(id)}
             onDoubleClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
             <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
@@ -97,7 +96,7 @@ function MovieCard(props) {
                     {id && (rate !== undefined || rate !== null)  && <div className={'card-rate'}>
                         <i className={`icon-star-contain`} />{rate}
                     </div>}
-                    {title && <div className={'card-title'}>
+                    {title && <div className={'card-title'} onClick={() => goToMovie(id)}>
                         {title}
                     </div>}
                     {genre && <div className={'card-genre'}>
