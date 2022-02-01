@@ -5,7 +5,6 @@ import { getAllGenresList } from '../../utils/API/API';
 import Carousel from '../Home/Carousel';
 import FilterBar from '../Home/FilterBar';
 import'../Home/HomePageStyles.css';
-import MoviesList from '../Home/MoviesList';
 
 function FavoritesPage() {
 
@@ -90,16 +89,6 @@ function FavoritesPage() {
                 return (
                     <Fragment key={index+genre}>
                         <Carousel movies={genre.list} title={genre.genre} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-                        {/* <MoviesList 
-                            fromFavorites 
-                            title={genre.genre} 
-                            style={sectionStyle}
-                            className={'shadow'}
-                            moviesList={genre.list} 
-                            favoritesList={favoritesList} 
-                            childrenStyle={sectionChildrenStyle}
-                            updateFavoritesList={updateFavoritesList} 
-                        /> */}
                     </Fragment>
                 )
             })}
@@ -107,18 +96,6 @@ function FavoritesPage() {
             <Footer />
         </div>
     )
-}
-
-const sectionStyle = {
-    backgroundColor: 'var(--background-color-darker)',
-    paddingTop: 10,
-    paddingBottom: 20,
-    marginBottom: 20,
-}
-
-const sectionChildrenStyle = {
-    overflow: 'auto',
-    maxHeight: 'calc((((100vw - 60px) / 5) - 13px) * 3.5)'
 }
 
 export default FavoritesPage;
