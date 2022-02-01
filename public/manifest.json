@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Muvi",
+  "name": "Muvi | Blocks of joy",
   "icons": [
     {
       "src": "favicon.ico",
@@ -13,7 +13,7 @@
       "sizes": "192x192"
     },
     {
-      "src": "muvi-color.png",
+      "src": "muvi-logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
