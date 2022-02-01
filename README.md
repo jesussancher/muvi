@@ -5,7 +5,7 @@ Designed and developed as a requirement for the Frontend position at 57Blocks.
 
 ## The solution
 
-The next is the respective technologies used to reach the solution, with it's respective narrative.
+The information below is the respective technologies used to reach the solution, with it's respective narrative.
 
 ### Technologies
 
