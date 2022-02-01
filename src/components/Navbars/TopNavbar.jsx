@@ -35,7 +35,7 @@ function TopNavbar() {
                     Blocks of joy
                 </h4>
             </span>
-            <div className={'buttom-navbar-button flex-row flex-center'} onClick={signout}>
+            <div className={'buttom-navbar-button top flex-row flex-center'} onClick={signout}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
                 <span className={'buttom-navbar-text'}>
                     Sign out

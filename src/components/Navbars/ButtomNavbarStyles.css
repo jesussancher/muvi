@@ -42,6 +42,11 @@
     transition: var(--slow-transition);
 }
 
+.buttom-navbar-button.top {
+    margin: 0;
+    padding: 0;
+}
+
 .buttom-navbar-button i{
     font-size: 0.7em
 }
