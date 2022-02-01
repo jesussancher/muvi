@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Muvi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Movie listing Application. 
+Designed and developed as a requirement for the Frontend position at 57Blocks.
 
-## Available Scripts
+## The solution
 
-In the project directory, you can run:
+The next is the respective technologies used to reach the solution, with it's respective narrative.
 
-### `npm start`
+### Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### * HTML
+#### * CSS
+#### * JavaScript
+* Fetch
+#### * ReactJS
+* Functional components
+* [React Router Dom](https://reactrouter.com/)
+* [Classnames](https://www.npmjs.com/package/classnames)
+* [React Fontawesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react)
+* [Spinners React](https://www.npmjs.com/package/spinners-react)
+#### * [The Movie Database API (TMDV API)](https://www.themoviedb.org/)
+#### * GIT
+#### * Vercel
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Narrative
 
-### `npm test`
+#### * Initial:
+Create application using `npx create-react-app`.
+#### * Version Control:
+Link to the GitHub [remote repository](https://github.com/jesussancher/muvi).
+#### * Routes:
+Structure routes (Login, Home, Detail, Favorites) using [*React Router DOM*](https://reactrouter.com/).
+#### * Auth:
+Design the authentication using *Local Storage* to store user's data.
+#### * Private / Public Pages:
+Permissions are given to visit the *Home Page* only if user is logged in, *Login Page* is rendered instead.
+#### * TMDB API:
+Queris related to Genre, Pagination, Movie Details and Movie Cast.
+#### * Responsive:
+Application show be shown correctly on every device is running. *CSS3 Media Queries* are used.
+#### * Deployment:
+The Applications is deplyed using *Vercel*.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# [THE MUVI APPLICATION](https://muvi-project.vercel.app/)
