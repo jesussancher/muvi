@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,7 @@ function kFormatter(num) {
 
 }
 
-function MovieDetailsSmall({movieDetails, movieCredits}) {
+function MovieDetailsSmall({movieDetails}) {
 
     // const [posterUrl, setPosterUrl] = useState('');
     const posterUrl = baseUrl + movieDetails?.backdrop_path;
