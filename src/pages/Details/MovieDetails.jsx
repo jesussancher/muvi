@@ -26,6 +26,7 @@ function MovieDetails({movieDetails}) {
     const overview = movieDetails?.overview;
     const releaseDate = movieDetails?.release_date?.split('-');
     const company = movieDetails?.production_companies[0];
+    document.title = `Muvi | ${title}`;
     // console.log(formatter.format(movieDetails?.budget)?.split('000,000.00')[0])
     // console.log(formatter.format(movieDetails?.revenue)?.split('000,000.00')[0])
     const info = [

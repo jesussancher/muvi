@@ -4,7 +4,7 @@ import { Icon } from '..';
 import { addToFavoriteList, removeFromFavoriteList } from '../../utils/Misc/favorites';
 import PosterFallback from '../../assets/images/fallback-poster.jpg';
 import './CardsStyles.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MovieCard(props) {
 
@@ -96,9 +96,9 @@ function MovieCard(props) {
                     {id && (rate !== undefined || rate !== null)  && <div className={'card-rate'}>
                         <i className={`icon-star-contain`} />{rate}
                     </div>}
-                    {title && <div className={'card-title'} onClick={() => goToMovie(id)}>
+                    {title &&  <Link to={`/movie/${id}`} params={id} target="_blank"><div className={'card-title'}>
                         {title}
-                    </div>}
+                    </div></Link>}
                     {genre && <div className={'card-genre'}>
                         {genre} 
                     </div>}

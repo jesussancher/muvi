@@ -8,12 +8,14 @@ import'../Home/HomePageStyles.css';
 
 function FavoritesPage() {
 
+    
     const [favoritesList, setFavoritesList] = useState([]);
     const [sortedList, setSortedList] = useState([]);
     const [sortedFilterList, setSortedFilterList] = useState([]);
     const [genresList, setGenresList] = useState([]);
     const [genresFilterList, setGenresFilterList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
+    document.title = `Muvi | My Favorites ${genreSelected?.name === 'All' ? '' : genreSelected?.name} Movies`;
 
     const getSelectedGenre = (genre) => {
         setGenreSelected(genre);

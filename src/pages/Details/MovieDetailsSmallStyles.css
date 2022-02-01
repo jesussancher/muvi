@@ -12,14 +12,15 @@
 }
 
 .details-tags-sm {
-    align-items: center;
     flex-wrap: wrap;
+    font-size: 0.9em;
+    align-items: center;
     padding: 0 var(--body-padding);
 }
 
 .details-tag {
     margin-top: 1em;
-    margin-right: 1em;
+    margin-right: 0.7em;
     color: var(--main-color);
 }
 

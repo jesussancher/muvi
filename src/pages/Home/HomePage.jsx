@@ -10,6 +10,8 @@ import HeadVideo from './HeadVideo';
 
 function HomePage() {
 
+    document.title = `Muvi | Home`;
+
     const [genresList, setGenresList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
     const [moviesList, setMoviesList] = useState([]);
