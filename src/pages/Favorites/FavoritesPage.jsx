@@ -15,7 +15,7 @@ function FavoritesPage() {
     const [genresList, setGenresList] = useState([]);
     const [genresFilterList, setGenresFilterList] = useState([]);
     const [genreSelected, setGenreSelected] = useState({});
-    document.title = `Muvi | My Favorites ${genreSelected?.name === 'All' ? '' : genreSelected?.name} Movies`;
+    document.title = `Muvi | My Favorites ${genreSelected?.name ? genreSelected?.name === 'All' ? '' : genreSelected?.name : ''} Movies`;
 
     const getSelectedGenre = (genre) => {
         setGenreSelected(genre);
