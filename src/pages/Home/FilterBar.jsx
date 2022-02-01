@@ -34,11 +34,17 @@ function FilterBar(props) {
     }
 
     const handleOnFilterSelection = (genre) => {
-        console.log(genre)
-        setSelected(genre);
-        getSelected(genre);
-        sortList(genre);
-        setOpen(false);
+        let genreObj;
+        if(genre.id === selected.id) {
+            genreObj = noFilterGenre;
+            setOpen(true);
+        } else {
+            genreObj = genre;
+            setOpen(false);
+        }
+        setSelected(genreObj);
+        getSelected(genreObj);
+        sortList(genreObj);
     }
 
     const sortList = (selected) => {
@@ -92,7 +98,7 @@ function FilterBar(props) {
 
     return (
         <section id={'filterBarPanel'} >
-            <h1>{title ? title : 'Movies'}</h1>
+            <h1>{title}</h1>
             <div className={'filter-containter flex-row flex-row-center-vert'}>
                 <div id={'filterBar'} style={{width: open ? undefined: closedWidth}} className={classNames('filter-content shadow-soft flex-row flex-row-center-vert', {'open': open})}>
                     {sortedGenresList ?

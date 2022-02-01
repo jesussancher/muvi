@@ -13,12 +13,16 @@ const monthsDictionary = {
     12: 'Dec'
 }
 
-const getMonthName = (month) => {
+const getMonthName = (month = 1) => {
     return monthsDictionary[month];
 }
 
 const getYearShort = (year) => {
-    return year.slice(2,year.length)
+    if(year){
+        return year.slice(2,year.length)
+    } else {
+        return 22
+    }
 }
 
 export {

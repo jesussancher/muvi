@@ -19,9 +19,11 @@
 
 .movie-overlay-details {
     width: 90vw;
-    padding: var(--body-padding);
     font-size: 40px;
     cursor: pointer;
+    position: relative;
+    padding: var(--body-padding);
+
 }
 
 .movie-overlay-details .card-title{

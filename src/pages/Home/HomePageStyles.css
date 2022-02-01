@@ -1,5 +1,6 @@
 .home-page {
-    min-height: 150vh;
+    position: relative;
+    min-height: calc(100vh + 160px);
     overflow-x: hidden;
     overflow-y: auto;
 }

@@ -88,11 +88,12 @@ function FavoritesPage() {
             {Object.values(sortedFilterList).map((genre, index) => {
                 return (
                     <Fragment key={index+genre}>
-                        <Carousel movies={genre.list} title={genre.genre} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
+                        <Carousel movies={genre.list} title={genre.genre} fromFavorites genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
                     </Fragment>
                 )
             })}
             <ButtomNavbar />
+            <div style={{marginTop: 200}}></div>
             <Footer />
         </div>
     )

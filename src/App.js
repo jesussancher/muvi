@@ -6,7 +6,8 @@ import {
 import { 
   HomePage,
   LoginPage,
-  FavoritesPage
+  FavoritesPage,
+  DetailsPage
 } from './pages';
 import { 
   AuthProvider, 
@@ -36,7 +37,16 @@ function App() {
                     </RequireAuth>
                   }
                   >
-                    </Route>
+              </Route>
+              <Route
+                  path="/movie/:id"
+                  element={
+                    <RequireAuth>
+                      <DetailsPage />
+                    </RequireAuth>
+                  }
+                  >
+              </Route>
             </Routes>
        </AuthProvider>
      </ErrorBoundary> 

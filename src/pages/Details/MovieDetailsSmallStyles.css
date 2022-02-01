@@ -1,0 +1,45 @@
+.details-poster-sm {
+    height: 60vh;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.details-overview-sm {
+    padding: var(--body-padding);
+    padding-bottom: 0;
+    text-align: justify;
+}
+
+.details-tags-sm {
+    align-items: center;
+    padding: 0 var(--body-padding);
+}
+
+.details-tag {
+    margin-right: 1em;
+    color: var(--main-color);
+}
+
+.details-tag-text {
+    margin-left: 0.5em;
+    color: #fff;
+}
+
+.details-company-sm {
+    width: 80px;
+    padding: 10px;
+    right: 30px;
+    bottom: -20px;
+    position: absolute;
+    margin-right: 0.5em;
+    background-color: rgba(255, 255, 255, 0.455);
+    backdrop-filter: blur(3px);
+    border-radius: var(--border-radius-large);
+}
+
+.details-company-sm img{
+    max-width: 70px;
+}
+

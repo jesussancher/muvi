@@ -4,8 +4,11 @@ import { Icon } from '..';
 import { addToFavoriteList, removeFromFavoriteList } from '../../utils/Misc/favorites';
 import PosterFallback from '../../assets/images/fallback-poster.jpg';
 import './CardsStyles.css';
+import { useNavigate } from 'react-router-dom';
 
 function MovieCard(props) {
+
+    const navigate = useNavigate();
 
     const {
         id,
@@ -61,11 +64,16 @@ function MovieCard(props) {
             setFavoriteAnimation(false);
         }, 2000);
     }
+    
+    const goToMovie = (id) => {
+        navigate(`/movie/${id}`, { replace: true });
+    }
 
     return (
         <div 
             className={classNames('card', {'release': release})} 
             style={{backgroundImage: `url(${image ? baseUrl+image : PosterFallback})`}}
+            onClick={() => goToMovie(id)}
             onDoubleClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
             >
             <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>

@@ -23,6 +23,7 @@ function Carousel(props) {
         movies,
         genresList,
         favoritesList,
+        fromFavorites,
         updateFavoritesList
     } = props
 
@@ -75,7 +76,7 @@ function Carousel(props) {
             const isFavorite = favoritesList?.some(fav => fav.id === id);
             return <Fragment key={index}>
                     <Suspense fallback={<MovieCard release />}>
-                        <MovieCard id={id} image={image} release title={title} rate={rate} genre={genre} genreId={genreId} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
+                        <MovieCard id={id} image={image} release title={title} fromFavorites={fromFavorites} rate={rate} genre={genre} genreId={genreId} isFavorite={isFavorite} getFavoritesList={updateFavoritesList}/>
                     </Suspense>
                 </Fragment>
         });

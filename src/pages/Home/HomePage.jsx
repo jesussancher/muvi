@@ -95,7 +95,7 @@ function HomePage() {
             <HeadVideo genresList={genresList} />
             <Carousel type={'new'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <Carousel type={'now'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-            <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
+            <FilterBar title={'Genres'} genresList={genresList} getSelected={getSelectedGenre}/>
             <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList} style={{minHeight: '80vh'}}/>
             <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue} getSearchMode={getSearchMode}/>
             <Footer />

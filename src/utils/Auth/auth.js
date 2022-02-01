@@ -59,7 +59,7 @@ function AuthProvider({ children }) {
   let recursionLogin = () => {
       const localUserData = JSON.parse(localStorage.getItem('user-login'));
 
-      const from = location.state?.from?.pathname || "/";
+      const from = location.pathname || "/";
 
       signin(localUserData, () => {
         navigate(from, { replace: true });
@@ -115,8 +115,9 @@ function RequireAuth({ children }) {
   let auth = useAuth();
   let location = useLocation();
 
+  // console.log("locaiton", location)
   if (!auth.user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={"/login"} state={{ from: location }} replace />;
   }
 
   return children;
