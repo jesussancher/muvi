@@ -57,7 +57,8 @@ function VideoPlayer(props) {
                         onDuration={handleOnDuration}
                         onProgress={handleOnProgress}
                         onError={handleOnError}
-                        playing={playing}
+                        playing
+                        volume={playing ? 1 : 0}
                         className={className}
                         url={videosList ? videosList : baseUrl+videoKey}
                     />

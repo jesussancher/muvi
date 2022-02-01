@@ -13,8 +13,9 @@ function ButtomNavbar(props) {
     const {
         pageNavigation,
         getSearchValue,
+        genreSelected,
+        getSearchMode,
         currentPage,
-        genreSelected
     } = props
 
     let location = useLocation();
@@ -36,6 +37,10 @@ function ButtomNavbar(props) {
     const closeNavbar = () => {
         setOpen(false);
     }
+
+    useEffect(() => {
+        getSearchMode && getSearchMode(open);
+    },[open]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const closeOnClickOutside = (event) => {
         const buttomRef = document.querySelector('#buttomNavbar');
@@ -70,12 +75,14 @@ function ButtomNavbar(props) {
 
 
     const getScrollValue = () => {
-        const moviesListSection = document.querySelector('#moviesListSection');
         var y = window.scrollY;
         const bottomCondition = (window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight - 150;
+        setHideNavbar(bottomCondition);
+
+        const moviesListSection = document.querySelector('#moviesListSection');
+        if(!moviesListSection) return;
         const topCondition = y > moviesListSection.offsetTop - 400 && y < moviesListSection.offsetTop + moviesListSection.offsetHeight + 400
         setHideNavbarItems(topCondition);
-        setHideNavbar(bottomCondition);
     }
     
 
@@ -87,7 +94,7 @@ function ButtomNavbar(props) {
     },[])
 
     return <div id={'buttomNavbar'} className={classNames('buttom-navbar inner-shadow shadow', {'open': open}, {'hide' : hideNavbar})}>
-                {pageNavigation && <div className={classNames('ribbon', {'open': hideNavbarItems})}>
+                {pageNavigation && <div className={classNames('ribbon', {'open': hideNavbarItems}, {'hide': open})}>
                     <b>{genreSelected.name ? genreSelected.name : 'All'}  </b>
                         {currentPage}
                 </div> }
@@ -98,7 +105,7 @@ function ButtomNavbar(props) {
                     {pageNavigation && <div className={classNames('buttom-prev flex-row flex-center', {'open': !hideNavbarItems || open})} onClick={() => pageNavigation(-1)}>
                             <Icon icon={'chevron-left'} />
                     </div>}
-                    {location.pathname === '/' && <div className={classNames('buttom-navbar-button flex-row flex-center', {'open': open})} onClick={toggleOpenNavbar}>
+                    {location.pathname === '/' && <div className={classNames('buttom-navbar-button flex-row flex-center', {'open': open}, {'hide': !hideNavbarItems})} onClick={toggleOpenNavbar}>
                         <Icon icon={'search'} light/>
                         <span className={'buttom-navbar-text'}>
                             Search

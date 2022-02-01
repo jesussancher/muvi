@@ -97,6 +97,6 @@ label:hover .input-container {
 }
 
 .input-container.focused.search,
-label:hover .input-container {
+label:hover .input-container.search {
     border: none;
 }

@@ -1,4 +1,5 @@
 .home-page {
+    min-height: 150vh;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -109,6 +110,7 @@ section {
 
 .movies-list {
     flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: flex-start;
 }
 

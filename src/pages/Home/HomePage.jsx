@@ -16,14 +16,15 @@ function HomePage() {
     const [favoritesList, setFavoritesList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchValue, setSearchValue] = useState('');
-    
+    const [searchMode, setSearchMode] = useState(false);
+
     const getGenresList = async() => {
-        const genres = await getAllGenresList('now_playing');
+        const genres = await getAllGenresList();
         setGenresList(genres.genres);
     }
 
-    const getMoviesList = async (genre) => {
-        const byGenre = await discoverMoviesByGenre(genre);
+    const getMoviesList = async (genre, page = 1) => {
+        const byGenre = await discoverMoviesByGenre(genre, page);
         setMoviesList(byGenre.results);
     }
 
@@ -44,6 +45,10 @@ function HomePage() {
     const getSelectedGenre = (genre) => {
         setGenreSelected(genre);
         setCurrentPage(1);
+    }
+
+    const getSearchMode = (mode) => {
+        setSearchMode(mode);
     }
 
     const getSearchValue = (query) => {
@@ -77,11 +82,12 @@ function HomePage() {
 
     useEffect(() => {
         if(searchValue === '') {
-            getMoviesList(genreSelected.id)
+            getMoviesList(genreSelected.id, currentPage);
         } else {
+            if(!searchMode) return;
             getMoviesSearch(searchValue);
         }
-    },[searchValue]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[searchValue, currentPage, searchMode]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={classNames('home-page')} onContextMenu={e => e.preventDefault()}>
@@ -90,8 +96,8 @@ function HomePage() {
             <Carousel type={'new'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <Carousel type={'now'} genresList={genresList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
             <FilterBar genresList={genresList} getSelected={getSelectedGenre}/>
-            <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList}/>
-            <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue}/>
+            <MoviesList genresList={genresList} moviesList={moviesList} favoritesList={favoritesList} updateFavoritesList={updateFavoritesList} style={{minHeight: '80vh'}}/>
+            <ButtomNavbar currentPage={currentPage} genreSelected={genreSelected} pageNavigation={getMoviesPagination} getSearchValue={getSearchValue} getSearchMode={getSearchMode}/>
             <Footer />
         </div>
     )

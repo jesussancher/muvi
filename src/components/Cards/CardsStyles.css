@@ -153,7 +153,7 @@
 @media only screen and (max-width: 600px) {
 
     .card {
-        height: 280px;
+        height:  calc((((100vw - 60px) / 2) - 15px) * 1.5);
         min-width: calc(((100vw - 20px) / 2) - 15px);
         max-width: calc(((100vw - 20px) / 2) - 15px);  
     }
@@ -164,7 +164,7 @@
 @media only screen and (min-width: 600px) {
 
     .card {
-        height: 300px;
+        height:  calc((((100vw - 20px) / 3) - 14px) * 1.5);
         min-width: calc(((100vw - 20px) / 3) - 14px);
         max-width: calc(((100vw - 20px) / 3) - 14px);   
     }
@@ -175,7 +175,7 @@
 @media only screen and (min-width: 768px) {
 
     .card {
-        height: 320px;
+        height:  calc((((100vw - 60px) / 4) - 14px) * 1.5);
         min-width: calc(((100vw - 60px) / 4) - 14px);
         max-width: calc(((100vw - 60px) / 4) - 14px);
     }
@@ -186,7 +186,7 @@
 @media only screen and (min-width: 992px) {
     
     .card {
-        height: 380px;
+        height: calc((((100vw - 60px) / 5) - 13px) * 1.5);
         min-width: calc(((100vw - 60px) / 5) - 13px);
         max-width: calc(((100vw - 60px) / 5) - 13px);
     }

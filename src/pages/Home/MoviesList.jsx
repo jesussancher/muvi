@@ -13,6 +13,7 @@ function MoviesList(props) {
         genresList,
         fromFavorites,
         favoritesList,
+        childrenStyle,
         updateFavoritesList
     } = props;
 
@@ -48,7 +49,7 @@ function MoviesList(props) {
     return (
         <section id={'moviesListSection'} style={{...style}} className={className}>
             {title && <h1>{title}</h1>}
-            <div className={classNames('movies-list flex-row')}>
+            <div className={classNames('movies-list flex-row')} style={{...childrenStyle}}>
                 {moviesList?.length > 0
                     ?
                     drawCards()
