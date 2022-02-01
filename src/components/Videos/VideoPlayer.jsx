@@ -37,6 +37,7 @@ function VideoPlayer(props) {
     }
     
     useEffect(() => {
+        setPlaying(true);
         document.addEventListener("scroll", getScrollValue);
         return function cleanup() {
             document.removeEventListener("scroll", getScrollValue);

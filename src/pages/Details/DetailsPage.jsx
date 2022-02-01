@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { TopNavbar, Footer, ButtomNavbar } from '../../components';
 import { tmdbRequest } from '../../utils/API/API';
-import MovieDetailsSmall from './MovieDetailsSmall';
+import CastCarousel from './CastCarousel';
+import MovieDetails from './MovieDetails';
 
 
 function DetailsPage() {
@@ -33,7 +34,9 @@ function DetailsPage() {
         <div className={classNames('home-page')} onContextMenu={e => e.preventDefault()}>
             <TopNavbar />
             <ButtomNavbar />
-            <MovieDetailsSmall movieDetails={movieDetails} movieCredits={movieCredits} />
+            <MovieDetails movieDetails={movieDetails} />
+            <CastCarousel title={'Cast'} cast={movieCredits ? movieCredits.cast : []}/>
+            <div style={{marginTop: 200}}></div>
             <Footer />
         </div>
     )

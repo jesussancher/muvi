@@ -16,7 +16,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 
-function MovieDetailsSmall({movieDetails}) {
+function MovieDetails({movieDetails}) {
 
     // const [posterUrl, setPosterUrl] = useState('');
     const posterUrl = baseUrl + movieDetails?.backdrop_path;
@@ -45,7 +45,7 @@ function MovieDetailsSmall({movieDetails}) {
 
 
     return (
-        <div id={'movieDetailsSmall'}>
+        <div id={'movieDetails'}>
             <div className={'details-poster-sm'} style={{backgroundImage: `url(${posterUrl})`}}>
                 <div className={'movie-overlay flex-column'}>
                     <div className={'movie-overlay-details'}>
@@ -69,25 +69,25 @@ function MovieDetailsSmall({movieDetails}) {
                     </div>
                 </div>
             </div>
-            <div className={'details-overview-sm'} >
+            <div className={'details-overview-sm flex-column flex-center'} >
                 {overview && <p>
                     {overview}
                 </p>}
-            </div>
-            <div className={'details-tags-sm flex-row'}>
-                {info.map((data, index) => {
-                    return (
-                        <span key={index} className={'details-tag'} style={{...data.style}}>
-                            <FontAwesomeIcon icon={data.icon} />
-                            <span className={'details-tag-text'} style={{...data.style}}>
-                                {data.text}
+                <div className={'details-tags-sm flex-row'}>
+                    {info.map((data, index) => {
+                        return (
+                            <span key={index} className={'details-tag'} style={{...data.style}}>
+                                <FontAwesomeIcon icon={data.icon} />
+                                <span className={'details-tag-text'} style={{...data.style}}>
+                                    {data.text}
+                                </span>
                             </span>
-                        </span>
-                    )})
-                }
+                        )})
+                    }
+                </div>
             </div>
         </div>
     )
 }
 
-export default MovieDetailsSmall;
+export default MovieDetails;

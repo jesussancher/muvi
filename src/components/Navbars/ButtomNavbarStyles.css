@@ -6,6 +6,7 @@
     backdrop-filter: blur(3px);
     transition: var(--slow-transition);
     background: var(--background-transparent);
+    z-index: 999;
 }
 
 .buttom-navbar.hide {
@@ -39,6 +40,10 @@
     user-select: none;
     border-radius: 25px;
     transition: var(--slow-transition);
+}
+
+.buttom-navbar-button i{
+    font-size: 0.7em
 }
 
 .buttom-navbar-button.hide {
@@ -91,7 +96,7 @@
 }
 
 .buttom-navbar-button.active .icon-container {
-    margin-top: -10px;
+    margin-top: -5px;
 }
 
 .buttom-navbar-button.active .icon-container::after{
@@ -100,7 +105,7 @@
     height: 4px;
     width: 4px;
     border-radius: 50%;
-    bottom: -10px;
+    bottom: -5px;
     left: calc(50% - 2px);
     background-color:var(--main-color);
     transition: var(--slow-transition);

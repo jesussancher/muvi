@@ -71,7 +71,7 @@
     overflow: hidden;
     font-weight: bold;
     line-height: 22px;
-    word-break: break-word;
+    word-wrap: wrap;
     text-overflow: ellipsis;
     transition: var(--slow-transition);
 }
