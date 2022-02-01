@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Button, 
@@ -15,6 +15,7 @@ export default function LoginPage(props) {
     const location = useLocation();
     const auth = useAuth();
 
+    const [userData, setUserData] = useState({email: '', password: ''});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -32,11 +33,18 @@ export default function LoginPage(props) {
       };
 
       if(!isEmailValid || !isPasswordValid) return;
-
       setIsModalOpen(!auth.isUserValid);
       auth.signin(userData, () => {
         navigate(from, { replace: true });
       });
+    }
+
+    const handleOnEmailChange = (email) => {
+      setUserData(prev => ({...prev, email}));
+    }
+
+    const handleOnPasswordChange = (password) => {
+      setUserData(prev => ({...prev, password}));
     }
 
     const closeModal = () => {
@@ -51,6 +59,10 @@ export default function LoginPage(props) {
       setIsPasswordValid(valid);
     }
 
+    useEffect(() => {
+      auth.userInput(userData);
+    },[auth,userData])
+
     return (
       <div className={classNames('login-page flex-column flex-column-center-land')}>
         <div className={classNames('logo-section flex-column flex-center')}>
@@ -58,8 +70,8 @@ export default function LoginPage(props) {
         </div>
         <div className={classNames('form-section flex-column flex-center')}>
           <form onSubmit={handleSubmit} className={classNames('flex-column flex-center')}>
-              <Input name="email" type="email" text="Email" placeholder="myemail@domain.com" getValidation={getEmailValidation}/>
-              <Input name="password" type="password" text="Password" placeholder="Password" getValidation={gePasswordValidation} />
+              <Input name="email" type="email" text="Email" placeholder="myemail@domain.com" getValidation={getEmailValidation} onValueChange={handleOnEmailChange}/>
+              <Input name="password" type="password" text="Password" placeholder="Password" getValidation={gePasswordValidation} onValueChange={handleOnPasswordChange}/>
               <Button type="submit" text="Let's go!" loading={auth.loading}/>
           </form>
         </div>

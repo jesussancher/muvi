@@ -112,13 +112,13 @@
 }
 
 .buttom-navbar-text {
-    /* width: 0; */
     opacity: 0;
+    word-wrap: nowrap;
     font-size: 15px;
-    font-weight: bold;
     overflow: hidden;
+    font-weight: bold;
     color: var(--main-color);
-    transition: var(--slow-transition);
+    transition: var(--quick-transition);
 }
 
 .buttom-prev,

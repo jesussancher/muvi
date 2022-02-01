@@ -56,6 +56,12 @@ function AuthProvider({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
+  let userInput = (newUser) => {
+    const isPasswordAllowed = testUser.password === newUser.password ;
+    const isEmailAllowed = testUser.email === newUser.email;
+    setIsUserValid(isPasswordAllowed && isEmailAllowed && !loading);
+  }
+
   let recursionLogin = () => {
       const localUserData = JSON.parse(localStorage.getItem('user-login'));
 
@@ -69,18 +75,14 @@ function AuthProvider({ children }) {
   let signin = (newUser, callback) => {
     return authProvider.signin(() => {
       if(!newUser) return;
-      const isPasswordAllowed = testUser.password === newUser.password ;
-      const isEmailAllowed = testUser.email === newUser.email;
-      setIsUserValid(isPasswordAllowed && isEmailAllowed && !loading);
-      if(isPasswordAllowed && isEmailAllowed) {
-
+      if(isUserValid) {
         localStorage.setItem('user-login', JSON.stringify(newUser));
         setUser(newUser);
         
         setLoading(true)
         setTimeout(() => {
           setLoading(false)
-          callback();
+          callback && callback();
         },[3000]); // fake async
       }
     });
@@ -90,11 +92,15 @@ function AuthProvider({ children }) {
     return authProvider.signout(() => {
       localStorage.setItem('user-login', null);
       setUser(null);
-      callback();
+      setLoading(true)
+      setTimeout(() => {
+        setLoading(false)
+        callback && callback();
+      },[3000]); // fake async
     });
   };
 
-  let value = { user, isUserValid, signin, signout, loading };
+  let value = { user, userInput, isUserValid, signin, signout, loading };
 
   React.useEffect(() => {
     recursionLogin();

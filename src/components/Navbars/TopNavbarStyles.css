@@ -5,8 +5,21 @@
     height: 45px;
     position: fixed;
     padding: 10px var(--body-padding);
+    padding-right: var(--body-padding);
     width: calc(100% - 40px);
     backdrop-filter: blur(3px);
     justify-content: space-between;
     transition: var(--slow-transition);
+}
+
+.sign-out {
+    width: 45px;
+    height: 100%;
+    cursor: pointer;
+    color: var(--main-color);
+    transition: var(--slow-transition);
+}
+
+.sign-out:hover {
+    color: var(--secondary-color)
 }

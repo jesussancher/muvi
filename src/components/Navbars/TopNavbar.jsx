@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { MuviLogo } from '..';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../utils/Auth/auth';
 import './TopNavbarStyles.css';
+import { MuviLogo } from '..';
 
 function TopNavbar() {
 
     const [hideNavbar, setHideNavbar] = useState(false);
+    const auth = useAuth();
 
     const getScrollValue = () => {
         var y = window.scrollY;
         setHideNavbar(y> 40) 
+    }
+
+    const signout = () => {
+        auth.signout();
     }
     
 
@@ -27,7 +35,12 @@ function TopNavbar() {
                     Blocks of joy
                 </h4>
             </span>
-            {/* <Input style={{height: 16}} icon={'search'} name={'search'} type={'text'} noBorder animated={'right'}/> */}
+            <div className={'buttom-navbar-button flex-row flex-center'} onClick={signout}>
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                <span className={'buttom-navbar-text'}>
+                    Sign out
+                </span>
+            </div>
         </div>
     )
 }
