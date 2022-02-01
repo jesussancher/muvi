@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import './MovieDetailsSmallStyles.css';
@@ -16,17 +15,6 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 
-function kFormatter(num) {
-    switch (true) {
-        case Math.abs(num) > 999999 && Math.abs(num) < 999999999:
-            return Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'M';
-        case Math.abs(num) > 999999999:
-            return Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'M';
-        default:
-            break;
-    }
-
-}
 
 function MovieDetailsSmall({movieDetails}) {
 
