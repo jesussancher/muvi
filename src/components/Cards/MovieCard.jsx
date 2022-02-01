@@ -65,10 +65,6 @@ function MovieCard(props) {
         }, 2000);
     }
     
-    const goToMovie = (id) => {
-        navigate(`/movie/${id}`, { replace: true });
-    }
-
     return (
         <div 
             className={classNames('card', {'release': release})} 
