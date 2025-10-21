@@ -14,8 +14,8 @@ import {
   getTVCredits,
   getTVWatchProviders,
   getTVVideos,
-  getTVReviews,
-  getTVRecommendations,
+  // getTVReviews,
+  // getTVRecommendations,
   getTVKeywords,
   getTVExternalIds,
 } from "../../utils/API/API";
@@ -29,8 +29,8 @@ function TVDetailsPage() {
   const [tvCredits, setTVCredits] = useState(null);
   const [watchProviders, setWatchProviders] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [reviews, setReviews] = useState(null);
-  const [recommendations, setRecommendations] = useState(null);
+  // const [reviews, setReviews] = useState(null);
+  // const [recommendations, setRecommendations] = useState(null);
   const [keywords, setKeywords] = useState(null);
   const [externalIds, setExternalIds] = useState(null);
 
@@ -54,15 +54,15 @@ function TVDetailsPage() {
     setVideos(vids);
   };
 
-  const fetchReviews = async (id) => {
-    const revs = await getTVReviews(id);
-    setReviews(revs);
-  };
+  // const fetchReviews = async (id) => {
+  //   const revs = await getTVReviews(id);
+  //   setReviews(revs);
+  // };
 
-  const fetchRecommendations = async (id) => {
-    const recs = await getTVRecommendations(id);
-    setRecommendations(recs);
-  };
+  // const fetchRecommendations = async (id) => {
+  //   const recs = await getTVRecommendations(id);
+  //   setRecommendations(recs);
+  // };
 
   const fetchKeywords = async (id) => {
     const keys = await getTVKeywords(id);
@@ -79,8 +79,8 @@ function TVDetailsPage() {
     getTVCreditsData(param.id);
     fetchWatchProviders(param.id);
     fetchVideos(param.id);
-    fetchReviews(param.id);
-    fetchRecommendations(param.id);
+    // fetchReviews(param.id);
+    // fetchRecommendations(param.id);
     fetchKeywords(param.id);
     fetchExternalIds(param.id);
   }, [param.id]);

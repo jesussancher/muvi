@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { VideoPlayer } from "../../components";
 import {
   tmdbRequest,
@@ -37,11 +37,14 @@ function HeadVideo({ isTV = false }) {
     getMovieDetails(videosKeys[0].movieId, videosKeys[0].videoKey, 0);
   };
 
-  const getMovieDetails = async (movieId, videoKey, index) => {
-    const requestFunction = isTV ? tmdbRequestTV : tmdbRequest;
-    const details = await requestFunction(movieId);
-    setCurrentMovie({ videoKey, details, index });
-  };
+  const getMovieDetails = useCallback(
+    async (movieId, videoKey, index) => {
+      const requestFunction = isTV ? tmdbRequestTV : tmdbRequest;
+      const details = await requestFunction(movieId);
+      setCurrentMovie({ videoKey, details, index });
+    },
+    [isTV]
+  );
 
   const getDuration = (duration) => {
     setCurrentMovieDuration(duration);
@@ -53,7 +56,7 @@ function HeadVideo({ isTV = false }) {
 
   useEffect(() => {
     getMoviesList();
-  }, [isTV]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isTV, getMovieDetails]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (
@@ -74,7 +77,13 @@ function HeadVideo({ isTV = false }) {
         newIndex
       );
     }, currentMovieDuration * 1000);
-  }, [currentMovie, currentMovieDuration, videosList, canPlay]);
+  }, [
+    currentMovie,
+    currentMovieDuration,
+    videosList,
+    canPlay,
+    getMovieDetails,
+  ]);
 
   return (
     <section id="headVideoSection">

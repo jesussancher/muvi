@@ -11,7 +11,6 @@ import {
   discoverTVByGenre,
   getAllTVGenresList,
   tmdbSearchTV,
-  tmdbRequestTV,
 } from "../../utils/API/API";
 import "../Home/HomePageStyles.css";
 import FilterBar from "../Home/FilterBar";
@@ -89,7 +88,7 @@ function TVSeriesPage() {
 
   useEffect(() => {
     getTVList(genreSelected.id);
-  }, [genreSelected]);
+  }, [genreSelected.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (searchValue === "") {
@@ -98,7 +97,7 @@ function TVSeriesPage() {
       if (!searchMode) return;
       getTVSearch(searchValue);
     }
-  }, [searchValue, currentPage, searchMode]);
+  }, [searchValue, currentPage, searchMode, genreSelected.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
