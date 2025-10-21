@@ -6,6 +6,7 @@ import {
   Footer,
   ButtomNavbar,
   GlobalSearch,
+  AdSense,
 } from "../../components";
 import {
   tmdbRequest,
@@ -104,8 +105,11 @@ function DetailsPage() {
             cast={movieCredits ? movieCredits.cast : []}
           />
         </div>
+        <div className="details-sidebar">
+          <AdSense slot="8622455036" className="adsense-sidebar" />
+        </div>
       </div>
-
+      <AdSense slot="8622455036" className="adsense-bottom" />
       <div style={{ marginTop: 200 }}></div>
       <Footer />
     </div>

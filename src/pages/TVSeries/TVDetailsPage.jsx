@@ -6,6 +6,7 @@ import {
   Footer,
   ButtomNavbar,
   GlobalSearch,
+  AdSense,
 } from "../../components";
 import {
   getTVDetails,
@@ -102,9 +103,11 @@ function TVDetailsPage() {
           />
           <CastCarousel title={"Cast"} cast={tvCredits ? tvCredits.cast : []} />
         </div>
-        <div className="details-sidebar"></div>
+        <div className="details-sidebar">
+          <AdSense slot="8622455036" className="adsense-sidebar" />
+        </div>
       </div>
-
+      <AdSense slot="8622455036" className="adsense-bottom" />
       <div style={{ marginTop: 200 }}></div>
       <Footer />
     </div>

@@ -79,13 +79,9 @@ npm install
 # Get your API key and access token from https://www.themoviedb.org/settings/api
 REACT_APP_TMDB_ACCESS_TOKEN=your_tmdb_access_token_here
 REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here
-
-# Google AdSense Configuration (Optional)
-# Get your AdSense details from https://www.google.com/adsense/
-REACT_APP_ADSENSE_CLIENT_ID=ca-pub-xxxxxxxxxxxxxxxxx
-REACT_APP_ADSENSE_SLOT_SIDEBAR=xxxxxxxxxx
-REACT_APP_ADSENSE_SLOT_BOTTOM=xxxxxxxxxx
 ```
+
+> **Note**: Google AdSense is pre-configured in the application. The AdSense script and ad units are already set up in the code.
 
 4. Start the development server:
 
@@ -103,18 +99,17 @@ The application will open at `http://localhost:3000`
 4. Copy both the API Key and the Access Token (Bearer token)
 5. Add them to your `.env` file
 
-### Google AdSense Setup (Optional)
+### Google AdSense Configuration
 
-If you want to enable ads:
+The application includes Google AdSense integration with the following configuration:
 
-1. Create a Google AdSense account
-2. Get your Publisher ID (ca-pub-xxxx)
-3. Create ad units for:
-   - Sidebar ad (appears on detail pages)
-   - Bottom ad (appears after content)
-4. Add the Client ID and Slot IDs to your `.env` file
+- **Client ID**: `ca-pub-6431549888769819`
+- **Ad Slot**: `8622455036` (Muvi - Auto responsive ad)
+- **Placements**:
+  - Sidebar ad (appears on movie/TV detail pages)
+  - Bottom ad (appears after content on detail pages)
 
-Note: If AdSense keys are not configured, placeholder ad spaces will be shown instead.
+The AdSense script is automatically loaded in `public/index.html`, and ad units are configured in the `AdSense` component with responsive, auto-format ads that adapt to different screen sizes.
 
 ## Project Structure
 
