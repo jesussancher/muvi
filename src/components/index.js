@@ -7,7 +7,6 @@ import Modal from "./Modals/Modal";
 import Icon from "./Icons/Icon";
 import TopNavbar from "./Navbars/TopNavbar";
 import ButtomNavbar from "./Navbars/ButtomNavbar";
-import ContentTypeNavbar from "./Navbars/ContentTypeNavbar";
 import MovieCard from "./Cards/MovieCard";
 import Tag from "./Tags/Tag";
 import VideoPlayer from "./Videos/VideoPlayer";
@@ -17,7 +16,6 @@ import AdSense from "./Ads/AdSense";
 
 export {
   ButtomNavbar,
-  ContentTypeNavbar,
   GlobalSearch,
   SearchInput,
   VideoPlayer,

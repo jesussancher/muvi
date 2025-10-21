@@ -4,7 +4,6 @@ import {
   TopNavbar,
   ButtomNavbar,
   Footer,
-  ContentTypeNavbar,
   GlobalSearch,
 } from "../../components";
 import {
@@ -105,7 +104,6 @@ function HomePage() {
       onContextMenu={(e) => e.preventDefault()}
     >
       <TopNavbar />
-      <ContentTypeNavbar />
       <GlobalSearch />
       <HeadVideo genresList={genresList} />
       <Carousel

@@ -5,9 +5,7 @@ import {
   TopNavbar,
   Footer,
   ButtomNavbar,
-  ContentTypeNavbar,
   GlobalSearch,
-  AdSense,
 } from "../../components";
 import {
   getTVDetails,
@@ -91,7 +89,6 @@ function TVDetailsPage() {
       onContextMenu={(e) => e.preventDefault()}
     >
       <TopNavbar />
-      <ContentTypeNavbar />
       <GlobalSearch />
       <ButtomNavbar />
       <div className="details-layout">
@@ -105,17 +102,9 @@ function TVDetailsPage() {
           />
           <CastCarousel title={"Cast"} cast={tvCredits ? tvCredits.cast : []} />
         </div>
-        <div className="details-sidebar">
-          <AdSense
-            slot={process.env.REACT_APP_ADSENSE_SLOT_SIDEBAR}
-            className="adsense-sidebar"
-          />
-        </div>
+        <div className="details-sidebar"></div>
       </div>
-      <AdSense
-        slot={process.env.REACT_APP_ADSENSE_SLOT_BOTTOM}
-        className="adsense-bottom"
-      />
+
       <div style={{ marginTop: 200 }}></div>
       <Footer />
     </div>
