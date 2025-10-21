@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faWallet,
   faCalendarDay,
-  faClock,
+  faTv,
+  faStar,
   faGlobe,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import "./MovieDetailsSmallStyles.css";
-import "./MovieDetailsEnhanced.css";
+import "../Details/MovieDetailsSmallStyles.css";
+import "../Details/MovieDetailsEnhanced.css";
+import "./TVSeriesDetailsStyles.css";
 import { getMonthName, getYearShort } from "../../utils/Misc/dateTime";
 import { MuviLogo, Tag } from "../../components";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
-
-function MovieDetails({
-  movieDetails,
+function TVSeriesDetails({
+  tvDetails,
   watchProviders,
   videos,
   keywords,
@@ -29,35 +25,35 @@ function MovieDetails({
 }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const posterUrl = baseUrl + movieDetails?.backdrop_path;
-  const title = movieDetails?.title;
-  const rate = movieDetails?.vote_average;
-  const genre = movieDetails?.genres[0]?.name;
-  const overview = movieDetails?.overview;
-  const releaseDate = movieDetails?.release_date?.split("-");
-  const company = movieDetails?.production_companies[0];
-  const status = movieDetails?.status;
-  const originalLanguage = movieDetails?.original_language?.toUpperCase();
-  const budget = movieDetails?.budget;
-  const revenue = movieDetails?.revenue;
-  const homepage = movieDetails?.homepage;
+  const posterUrl = baseUrl + tvDetails?.backdrop_path;
+  const title = tvDetails?.name;
+  const rate = tvDetails?.vote_average;
+  const genre = tvDetails?.genres && tvDetails?.genres[0]?.name;
+  const overview = tvDetails?.overview;
+  const firstAirDate = tvDetails?.first_air_date?.split("-");
+  const network = tvDetails?.networks && tvDetails?.networks[0];
+  const numberOfSeasons = tvDetails?.number_of_seasons;
+  const numberOfEpisodes = tvDetails?.number_of_episodes;
+  const status = tvDetails?.status;
+  const originalLanguage = tvDetails?.original_language?.toUpperCase();
+  const homepage = tvDetails?.homepage;
 
   document.title = `Muvi ${title ? "| " + title : ""}`;
 
   const info = [
     {
-      icon: faClock,
-      text: Math.ceil(movieDetails?.runtime / 60) + "Hs",
+      icon: faTv,
+      text: `${numberOfSeasons || 0} Season${numberOfSeasons !== 1 ? "s" : ""}`,
     },
     {
       icon: faCalendarDay,
-      text: `${getMonthName(releaseDate && releaseDate[1])} ${
-        releaseDate && releaseDate[2]
-      } ${getYearShort(releaseDate && releaseDate[0])} `,
+      text: `${getMonthName(firstAirDate && firstAirDate[1])} ${
+        firstAirDate && firstAirDate[2]
+      } ${getYearShort(firstAirDate && firstAirDate[0])} `,
     },
     {
-      icon: faWallet,
-      text: budget > 0 ? formatter.format(budget).split(",")[0] + "M" : "N/A",
+      icon: faStar,
+      text: status || "Unknown",
     },
   ];
 
@@ -126,10 +122,10 @@ function MovieDetails({
             )}
             {genre && <div className={"card-genre"}>{genre}</div>}
             <div className={"details-company-sm flex-row flex-center shadow"}>
-              {company?.logo_path ? (
+              {network?.logo_path ? (
                 <img
-                  src={baseUrl + company?.logo_path}
-                  alt={company?.name + " logo"}
+                  src={baseUrl + network?.logo_path}
+                  alt={network?.name + " logo"}
                 />
               ) : (
                 <MuviLogo />
@@ -141,6 +137,32 @@ function MovieDetails({
 
       <div className={"details-overview-sm flex-column flex-center"}>
         {overview && <p>{overview}</p>}
+
+        <div className={"tv-series-stats"}>
+          <div className={"stat-item"}>
+            <span className={"stat-label"}>Episodes</span>
+            <span className={"stat-value"}>{numberOfEpisodes || "N/A"}</span>
+          </div>
+          <div className={"stat-item"}>
+            <span className={"stat-label"}>Status</span>
+            <span className={"stat-value"}>{status || "Unknown"}</span>
+          </div>
+          {tvDetails?.episode_run_time &&
+            tvDetails.episode_run_time.length > 0 && (
+              <div className={"stat-item"}>
+                <span className={"stat-label"}>Runtime</span>
+                <span className={"stat-value"}>
+                  {tvDetails.episode_run_time[0]} min
+                </span>
+              </div>
+            )}
+          {originalLanguage && (
+            <div className={"stat-item"}>
+              <span className={"stat-label"}>Language</span>
+              <span className={"stat-value"}>{originalLanguage}</span>
+            </div>
+          )}
+        </div>
 
         <div className={"details-tags-sm flex-row"}>
           {info.map((data, index) => {
@@ -157,30 +179,6 @@ function MovieDetails({
               </span>
             );
           })}
-        </div>
-
-        {/* Additional Info */}
-        <div className="movie-additional-info">
-          {status && (
-            <div className="info-item">
-              <span className="info-label">Status:</span>
-              <span className="info-value">{status}</span>
-            </div>
-          )}
-          {originalLanguage && (
-            <div className="info-item">
-              <span className="info-label">Language:</span>
-              <span className="info-value">{originalLanguage}</span>
-            </div>
-          )}
-          {revenue > 0 && (
-            <div className="info-item">
-              <span className="info-label">Revenue:</span>
-              <span className="info-value">
-                {formatter.format(revenue).split(",")[0]}M
-              </span>
-            </div>
-          )}
         </div>
 
         {/* External Links */}
@@ -249,11 +247,11 @@ function MovieDetails({
         )}
 
         {/* Keywords */}
-        {keywords?.keywords && keywords.keywords.length > 0 && (
+        {keywords?.results && keywords.results.length > 0 && (
           <div className="keywords-section">
             <h3>Keywords</h3>
             <div className="keywords-list">
-              {keywords.keywords.slice(0, 10).map((keyword) => (
+              {keywords.results.slice(0, 10).map((keyword) => (
                 <Tag key={keyword.id} text={keyword.name} />
               ))}
             </div>
@@ -322,27 +320,26 @@ function MovieDetails({
           </motion.div>
         )}
 
-        {/* Production Companies */}
-        {movieDetails?.production_companies &&
-          movieDetails.production_companies.length > 1 && (
-            <div className="production-companies">
-              <h3>Production Companies</h3>
-              <div className="companies-grid">
-                {movieDetails.production_companies.map((comp) => (
-                  <div key={comp.id} className="company-item">
-                    {comp.logo_path ? (
-                      <img src={baseUrl + comp.logo_path} alt={comp.name} />
-                    ) : (
-                      <span>{comp.name}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
+        {/* Networks */}
+        {tvDetails?.networks && tvDetails.networks.length > 0 && (
+          <div className="production-companies">
+            <h3>Networks</h3>
+            <div className="companies-grid">
+              {tvDetails.networks.map((net) => (
+                <div key={net.id} className="company-item">
+                  {net.logo_path ? (
+                    <img src={baseUrl + net.logo_path} alt={net.name} />
+                  ) : (
+                    <span>{net.name}</span>
+                  )}
+                </div>
+              ))}
             </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default MovieDetails;
+export default TVSeriesDetails;

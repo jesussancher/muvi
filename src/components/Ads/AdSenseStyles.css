@@ -1,0 +1,67 @@
+.adsense-container {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.adsense-placeholder {
+    width: 100%;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-transparent);
+    border: 2px dashed var(--background-darker-transparent);
+    border-radius: var(--border-radius-large);
+    margin: 20px 0;
+}
+
+.adsense-placeholder-content {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.4;
+    padding: 20px;
+}
+
+.adsense-placeholder-content .icon-info {
+    font-size: 2em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.adsense-placeholder-content p {
+    margin: 5px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.adsense-placeholder-content small {
+    font-size: 0.85em;
+    opacity: 0.7;
+}
+
+/* Sidebar ad specific styling */
+.adsense-sidebar {
+    position: sticky;
+    top: 150px;
+    max-width: 300px;
+}
+
+/* Bottom ad specific styling */
+.adsense-bottom {
+    margin: 40px 0;
+}
+
+/* Responsive */
+@media only screen and (max-width: 992px) {
+    .adsense-sidebar {
+        position: relative;
+        top: 0;
+        max-width: 100%;
+        margin: 20px 0;
+    }
+}
+

@@ -8,48 +8,49 @@ import {
   GlobalSearch,
 } from "../../components";
 import {
-  discoverMoviesByGenre,
-  getAllGenresList,
-  tmdbSearchMovie,
+  discoverTVByGenre,
+  getAllTVGenresList,
+  tmdbSearchTV,
+  tmdbRequestTV,
 } from "../../utils/API/API";
-import "./HomePageStyles.css";
-import FilterBar from "./FilterBar";
-import Carousel from "./Carousel";
-import MoviesList from "./MoviesList";
-import HeadVideo from "./HeadVideo";
+import "../Home/HomePageStyles.css";
+import FilterBar from "../Home/FilterBar";
+import Carousel from "../Home/Carousel";
+import MoviesList from "../Home/MoviesList";
+import HeadVideo from "../Home/HeadVideo";
 
-function HomePage() {
-  document.title = `Muvi | Home`;
+function TVSeriesPage() {
+  document.title = `Muvi | TV Series`;
 
   const [genresList, setGenresList] = useState([]);
   const [genreSelected, setGenreSelected] = useState({});
-  const [moviesList, setMoviesList] = useState([]);
+  const [tvList, setTVList] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [searchMode, setSearchMode] = useState(false);
 
   const getGenresList = async () => {
-    const genres = await getAllGenresList();
+    const genres = await getAllTVGenresList();
     setGenresList(genres.genres);
   };
 
-  const getMoviesList = async (genre, page = 1) => {
-    const byGenre = await discoverMoviesByGenre(genre, page);
-    setMoviesList(byGenre.results);
+  const getTVList = async (genre, page = 1) => {
+    const byGenre = await discoverTVByGenre(genre, page);
+    setTVList(byGenre.results);
   };
 
-  const getMoviesSearch = async (query) => {
-    const byQuery = await tmdbSearchMovie(query);
-    setMoviesList(byQuery.results);
+  const getTVSearch = async (query) => {
+    const byQuery = await tmdbSearchTV(query);
+    setTVList(byQuery.results);
   };
 
-  const getMoviesPagination = async (n) => {
+  const getTVPagination = async (n) => {
     const newPage = currentPage + n;
     if (newPage === 0) return;
-    const byPage = await discoverMoviesByGenre(genreSelected.id, newPage);
+    const byPage = await discoverTVByGenre(genreSelected.id, newPage);
     setCurrentPage(newPage);
-    setMoviesList(byPage.results);
+    setTVList(byPage.results);
   };
 
   const getSelectedGenre = (genre) => {
@@ -69,10 +70,10 @@ function HomePage() {
     setFavoritesList(list);
   };
 
-  // Request now playing movies
+  // Request genres
   useEffect(() => {
     getGenresList();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     async function getFavoritesList() {
@@ -84,20 +85,20 @@ function HomePage() {
       }
     }
     getFavoritesList();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    getMoviesList(genreSelected.id);
-  }, [genreSelected]); // eslint-disable-line react-hooks/exhaustive-deps
+    getTVList(genreSelected.id);
+  }, [genreSelected]);
 
   useEffect(() => {
     if (searchValue === "") {
-      getMoviesList(genreSelected.id, currentPage);
+      getTVList(genreSelected.id, currentPage);
     } else {
       if (!searchMode) return;
-      getMoviesSearch(searchValue);
+      getTVSearch(searchValue);
     }
-  }, [searchValue, currentPage, searchMode]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchValue, currentPage, searchMode]);
 
   return (
     <div
@@ -105,20 +106,22 @@ function HomePage() {
       onContextMenu={(e) => e.preventDefault()}
     >
       <TopNavbar />
-
+      <ContentTypeNavbar />
       <GlobalSearch />
-      <HeadVideo genresList={genresList} />
+      <HeadVideo genresList={genresList} isTV={true} />
       <Carousel
-        type={"new"}
+        type={"tv-popular"}
         genresList={genresList}
         favoritesList={favoritesList}
         updateFavoritesList={updateFavoritesList}
+        isTV={true}
       />
       <Carousel
-        type={"now"}
+        type={"tv-top"}
         genresList={genresList}
         favoritesList={favoritesList}
         updateFavoritesList={updateFavoritesList}
+        isTV={true}
       />
       <FilterBar
         title={"Genres"}
@@ -127,15 +130,16 @@ function HomePage() {
       />
       <MoviesList
         genresList={genresList}
-        moviesList={moviesList}
+        moviesList={tvList}
         favoritesList={favoritesList}
         updateFavoritesList={updateFavoritesList}
         style={{ minHeight: "80vh" }}
+        isTV={true}
       />
       <ButtomNavbar
         currentPage={currentPage}
         genreSelected={genreSelected}
-        pageNavigation={getMoviesPagination}
+        pageNavigation={getTVPagination}
         getSearchValue={getSearchValue}
         getSearchMode={getSearchMode}
       />
@@ -145,4 +149,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default TVSeriesPage;

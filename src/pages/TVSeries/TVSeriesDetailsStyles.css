@@ -1,0 +1,52 @@
+.tv-series-stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--background-transparent);
+    border-radius: var(--border-radius-large);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 100px;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: var(--text-color);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--main-color);
+}
+
+@media only screen and (max-width: 600px) {
+    .tv-series-stats {
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+    
+    .stat-label {
+        font-size: 0.75em;
+    }
+    
+    .stat-value {
+        font-size: 1.1em;
+    }
+}
+

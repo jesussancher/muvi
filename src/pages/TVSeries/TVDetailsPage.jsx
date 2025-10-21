@@ -10,76 +10,77 @@ import {
   AdSense,
 } from "../../components";
 import {
-  tmdbRequest,
-  getMovieWatchProviders,
-  getMovieVideos,
-  // getMovieReviews,
-  // getMovieRecommendations,
-  getMovieKeywords,
-  getMovieExternalIds,
+  getTVDetails,
+  getTVCredits,
+  getTVWatchProviders,
+  getTVVideos,
+  getTVReviews,
+  getTVRecommendations,
+  getTVKeywords,
+  getTVExternalIds,
 } from "../../utils/API/API";
-import CastCarousel from "./CastCarousel";
-import MovieDetails from "./MovieDetails";
+import CastCarousel from "../Details/CastCarousel";
+import TVSeriesDetails from "./TVSeriesDetails";
 
-function DetailsPage() {
+function TVDetailsPage() {
   const param = useParams();
 
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [movieCredits, setMovieCredits] = useState(null);
+  const [tvDetails, setTVDetails] = useState(null);
+  const [tvCredits, setTVCredits] = useState(null);
   const [watchProviders, setWatchProviders] = useState(null);
   const [videos, setVideos] = useState(null);
-  // const [reviews, setReviews] = useState(null);
-  // const [recommendations, setRecommendations] = useState(null);
+  const [reviews, setReviews] = useState(null);
+  const [recommendations, setRecommendations] = useState(null);
   const [keywords, setKeywords] = useState(null);
   const [externalIds, setExternalIds] = useState(null);
 
-  const getMovieDetails = async (id) => {
-    const details = await tmdbRequest(id);
-    setMovieDetails(details);
+  const getTVDetailsData = async (id) => {
+    const details = await getTVDetails(id);
+    setTVDetails(details);
   };
 
-  const getMovieCredits = async (id) => {
-    const credits = await tmdbRequest(`${id}/credits`);
-    setMovieCredits(credits);
+  const getTVCreditsData = async (id) => {
+    const credits = await getTVCredits(id);
+    setTVCredits(credits);
   };
 
   const fetchWatchProviders = async (id) => {
-    const providers = await getMovieWatchProviders(id);
+    const providers = await getTVWatchProviders(id);
     setWatchProviders(providers);
   };
 
   const fetchVideos = async (id) => {
-    const vids = await getMovieVideos(id);
+    const vids = await getTVVideos(id);
     setVideos(vids);
   };
 
-  // const fetchReviews = async (id) => {
-  //   const revs = await getMovieReviews(id);
-  //   setReviews(revs);
-  // };
+  const fetchReviews = async (id) => {
+    const revs = await getTVReviews(id);
+    setReviews(revs);
+  };
 
-  // const fetchRecommendations = async (id) => {
-  //   const recs = await getMovieRecommendations(id);
-  //   setRecommendations(recs);
-  // };
+  const fetchRecommendations = async (id) => {
+    const recs = await getTVRecommendations(id);
+    setRecommendations(recs);
+  };
 
   const fetchKeywords = async (id) => {
-    const keys = await getMovieKeywords(id);
+    const keys = await getTVKeywords(id);
     setKeywords(keys);
   };
 
   const fetchExternalIds = async (id) => {
-    const ids = await getMovieExternalIds(id);
+    const ids = await getTVExternalIds(id);
     setExternalIds(ids);
   };
 
   useEffect(() => {
-    getMovieDetails(param.id);
-    getMovieCredits(param.id);
+    getTVDetailsData(param.id);
+    getTVCreditsData(param.id);
     fetchWatchProviders(param.id);
     fetchVideos(param.id);
-    // fetchReviews(param.id);
-    // fetchRecommendations(param.id);
+    fetchReviews(param.id);
+    fetchRecommendations(param.id);
     fetchKeywords(param.id);
     fetchExternalIds(param.id);
   }, [param.id]);
@@ -95,17 +96,14 @@ function DetailsPage() {
       <ButtomNavbar />
       <div className="details-layout">
         <div className="details-main-content">
-          <MovieDetails
-            movieDetails={movieDetails}
+          <TVSeriesDetails
+            tvDetails={tvDetails}
             watchProviders={watchProviders}
             videos={videos}
             keywords={keywords}
             externalIds={externalIds}
           />
-          <CastCarousel
-            title={"Cast"}
-            cast={movieCredits ? movieCredits.cast : []}
-          />
+          <CastCarousel title={"Cast"} cast={tvCredits ? tvCredits.cast : []} />
         </div>
         <div className="details-sidebar">
           <AdSense
@@ -124,4 +122,4 @@ function DetailsPage() {
   );
 }
 
-export default DetailsPage;
+export default TVDetailsPage;

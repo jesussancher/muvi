@@ -1,45 +1,235 @@
 # Muvi
 
-Movie listing Application. 
-Designed and developed as a requirement for the Frontend position at 57Blocks.
+Movie and TV Series listing application with enhanced features including watch providers, trailers, global search, and more.
 
-## The solution
+Originally designed and developed as a requirement for the Frontend position at 57Blocks, now enhanced with comprehensive TV series support and modern animations.
 
-The information below is the respective technologies used to reach the solution, with it's respective narrative.
+## Features
 
-### Technologies
+- 🎬 **Movies & TV Series**: Browse both movies and TV shows with dedicated pages
+- 🔍 **Global Search**: Autocomplete search with instant results (minimum 3 characters)
+- 🎯 **Content Navigation**: Seamless switching between movies and series
+- 📺 **Watch Providers**: Direct links to streaming platforms where content is available
+- 🎥 **Trailers & Videos**: Watch trailers directly in the app
+- ⭐ **Favorites**: Save your favorite content
+- 🏷️ **Keywords & Tags**: Discover content by keywords
+- 🎨 **Modern UI**: Smooth animations with Framer Motion
+- 📱 **Responsive Design**: Works perfectly on all devices
+- 💰 **AdSense Integration**: Monetization support with Google AdSense
 
-#### * HTML
-#### * CSS
-#### * JavaScript
-* Fetch
-#### * ReactJS
-* Functional components
-* [React Router Dom](https://reactrouter.com/)
-* [Classnames](https://www.npmjs.com/package/classnames)
-* [React Fontawesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react)
-* [Spinners React](https://www.npmjs.com/package/spinners-react)
-#### * [The Movie Database API (TMDV API)](https://www.themoviedb.org/)
-#### * GIT
-#### * Vercel
+## Technologies
 
-### Narrative
+### Core
 
-#### * Initial:
-Create application using `npx create-react-app`.
-#### * Version Control:
-Link to the GitHub [remote repository](https://github.com/jesussancher/muvi).
-#### * Routes:
-Structure routes (Login, Home, Detail, Favorites) using [*React Router DOM*](https://reactrouter.com/).
-#### * Auth:
-Design the authentication using *Local Storage* to store user's data.
-#### * Private / Public Pages:
-Permissions are given to visit the *Home Page* only if user is logged in, *Login Page* is rendered instead.
-#### * TMDB API:
-Queris related to Genre, Pagination, Movie Details and Movie Cast.
-#### * Responsive:
-Application show be shown correctly on every device is running. *CSS3 Media Queries* are used.
-#### * Deployment:
-The Applications is deplyed using *Vercel*.
+- **HTML5** & **CSS3**
+- **JavaScript** (ES6+)
+- **React 17.0.2**
+  - Functional components with Hooks
+  - [React Router Dom v6](https://reactrouter.com/)
+  - [Classnames](https://www.npmjs.com/package/classnames)
 
-# [THE MUVI APPLICATION](https://muvi-project.vercel.app/)
+### UI & Animations
+
+- [Framer Motion 6.5.1](https://www.framer.com/motion/)
+- [React FontAwesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react)
+- [Spinners React](https://www.npmjs.com/package/spinners-react)
+- Custom icon font (Muvi Icons)
+
+### API & Data
+
+- [The Movie Database API (TMDB API)](https://www.themoviedb.org/)
+  - Movies, TV Series, Search
+  - Watch Providers
+  - Videos & Trailers
+  - Cast & Crew
+  - Reviews & Recommendations
+
+### Monetization
+
+- Google AdSense Integration
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- TMDB API Account
+- (Optional) Google AdSense Account
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/jesussancher/muvi.git
+cd muvi
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory with the following variables:
+
+```env
+# TMDB API Configuration
+# Get your API key and access token from https://www.themoviedb.org/settings/api
+REACT_APP_TMDB_ACCESS_TOKEN=your_tmdb_access_token_here
+REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here
+
+# Google AdSense Configuration (Optional)
+# Get your AdSense details from https://www.google.com/adsense/
+REACT_APP_ADSENSE_CLIENT_ID=ca-pub-xxxxxxxxxxxxxxxxx
+REACT_APP_ADSENSE_SLOT_SIDEBAR=xxxxxxxxxx
+REACT_APP_ADSENSE_SLOT_BOTTOM=xxxxxxxxxx
+```
+
+4. Start the development server:
+
+```bash
+npm start
+```
+
+The application will open at `http://localhost:3000`
+
+### Getting TMDB API Keys
+
+1. Create an account at [The Movie Database](https://www.themoviedb.org/)
+2. Go to Settings → API
+3. Request an API key
+4. Copy both the API Key and the Access Token (Bearer token)
+5. Add them to your `.env` file
+
+### Google AdSense Setup (Optional)
+
+If you want to enable ads:
+
+1. Create a Google AdSense account
+2. Get your Publisher ID (ca-pub-xxxx)
+3. Create ad units for:
+   - Sidebar ad (appears on detail pages)
+   - Bottom ad (appears after content)
+4. Add the Client ID and Slot IDs to your `.env` file
+
+Note: If AdSense keys are not configured, placeholder ad spaces will be shown instead.
+
+## Project Structure
+
+```
+muvi/
+├── public/
+│   ├── index.html
+│   └── assets/
+├── src/
+│   ├── components/
+│   │   ├── Ads/              # AdSense components
+│   │   ├── Buttons/
+│   │   ├── Cards/            # Movie/TV cards
+│   │   ├── Footer/
+│   │   ├── Icons/
+│   │   ├── Inputs/
+│   │   ├── Loaders/
+│   │   ├── Logo/
+│   │   ├── Modals/
+│   │   ├── Navbars/          # Top & Content Type navbars
+│   │   ├── Search/           # Global search with autocomplete
+│   │   ├── Tags/
+│   │   └── Videos/
+│   ├── pages/
+│   │   ├── Home/             # Movies home page
+│   │   ├── Details/          # Movie details page
+│   │   ├── TVSeries/         # TV series pages
+│   │   └── Favorites/
+│   ├── utils/
+│   │   ├── API/              # TMDB API integration
+│   │   ├── Auth/
+│   │   └── Misc/
+│   ├── App.js
+│   └── index.js
+└── package.json
+```
+
+## Features Breakdown
+
+### Movies & TV Series
+
+- Separate pages for movies and TV shows
+- Genre filtering
+- Pagination support
+- Top rated, popular, upcoming lists
+- Search functionality
+
+### Detail Pages
+
+Enhanced detail pages include:
+
+- High-quality backdrops
+- Movie/show information
+- Cast carousel
+- Watch providers with direct links
+- Trailers and videos
+- Keywords and tags
+- External links (IMDb, Homepage)
+- Production companies/networks
+- Google AdSense placements (sidebar & bottom)
+
+### Global Search
+
+- Fixed position search bar
+- Autocomplete with 300ms debounce
+- Minimum 3 characters to trigger
+- Shows both movies and TV shows
+- Click to navigate to detail page
+
+### Animations
+
+- Smooth page transitions
+- Hover effects on cards
+- Animated tab indicators
+- Fade-in animations
+- Scale and transform effects
+
+## Available Scripts
+
+- `npm start` - Run development server
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm eject` - Eject from create-react-app (irreversible)
+
+## Deployment
+
+The application is deployed using Vercel:
+
+[Live Demo](https://muvi-project.vercel.app/)
+
+To deploy your own version:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## License
+
+This project is open source and available for educational purposes.
+
+## Credits
+
+- Movie data provided by [TMDB](https://www.themoviedb.org/)
+- Icons by [FontAwesome](https://fontawesome.com/)
+- Developed by [Jesús Sánchez](https://github.com/jesussancher)
+
+---
+
+For questions or issues, please open an issue on the [GitHub repository](https://github.com/jesussancher/muvi).

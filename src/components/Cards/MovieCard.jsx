@@ -1,106 +1,134 @@
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import { Icon } from '..';
-import { addToFavoriteList, removeFromFavoriteList } from '../../utils/Misc/favorites';
-import PosterFallback from '../../assets/images/fallback-poster.jpg';
-import './CardsStyles.css';
-import { Link } from 'react-router-dom';
+import classNames from "classnames";
+import React, { useState } from "react";
+import { Icon } from "..";
+import {
+  addToFavoriteList,
+  removeFromFavoriteList,
+} from "../../utils/Misc/favorites";
+import PosterFallback from "../../assets/images/fallback-poster.jpg";
+import "./CardsStyles.css";
+import { Link } from "react-router-dom";
 
 function MovieCard(props) {
+  const {
+    id,
+    rate,
+    genre,
+    title,
+    image,
+    genreId,
+    release,
+    isFavorite,
+    fromFavorites,
+    getFavoritesList,
+    mediaType = "movie",
+  } = props;
 
-    const {
+  const baseUrl = "https://image.tmdb.org/t/p/original";
+
+  const [hoverFavorite, setHoverFavorite] = useState(false);
+  const [favoriteAnimation, setFavoriteAnimation] = useState(false);
+
+  const onEnterFavorite = () => {
+    setHoverFavorite(true);
+  };
+
+  const onLeaveFavorite = () => {
+    setHoverFavorite(false);
+  };
+
+  const handleAddToFavoriteList = () => {
+    if (!getFavoritesList) return;
+    getFavoritesList(
+      addToFavoriteList({
         id,
-        rate,
+        vote_average: rate,
         genre,
         title,
-        image,
         genreId,
-        release,
-        isFavorite,
-        fromFavorites,
-        getFavoritesList
-    } = props;
+        poster_path: image,
+        release_date: release,
+      })
+    );
+    favAnimation("add");
+  };
 
-    const baseUrl = 'https://image.tmdb.org/t/p/original';
+  const handleRemoveToFavoriteList = () => {
+    if (!getFavoritesList) return;
+    getFavoritesList(removeFromFavoriteList(id));
+    favAnimation("remove");
+  };
 
-    const [hoverFavorite, setHoverFavorite] = useState(false);
-    const [favoriteAnimation, setFavoriteAnimation] = useState(false);
+  const favAnimation = (type) => {
+    const favInterval = setInterval(() => {
+      setFavoriteAnimation(true);
+    }, 10);
+    setTimeout(() => {
+      clearInterval(favInterval);
+      setFavoriteAnimation(false);
+    }, 2000);
+  };
 
-    const onEnterFavorite = () => {
-        setHoverFavorite(true)
-    }
-
-    const onLeaveFavorite = () => {
-        setHoverFavorite(false)
-    }
-
-    const handleAddToFavoriteList = () => {
-        if(!getFavoritesList) return;
-        getFavoritesList(addToFavoriteList({
-            id,
-            vote_average: rate,
-            genre,
-            title,
-            genreId,
-            poster_path: image,
-            release_date: release}));
-        favAnimation('add');
-    }
-
-    const handleRemoveToFavoriteList = () => {
-        if(!getFavoritesList) return;
-        getFavoritesList(removeFromFavoriteList(id));
-        favAnimation('remove');
-    }
-
-    const favAnimation = (type) => {
-        const favInterval = setInterval(() => {
-            setFavoriteAnimation(true);
-        }, 10);
-        setTimeout(() => {
-            clearInterval(favInterval);
-            setFavoriteAnimation(false);
-        }, 2000);
-    }
-    
-    return (
-        <div 
-            className={classNames('card', {'release': release})} 
-            style={{backgroundImage: `url(${image ? baseUrl+image : PosterFallback})`}}
-            onDoubleClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
-            >
-            <div className={classNames('new-fav flex-row flex-center', !fromFavorites && favoriteAnimation && (isFavorite ? 'add-animate' : 'remove-animate'))}>
-                { isFavorite
-                    ?
-                    <i className={'icon-favorite-contain'} />
-                    :
-                    <i className={'icon-favorite-outline'} />
-                }
+  return (
+    <div
+      className={classNames("card", { release: release })}
+      style={{
+        backgroundImage: `url(${image ? baseUrl + image : PosterFallback})`,
+      }}
+      onDoubleClick={
+        id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList
+      }
+    >
+      <div
+        className={classNames(
+          "new-fav flex-row flex-center",
+          !fromFavorites &&
+            favoriteAnimation &&
+            (isFavorite ? "add-animate" : "remove-animate")
+        )}
+      >
+        {isFavorite ? (
+          <i className={"icon-favorite-contain"} />
+        ) : (
+          <i className={"icon-favorite-outline"} />
+        )}
+      </div>
+      <div
+        className={"card-favorite flex-row flex-center"}
+        onMouseEnter={onEnterFavorite}
+        onMouseLeave={onLeaveFavorite}
+        onClick={
+          id && isFavorite
+            ? handleRemoveToFavoriteList
+            : handleAddToFavoriteList
+        }
+      >
+        <Icon
+          icon={
+            hoverFavorite || isFavorite
+              ? "favorite-contain"
+              : "favorite-outline"
+          }
+        />
+      </div>
+      <div className={"card-info-container"}>
+        <div className={"card-info-content flex-column"}>
+          {id && (rate !== undefined || rate !== null) && (
+            <div className={"card-rate"}>
+              <i className={`icon-star-contain`} />
+              {rate}
             </div>
-            <div 
-                className={'card-favorite flex-row flex-center'}
-                onMouseEnter={onEnterFavorite}
-                onMouseLeave={onLeaveFavorite}
-                onClick={id && isFavorite ? handleRemoveToFavoriteList : handleAddToFavoriteList}
-            >
-                <Icon icon={hoverFavorite || isFavorite ? 'favorite-contain' : 'favorite-outline'} />
-            </div>
-            <div className={'card-info-container'}>
-                <div className={'card-info-content flex-column'}>
-                    {id && (rate !== undefined || rate !== null)  && <div className={'card-rate'}>
-                        <i className={`icon-star-contain`} />{rate}
-                    </div>}
-                    {title &&  <Link to={`/movie/${id}`} params={id} target="_blank"><div className={'card-title'}>
-                        {title}
-                    </div></Link>}
-                    {genre && <div className={'card-genre'}>
-                        {genre} 
-                    </div>}
-                    
-                </div>
-            </div>
+          )}
+          {title && (
+            <Link to={`/${mediaType}/${id}`} params={id} target="_blank">
+              <div className={"card-title"}>{title}</div>
+            </Link>
+          )}
+          {genre && <div className={"card-genre"}>{genre}</div>}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default MovieCard;
