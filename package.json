@@ -27,8 +27,9 @@
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "node scripts/generate-sitemap.js",
-    "build": "react-scripts build && react-snap",
-    "postbuild": "echo 'Build complete with pre-rendered pages'",
+    "build": "react-scripts build",
+    "postbuild": "echo 'Build complete!'",
+    "build:snap": "react-scripts build && react-snap",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
