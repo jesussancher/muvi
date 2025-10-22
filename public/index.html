@@ -11,8 +11,11 @@
     />
     <meta name="keywords" content="películas, series, streaming, cine, trailers, reparto, ver películas online, catálogo películas" />
     <meta name="author" content="Ver Muvi" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="google-site-verification" content="32Lb33tnqZHvmmklmP_LntpSRYkyq5bvtuBC1pFXdYA" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="format-detection" content="telephone=no" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -39,17 +42,57 @@
     <title>Ver Muvi - Catálogo de Películas y Series Online</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <noscript>
+      <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+        <h1>Ver Muvi - Catálogo de Películas y Series Online</h1>
+        <p>Descubre miles de películas y series con información detallada, trailers, reparto y dónde verlas en streaming.</p>
+        <p>Este sitio requiere JavaScript para funcionar correctamente.</p>
+      </div>
+    </noscript>
+    
+    <!-- Contenido estructurado para bots mientras carga React -->
+    <div id="root">
+      <div style="visibility: hidden; position: absolute; top: 0; left: 0;">
+        <h1>Ver Muvi - Películas y Series Online</h1>
+        <nav>
+          <a href="/">Inicio</a>
+          <a href="/tv">Series de TV</a>
+          <a href="/favorites">Favoritos</a>
+        </nav>
+        <main>
+          <h2>Catálogo de Películas Populares</h2>
+          <p>Descubre las películas más populares del momento. Información completa, trailers en HD, reparto completo y dónde ver cada película en streaming.</p>
+          <section>
+            <h3>Películas Destacadas</h3>
+            <p>Explora nuestro extenso catálogo de películas organizadas por género: Acción, Drama, Comedia, Terror, Ciencia Ficción y más.</p>
+          </section>
+          <section>
+            <h3>Series de Televisión</h3>
+            <p>Encuentra las mejores series de TV con información detallada de temporadas, episodios, reparto y plataformas de streaming.</p>
+          </section>
+        </main>
+      </div>
+    </div>
+    
+    <!-- Schema.org para la página principal -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Ver Muvi",
+      "alternateName": "Muvi",
+      "url": "https://vermuvi.com",
+      "description": "Catálogo completo de películas y series online con información detallada, trailers y dónde ver en streaming",
+      "inLanguage": "es",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://vermuvi.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </body>
 </html>
