@@ -95,6 +95,7 @@ function DetailsPage() {
         <div className="details-main-content">
           <MovieDetails
             movieDetails={movieDetails}
+            movieCredits={movieCredits}
             watchProviders={watchProviders}
             videos={videos}
             keywords={keywords}

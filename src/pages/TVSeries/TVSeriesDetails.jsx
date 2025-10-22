@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarDay,
@@ -38,7 +39,29 @@ function TVSeriesDetails({
   const originalLanguage = tvDetails?.original_language?.toUpperCase();
   const homepage = tvDetails?.homepage;
 
-  document.title = `Muvi ${title ? "| " + title : ""}`;
+  // SEO Meta data
+  const firstAirYear = firstAirDate ? firstAirDate[0] : "";
+  const tvTitle = title ? `${title} (${firstAirYear})` : "Serie";
+  const tvDescription = overview
+    ? overview.length > 155
+      ? overview.substring(0, 155) + "..."
+      : overview
+    : `Ver ${title} online. Información completa, reparto, trailers y dónde ver en streaming.`;
+  const tvImage = tvDetails?.poster_path
+    ? `https://image.tmdb.org/t/p/w780${tvDetails.poster_path}`
+    : "https://vermuvi.com/muvi-logo.png";
+  const tvUrl = `https://vermuvi.com/tv/${tvDetails?.id}`;
+
+  // Generate keywords from genres and keywords
+  const genreKeywords = tvDetails?.genres?.map((g) => g.name).join(", ") || "";
+  const tvKeywords =
+    keywords?.results
+      ?.slice(0, 5)
+      .map((k) => k.name)
+      .join(", ") || "";
+  const allKeywords = `${title}, serie, ${genreKeywords}, ${tvKeywords}, ver online, streaming`;
+
+  document.title = `${tvTitle} | Ver Muvi - Series Online`;
 
   const info = [
     {
@@ -95,8 +118,68 @@ function TVSeriesDetails({
     }
   };
 
+  // Schema.org JSON-LD for TV Series
+  const schemaOrgData = tvDetails
+    ? {
+        "@context": "https://schema.org",
+        "@type": "TVSeries",
+        name: title,
+        description: overview,
+        image: tvImage,
+        datePublished: tvDetails.first_air_date,
+        genre: tvDetails.genres?.map((g) => g.name),
+        numberOfSeasons: numberOfSeasons,
+        numberOfEpisodes: numberOfEpisodes,
+        aggregateRating: rate
+          ? {
+              "@type": "AggregateRating",
+              ratingValue: rate,
+              ratingCount: tvDetails.vote_count,
+              bestRating: 10,
+              worstRating: 0,
+            }
+          : undefined,
+        url: tvUrl,
+        inLanguage: tvDetails.original_language,
+        contentRating: tvDetails.adult ? "TV-MA" : "TV-PG",
+      }
+    : null;
+
   return (
     <div id={"movieDetails"}>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>{`${tvTitle} | Ver Muvi - Series Online`}</title>
+        <meta name="title" content={`${tvTitle} | Ver Muvi - Series Online`} />
+        <meta name="description" content={tvDescription} />
+        <meta name="keywords" content={allKeywords} />
+        <link rel="canonical" href={tvUrl} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="video.tv_show" />
+        <meta property="og:url" content={tvUrl} />
+        <meta property="og:title" content={tvTitle} />
+        <meta property="og:description" content={tvDescription} />
+        <meta property="og:image" content={tvImage} />
+        <meta property="og:image:width" content="780" />
+        <meta property="og:image:height" content="1170" />
+        <meta property="og:site_name" content="Ver Muvi" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={tvUrl} />
+        <meta name="twitter:title" content={tvTitle} />
+        <meta name="twitter:description" content={tvDescription} />
+        <meta name="twitter:image" content={tvImage} />
+
+        {/* Schema.org JSON-LD */}
+        {schemaOrgData && (
+          <script type="application/ld+json">
+            {JSON.stringify(schemaOrgData)}
+          </script>
+        )}
+      </Helmet>
+
       <div
         className={"details-poster-sm"}
         style={{ backgroundImage: `url(${posterUrl})` }}

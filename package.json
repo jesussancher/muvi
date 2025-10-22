@@ -10,20 +10,26 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.1",
+    "dotenv": "^17.2.3",
     "framer-motion": "^6.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-adsense": "^0.0.5",
+    "react-helmet-async": "^2.0.5",
     "react-player": "^2.9.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-snap": "^1.23.0",
     "react-transition-group": "^4.4.2",
     "spinners-react": "^1.0.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "prebuild": "node scripts/generate-sitemap.js",
+    "build": "react-scripts build && react-snap",
+    "postbuild": "echo 'Build complete with pre-rendered pages'",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -47,5 +53,24 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "reactSnap": {
+    "include": [
+      "/",
+      "/tv",
+      "/favorites"
+    ],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "skipThirdPartyRequests": true,
+    "cacheAjaxRequests": false,
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "crawl": true,
+    "waitFor": 1000
   }
 }

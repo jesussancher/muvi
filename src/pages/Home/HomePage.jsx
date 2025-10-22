@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
   TopNavbar,
   ButtomNavbar,
@@ -103,6 +104,72 @@ function HomePage() {
       className={classNames("home-page")}
       onContextMenu={(e) => e.preventDefault()}
     >
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>
+          Ver Muvi - Catálogo de Películas y Series Online | Streaming
+        </title>
+        <meta
+          name="title"
+          content="Ver Muvi - Catálogo de Películas y Series Online | Streaming"
+        />
+        <meta
+          name="description"
+          content="Descubre el catálogo completo de películas y series online en Ver Muvi. Encuentra información detallada, trailers, reparto y dónde ver tus favoritas en streaming."
+        />
+        <meta
+          name="keywords"
+          content="películas online, series online, streaming, catálogo películas, ver películas gratis, trailers, estrenos, cine, entretenimiento"
+        />
+        <link rel="canonical" href="https://vermuvi.com/" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vermuvi.com/" />
+        <meta
+          property="og:title"
+          content="Ver Muvi - Catálogo de Películas y Series Online"
+        />
+        <meta
+          property="og:description"
+          content="Descubre el catálogo completo de películas y series online. Información detallada, trailers, reparto y dónde ver en streaming."
+        />
+        <meta property="og:image" content="https://vermuvi.com/muvi-logo.png" />
+        <meta property="og:site_name" content="Ver Muvi" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://vermuvi.com/" />
+        <meta
+          name="twitter:title"
+          content="Ver Muvi - Catálogo de Películas y Series Online"
+        />
+        <meta
+          name="twitter:description"
+          content="Descubre el catálogo completo de películas y series online. Información, trailers y dónde ver en streaming."
+        />
+        <meta
+          name="twitter:image"
+          content="https://vermuvi.com/muvi-logo.png"
+        />
+
+        {/* Schema.org JSON-LD for WebSite */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Ver Muvi",
+            url: "https://vermuvi.com",
+            description: "Catálogo completo de películas y series online",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://vermuvi.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          })}
+        </script>
+      </Helmet>
+
       <TopNavbar />
       <GlobalSearch />
       <HeadVideo genresList={genresList} />

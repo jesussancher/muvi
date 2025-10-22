@@ -5,24 +5,28 @@
     align-items: center;
     justify-content: center;
     margin: 20px 0;
+    position: relative;
 }
 
 .adsense-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--background-transparent);
-    border: 2px dashed var(--background-darker-transparent);
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-large);
-    margin: 20px 0;
+    z-index: -1;
 }
 
 .adsense-placeholder-content {
     text-align: center;
-    color: var(--text-color);
-    opacity: 0.4;
+    color: #ffffff;
+    opacity: 0.3;
     padding: 20px;
 }
 

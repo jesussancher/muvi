@@ -1,6 +1,7 @@
 {
-  "short_name": "Muvi",
-  "name": "Muvi | Blocks of joy",
+  "short_name": "Ver Muvi",
+  "name": "Ver Muvi - Catálogo de Películas y Series Online",
+  "description": "Descubre películas y series online con información detallada, trailers, reparto y dónde ver en streaming",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +11,24 @@
     {
       "src": "muvi-logo.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "muvi-logo.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["entertainment", "movies", "tv"],
+  "screenshots": []
 }

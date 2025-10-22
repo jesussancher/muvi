@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWallet,
@@ -22,6 +23,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 function MovieDetails({
   movieDetails,
+  movieCredits,
   watchProviders,
   videos,
   keywords,
@@ -42,7 +44,36 @@ function MovieDetails({
   const revenue = movieDetails?.revenue;
   const homepage = movieDetails?.homepage;
 
-  document.title = `Muvi ${title ? "| " + title : ""}`;
+  // SEO Meta data
+  const releaseYear = releaseDate ? releaseDate[0] : "";
+  const movieTitle = title ? `${title} (${releaseYear})` : "Película";
+  const movieDescription = overview
+    ? overview.length > 155
+      ? overview.substring(0, 155) + "..."
+      : overview
+    : `Ver ${title} online. Información completa, reparto, trailers y dónde ver en streaming.`;
+  const movieImage = movieDetails?.poster_path
+    ? `https://image.tmdb.org/t/p/w780${movieDetails.poster_path}`
+    : "https://vermuvi.com/muvi-logo.png";
+  const movieUrl = `https://vermuvi.com/movie/${movieDetails?.id}`;
+
+  // Generate keywords from genres and keywords
+  const genreKeywords =
+    movieDetails?.genres?.map((g) => g.name).join(", ") || "";
+  const movieKeywords =
+    keywords?.keywords
+      ?.slice(0, 5)
+      .map((k) => k.name)
+      .join(", ") || "";
+  const allKeywords = `${title}, película, ${genreKeywords}, ${movieKeywords}, ver online, streaming`;
+
+  // Cast for Schema.org
+  const mainCast = movieCredits?.cast?.slice(0, 5) || [];
+
+  // Director for Schema.org
+  const director = movieCredits?.crew?.find((c) => c.job === "Director");
+
+  document.title = `${movieTitle} | Ver Muvi - Películas Online`;
 
   const info = [
     {
@@ -99,8 +130,86 @@ function MovieDetails({
     }
   };
 
+  // Schema.org JSON-LD
+  const schemaOrgData = movieDetails
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Movie",
+        name: title,
+        description: overview,
+        image: movieImage,
+        datePublished: movieDetails.release_date,
+        genre: movieDetails.genres?.map((g) => g.name),
+        duration: `PT${movieDetails.runtime}M`,
+        aggregateRating: rate
+          ? {
+              "@type": "AggregateRating",
+              ratingValue: rate,
+              ratingCount: movieDetails.vote_count,
+              bestRating: 10,
+              worstRating: 0,
+            }
+          : undefined,
+        director: director
+          ? {
+              "@type": "Person",
+              name: director.name,
+            }
+          : undefined,
+        actor: mainCast.map((actor) => ({
+          "@type": "Person",
+          name: actor.name,
+        })),
+        url: movieUrl,
+        inLanguage: movieDetails.original_language,
+        contentRating: movieDetails.adult ? "R" : "PG-13",
+      }
+    : null;
+
   return (
     <div id={"movieDetails"}>
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>{`${movieTitle} | Ver Muvi - Películas Online`}</title>
+        <meta
+          name="title"
+          content={`${movieTitle} | Ver Muvi - Películas Online`}
+        />
+        <meta name="description" content={movieDescription} />
+        <meta name="keywords" content={allKeywords} />
+        <link rel="canonical" href={movieUrl} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="video.movie" />
+        <meta property="og:url" content={movieUrl} />
+        <meta property="og:title" content={movieTitle} />
+        <meta property="og:description" content={movieDescription} />
+        <meta property="og:image" content={movieImage} />
+        <meta property="og:image:width" content="780" />
+        <meta property="og:image:height" content="1170" />
+        <meta property="og:site_name" content="Ver Muvi" />
+        {releaseDate && (
+          <meta
+            property="og:video:release_date"
+            content={movieDetails.release_date}
+          />
+        )}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={movieUrl} />
+        <meta name="twitter:title" content={movieTitle} />
+        <meta name="twitter:description" content={movieDescription} />
+        <meta name="twitter:image" content={movieImage} />
+
+        {/* Schema.org JSON-LD */}
+        {schemaOrgData && (
+          <script type="application/ld+json">
+            {JSON.stringify(schemaOrgData)}
+          </script>
+        )}
+      </Helmet>
+
       <div
         className={"details-poster-sm"}
         style={{ backgroundImage: `url(${posterUrl})` }}

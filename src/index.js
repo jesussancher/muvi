@@ -1,19 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import './index.css';
-import './assets/styles.css';
-import './assets/icons/muvi/css/muvi.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { HelmetProvider } from "react-helmet-async";
+import "./index.css";
+import "./assets/styles.css";
+import "./assets/icons/muvi/css/muvi.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
