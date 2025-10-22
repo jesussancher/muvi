@@ -17,7 +17,6 @@ import FilterBar from "../Home/FilterBar";
 import Carousel from "../Home/Carousel";
 import MoviesList from "../Home/MoviesList";
 import HeadVideo from "../Home/HeadVideo";
-
 function TVSeriesPage() {
   document.title = `Muvi | TV Series`;
 
